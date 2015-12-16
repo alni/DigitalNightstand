@@ -1,0 +1,18 @@
+{
+  "alarms": [
+    {
+      "time": [7, 30],
+      "days": [ "mon", "tue", "wed", "thu", "fri", "sat", "sun" ],
+      "title": "Wake"
+    },
+    {
+      "time": [ 9, 0 ],
+      "days": [ "sat", "sun" ],
+      "title": "Wake"
+    },
+    {
+      "time": [ 19, 11 ],
+      "title":  "WAKEUP"
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+﻿import colors
+
+COLORS = colors

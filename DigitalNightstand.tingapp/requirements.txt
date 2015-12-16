@@ -1,0 +1,5 @@
+arrow==0.7.0
+pygame==1.9.1
+schedule==0.3.2
+tingbot==0.3
+appdirs==1.4.0

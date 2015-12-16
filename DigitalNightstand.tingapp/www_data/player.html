@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/jtsage-datebox.min.css" />
+    <link rel="stylesheet" href="css/custom.css" />
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="js/handlebars-v4.0.2.js"></script>
+</head>
+<body>
+    <div data-role="page" style="background-image: url(images/banner-911778_1920.jpg); background-position:center; background-size:cover; background-repeat:no-repeat;">
+        <div data-role="header">
+            <h1>Digital Nightstand Frontend</h1>
+            <div data-role="navbar" data-grid="a">
+                <ul>
+                    <li><a href="index.html" class="ui-btn ui-icon-prev" data-ajax="false">Setup</a></li>
+                    <li><a href="player.html" class="ui-btn ui-btn-active ui-state-persist ui-icon-prev">Radio Player</a></li>
+                </ul>
+            </div><!-- /navbar -->
+        </div><!-- /header -->
+
+        <div role="main" class="ui-content">
+            <div class="ui-body ui-body-a ui-corner-all">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <a id="play" href="/api/play" class="ui-btn ui-btn-b ui-icon-play ui-nodisc-icon ui-btn-icon-notext my-big-button"></a>
+                            </div>
+                            <div class="ui-block-b">
+                                <a id="pause" href="/api/pause" class="ui-btn ui-btn-b ui-icon-pause ui-nodisc-icon ui-btn-icon-notext my-big-button"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Block B</div></div>
+                </div><!-- /grid-a -->
+            </div>
+            <div class="ui-body ui-body-a ui-corner-all">
+                <h4 id="station"></h4>
+                <p id="info"></p>
+            </div>
+        </div><!-- /content -->
+
+        <div data-role="footer">
+            <div data-role="navbar" data-grid="d">
+                <ul>
+                    <li><a href="/api/prev" class="ui-btn ui-btn-b ui-icon-prev ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a></li>
+                    <li><a href="/api/next" class="ui-btn ui-btn-b ui-icon-next ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a></li>
+                    <li><a href="/api/vol_down" class="ui-btn ui-btn-b ui-icon-vol-down ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a></li>
+                    <li><a href="/api/vol_up" class="ui-btn ui-btn-b ui-icon-vol-up ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a></li>
+                    <li><a href="/api/vol_mute" class="ui-btn ui-btn-b ui-icon-vol-mute ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a></li>
+                </ul>
+            </div><!-- /navbar -->
+        </div><!-- /footer -->
+    </div><!-- /page -->
+    <script>
+        $(document).ready(function () {
+            setInterval(function () {
+                $.getJSON("/api/").done(function (data) {
+                    $("#station").text(data.radio.station);
+                    $("#info").text(data.radio.info);
+                });
+            }, 2000);
+            
+
+            $("a[href^='/api/']").on("click", function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                setTimeout(function () {
+                    $this.removeClass("ui-btn-active");
+                }, 250);
+                
+                $.getJSON($this.attr("href")).done(function (data) {
+                    $("#station").text(data.radio.station);
+                    $("#info").text(data.radio.info);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

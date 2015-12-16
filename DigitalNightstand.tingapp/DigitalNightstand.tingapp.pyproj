@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{c88d4417-6892-4ed8-b7a6-5638ff3c94e8}</ProjectGuid>
+    <ProjectHome>
+    </ProjectHome>
+    <StartupFile>main.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>DigitalNightstand</Name>
+    <RootNamespace>DigitalNightstand</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Alarm.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="defs\colors.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="defs\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="main.py" />
+    <Compile Include="gui.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Player.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Radio.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebFrontend.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="data\" />
+    <Folder Include="docs\" />
+    <Folder Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\" />
+    <Folder Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\getSegment_data\" />
+    <Folder Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\index_data\" />
+    <Folder Include="docs\mplayer\" />
+    <Folder Include="www_data\" />
+    <Folder Include="res\" />
+    <Folder Include="defs\" />
+    <Folder Include="res\icons\" />
+    <Folder Include="res\icons\material-design-icons-2.0\" />
+    <Folder Include="res\icons\material-design-icons-2.0\av\2x_web\" />
+    <Folder Include="res\icons\material-design-icons-2.0\navigation\" />
+    <Folder Include="res\icons\material-design-icons-2.0\navigation\2x_web\" />
+    <Folder Include="res\icons\material-design-icons-2.0\av\" />
+    <Folder Include="res\images\" />
+    <Folder Include="res\sounds\" />
+    <Folder Include="www_data\js\" />
+    <Folder Include="www_data\css\" />
+    <Folder Include="www_data\images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data\alarms.default" />
+    <Content Include="data\alarms.json" />
+    <Content Include="data\radio.json" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\banner_911778_1280.jpg" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\base.css" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\browse_input.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\closebox.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\cl_swatch.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\cl_swatch_002.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\cl_swatch_003.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\cl_swatch_004.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\cl_swatch_005.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\FancyZoom.js" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\FancyZoomHTML.js" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\ga.js" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\gen.js" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\generateThemePng.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\generateThemePng_002.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\generateThemePng_003.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\generateThemePng_004.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\generateThemePng_005.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\getSegment.htm" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\getSegment_data\adframe.js" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\getSegment_data\gtm.js" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\index.htm" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\index_data\st.js" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\jquery-ui.js" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\jquery.js" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\loading.gif" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\reset.css" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\sharethis.css" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\sharethis.js" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\spacer.gif" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\zoom-shadow1.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\zoom-shadow2.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\zoom-shadow3.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\zoom-shadow4.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\zoom-shadow5.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\zoom-shadow6.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\zoom-shadow7.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\zoom-shadow8.png" />
+    <Content Include="docs\Filer_for_Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29\zoom-spin-1.png" />
+    <Content Include="docs\mplayer\slave.txt" />
+    <Content Include="docs\Pictaculous - A Color Palette Generator %28courtesy of MailChimp%29.htm" />
+    <Content Include="README.md" />
+    <Content Include="requirements.txt" />
+    <Content Include="res\icons\material-design-icons-2.0\av\2x_web\ic_pause_circle_outline_white_24dp.png" />
+    <Content Include="res\icons\material-design-icons-2.0\av\2x_web\ic_play_circle_outline_white_24dp.png" />
+    <Content Include="res\icons\material-design-icons-2.0\av\2x_web\ic_skip_next_white_24dp.png" />
+    <Content Include="res\icons\material-design-icons-2.0\av\2x_web\ic_skip_previous_white_24dp.png" />
+    <Content Include="res\icons\material-design-icons-2.0\av\2x_web\ic_volume_down_white_24dp.png" />
+    <Content Include="res\icons\material-design-icons-2.0\av\2x_web\ic_volume_mute_white_24dp.png" />
+    <Content Include="res\icons\material-design-icons-2.0\av\2x_web\ic_volume_up_white_24dp.png" />
+    <Content Include="res\icons\material-design-icons-2.0\LICENSE" />
+    <Content Include="res\icons\material-design-icons-2.0\navigation\2x_web\ic_chevron_left_black_18dp.png" />
+    <Content Include="res\icons\material-design-icons-2.0\navigation\2x_web\ic_chevron_left_white_18dp.png" />
+    <Content Include="res\icons\material-design-icons-2.0\navigation\2x_web\ic_chevron_right_black_18dp.png" />
+    <Content Include="res\icons\material-design-icons-2.0\navigation\2x_web\ic_chevron_right_white_18dp.png" />
+    <Content Include="res\icons\material-design-icons-2.0\README.md" />
+    <Content Include="res\images\banner-911778_1280.jpg" />
+    <Content Include="res\images\bg.png" />
+    <Content Include="res\images\output2.gif" />
+    <Content Include="res\sounds\Argon_48k.ogg" />
+    <Content Include="res\sounds\Argon_48k.wav" />
+    <Content Include="www_data\css\custom.css" />
+    <Content Include="www_data\css\jquery.mobile-1.4.5.min.css" />
+    <Content Include="www_data\css\jtsage-datebox.css" />
+    <Content Include="www_data\css\jtsage-datebox.min.css" />
+    <Content Include="www_data\images\banner-911778_1280.jpg" />
+    <Content Include="www_data\images\banner-911778_1920.jpg" />
+    <Content Include="www_data\player.html" />
+    <Content Include="www_data\index.html" />
+    <Content Include="www_data\js\handlebars-v4.0.2.js" />
+    <Content Include="www_data\js\jquery-1.11.3.min.js" />
+    <Content Include="www_data\js\jquery.mobile-1.4.5.js" />
+    <Content Include="www_data\js\jquery.mobile-1.4.5.min.js" />
+    <Content Include="www_data\js\jquery.mobile-1.4.5.min.map" />
+    <Content Include="www_data\js\jtsage-datebox.js" />
+    <Content Include="www_data\js\jtsage-datebox.js.map" />
+    <Content Include="www_data\js\jtsage-datebox.min.js" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <Import Condition="Exists($(PtvsTargetsFile))" Project="$(PtvsTargetsFile)" />
+  <Import Condition="!Exists($(PtvsTargetsFile))" Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>
