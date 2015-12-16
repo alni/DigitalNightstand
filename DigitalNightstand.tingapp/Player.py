@@ -21,18 +21,23 @@ class Player(object):
 
     def play_pause(self):
         self.player.stdin.write("pause\n")
+        self.player.stdin.flush()
 
     def stop(self):
         self.player.stdin.write("quit\n")
+        self.player.stdin.flush()
 
     def vol_down(self):
         self.player.stdin.write("volume -1\n")
+        self.player.stdin.flush()
 
     def vol_up(self):
         self.player.stdin.write("volume 1\n")
+        self.player.stdin.flush()
 
     def mute(self):
         self.player.stdin.write("mute\n")
+        self.player.stdin.flush()
 
     def load(self, channel):
         command = "loadfile " + channel + "\n"

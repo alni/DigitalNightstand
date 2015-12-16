@@ -63,123 +63,48 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             path = os.path.join(path, word)
 
         return path
+
+    def api_call(self, method=None):
+        #send code 200 response
+        self.send_response(200)
+        if method is not None:
+            method()
+        #send header first
+        self.send_header('Content-type','application/json')
+        self.end_headers()
+
+        #send content to client
+        self.wfile.write(json.dumps(api_data))
     
     def do_GET(self):
         logging.warning("======= GET STARTED =======")
         logging.warning(self.headers)
         if self.path == "/api/":
-            #send code 200 response
-            self.send_response(200)
- 
-            #send header first
-            self.send_header('Content-type','application/json')
-            self.end_headers()
-
-            #send content to client
-            self.wfile.write(json.dumps(api_data))
+            self.api_call()
             return
-        if self.path == "/api/play":
+        if self.path.startswith("/api/"):
             if radio is not None:
-                #send code 200 response
-                self.send_response(200)
-                radio.player.play_pause()
-                #send header first
-                self.send_header('Content-type','application/json')
-                self.end_headers()
-
-                #send content to client
-                self.wfile.write(json.dumps(api_data))
-                return
-            else:
-                self.send_error(501, "Radio not set to an instance")
-                return
-        if self.path == "/api/pause":
-            if radio is not None:
-                #send code 200 response
-                self.send_response(200)
-                radio.player.play_pause()
-                #send header first
-                self.send_header('Content-type','application/json')
-                self.end_headers()
-
-                #send content to client
-                self.wfile.write(json.dumps(api_data))
-                return
-            else:
-                self.send_error(501, "Radio not set to an instance")
-                return
-        if self.path == "/api/prev":
-            if radio is not None:
-                #send code 200 response
-                self.send_response(200)
-                radio.prev_channel()
-                #send header first
-                self.send_header('Content-type','application/json')
-                self.end_headers()
-
-                #send content to client
-                self.wfile.write(json.dumps(api_data))
-                return
-            else:
-                self.send_error(501, "Radio not set to an instance")
-                return
-        if self.path == "/api/next":
-            if radio is not None:
-                #send code 200 response
-                self.send_response(200)
-                radio.next_channel()
-                #send header first
-                self.send_header('Content-type','application/json')
-                self.end_headers()
-
-                #send content to client
-                self.wfile.write(json.dumps(api_data))
-                return
-            else:
-                self.send_error(501, "Radio not set to an instance")
-                return
-        if self.path == "/api/vol_down":
-            if radio is not None:
-                #send code 200 response
-                self.send_response(200)
-                radio.player.vol_down()
-                #send header first
-                self.send_header('Content-type','application/json')
-                self.end_headers()
-
-                #send content to client
-                self.wfile.write(json.dumps(api_data))
-                return
-            else:
-                self.send_error(501, "Radio not set to an instance")
-                return
-        if self.path == "/api/vol_up":
-            if radio is not None:
-                #send code 200 response
-                self.send_response(200)
-                radio.player.vol_up()
-                #send header first
-                self.send_header('Content-type','application/json')
-                self.end_headers()
-
-                #send content to client
-                self.wfile.write(json.dumps(api_data))
-                return
-            else:
-                self.send_error(501, "Radio not set to an instance")
-                return
-        if self.path == "/api/vol_mute":
-            if radio is not None:
-                #send code 200 response
-                self.send_response(200)
-                radio.player.mute()
-                #send header first
-                self.send_header('Content-type','application/json')
-                self.end_headers()
-
-                #send content to client
-                self.wfile.write(json.dumps(api_data))
-                return
+                if self.path == "/api/play":
+                    self.api_call(radio.player.play_pause)
+                    return
+                if self.path == "/api/pause":
+                    self.api_call(radio.player.play_pause)
+                    return
+                if self.path == "/api/prev":
+                    self.api_call(radio.prev_channel)
+                    return
+                if self.path == "/api/next":
+                    self.api_call(radio.next_channel)
+                    return
+                if self.path == "/api/vol_down":
+                    self.api_call(radio.player.vol_down)
+                    return
+                if self.path == "/api/vol_up":
+                    self.api_call(radio.player.vol_up)
+                    return
+                if self.path == "/api/vol_mute":
+                    self.api_call(radio.player.mute)
+                    return
             else:
                 self.send_error(501, "Radio not set to an instance")
                 return
@@ -193,16 +118,6 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         with open("test123456.json", "w") as outfile:
             print os.path.abspath(outfile.name)
             json.dump(data, outfile)
-        form = cgi.FieldStorage(
-            fp=self.rfile,
-            headers=self.headers,
-            environ={'REQUEST_METHOD':'POST',
-                     'CONTENT_TYPE':self.headers['Content-Type'],
-                     })
-        logging.warning("======= POST VALUES =======")
-        print form.getvalue("alarm_01_days")
-        for item in form.list:
-            logging.warning(item)
         logging.warning("\n")
         
         SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
