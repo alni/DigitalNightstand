@@ -9,7 +9,7 @@ Features includes:
 * Alarm Clock
 * Web Frontend
 
-See <DigitalNightstand.tingapp/> for more information.
+See [DigitalNightstand.tingapp/](DigitalNightstand.tingapp/) for more information.
 
 ## Screenshots ##
 
