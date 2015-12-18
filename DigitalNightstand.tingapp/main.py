@@ -18,11 +18,12 @@ import WebFrontend as web_frontend
 from WebFrontend import WebFrontend
 import gui
 from gui import *
+import config
 
 # Intitalize global objects
 frontend = None
 alarm = None
-radio_config = "data/radio.json"
+radio_config = config.RADIO_STATIONS_PATH # "data/radio.json"
 p = None
 current_coding = None
 if os.name == 'nt':
@@ -360,16 +361,15 @@ def loop():
 
 # END: loop()
 
-frontend = WebFrontend()
+frontend = WebFrontend(port=config.WEB_FRONTENT_PORT)
 frontend.serve()
 
-with open("test123456.json") as data_file:
-    settings_data = json.load(data_file)
+settings_data = config.SETTINGS
 
 with open(radio_config) as data_file:
     radio_data = json.load(data_file)
 
-p = Radio(radio_channels=radio_data['channels'])
+p = Radio(radio_channels=radio_data['channels'], mplayer_path=config.MPLAYER_PATH)
 if "radio_stations" in settings_data and len(settings_data['radio_stations']) > 0:
     p.radio_channels.extend(settings_data['radio_stations'])
 

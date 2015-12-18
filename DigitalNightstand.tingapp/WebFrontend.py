@@ -10,9 +10,7 @@ import posixpath
 import urllib
 import json
 
-from appdirs import AppDirs
-
-dirs = AppDirs("DigitalNightstand.tingapp", "Alexander Nilsen")
+import config
 
 api_data = {
     "radio": {
@@ -113,13 +111,16 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     def do_POST(self):
         logging.warning("======= POST STARTED =======")
         logging.warning(self.headers)
-        self.data_string = self.rfile.read(int(self.headers['Content-Length']))
-        data = json.loads(self.data_string)
-        with open("test123456.json", "w") as outfile:
-            print os.path.abspath(outfile.name)
-            json.dump(data, outfile)
-        logging.warning("\n")
-        
+        if self.path == "/":
+            self.data_string = self.rfile.read(int(self.headers['Content-Length']))
+            data = json.loads(self.data_string)
+            config.save_settings(data, config.CONFIG_FILE)
+            logging.warning("\n")
+            self.send_response(200)
+            return
+        else:
+            self.send_error(501, "POST request is not supported with path")
+            return
         SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
 
 class WebFrontend(object):

@@ -33,6 +33,8 @@ The alarms can have a customized `title`, `days`, and `time`.
 
 The Web Frontend provides configuration and control of the Nightstand from a web browser.
 
+Accepts connections default on port `8000`.
+
 Supports:
 
 * Radio Player control

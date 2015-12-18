@@ -12,7 +12,11 @@ class Player(object):
         self.player = self._create_player(channel, mplayer_path)
 
     def _create_player(self, channel, mplayer_path):
-        self.player = subprocess.Popen([mplayer_path, "-slave", "-quiet", "-cache", "1024", channel], 
+        args = [mplayer_path, "-slave", "-quiet", "-cache", "1024"]
+        if channel.endswith(".m3u") or channel.endswith(".pls"):
+            args.append("-playlist")
+        args.append(channel)
+        self.player = subprocess.Popen(args, 
                                        stdin=subprocess.PIPE, 
                                        stdout=subprocess.PIPE, 
                                        stderr=subprocess.STDOUT,

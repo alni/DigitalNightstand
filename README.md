@@ -1,6 +1,15 @@
 # DigitalNightstand
 
-Digital Nightstand for Tingbot/Raspberry Pi
+Digital Nightstand for the Tingbot/Raspberry Pi.
+
+Features includes:
+
+* Internet Radio, 
+* Digital Clock
+* Alarm Clock
+* Web Frontend
+
+See <DigitalNightstand.tingapp/> for more information.
 
 ## Screenshots ##
 

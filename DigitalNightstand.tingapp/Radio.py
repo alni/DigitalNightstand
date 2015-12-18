@@ -3,7 +3,7 @@
 class Radio(object):
     """description of class"""
 
-    def __init__(self, radio_channels=None):
+    def __init__(self, radio_channels=None, mplayer_path="D:/Personal/Downloads/Software/AudioVideo/MPlayer/MPlayer-x86_64-r37451+g531b0a3/mplayer.exe"):
         if radio_channels == None:
             radio_channels =  [
                 ("NRK P1", "http://lyd.nrk.no/nrk_radio_p1_ostlandssendingen_mp3_h"),
@@ -40,7 +40,7 @@ class Radio(object):
 
         self.radio_channels = radio_channels
         self.active_channel = 0
-        self.player = Player.Player(self.radio_channels[self.active_channel]['stream_uri'])
+        self.player = Player.Player(self.radio_channels[self.active_channel]['stream_uri'], mplayer_path)
 
     def next_channel(self):
         self.set_channel(self.active_channel + 1)

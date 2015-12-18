@@ -26,6 +26,9 @@
     <Compile Include="Alarm.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="config.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="defs\colors.py">
       <SubType>Code</SubType>
     </Compile>
@@ -48,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="data\" />
+    <Folder Include="data\radio\" />
     <Folder Include="docs\" />
     <Folder Include="docs\mplayer\" />
     <Folder Include="www_data\" />
@@ -69,6 +73,8 @@
     <Content Include="data\alarms.default" />
     <Content Include="data\alarms.json" />
     <Content Include="data\radio.json" />
+    <Content Include="data\radio\NO.json" />
+    <Content Include="data\radio\GB.json" />
     <Content Include="docs\mplayer\slave.txt" />
     <Content Include="docs\Pictaculous.PNG" />
     <Content Include="README.md" />
@@ -89,6 +95,7 @@
     <Content Include="res\images\banner-911778_1280.jpg" />
     <Content Include="res\sounds\Argon_48k.ogg" />
     <Content Include="res\sounds\Argon_48k.wav" />
+    <Content Include="test123456.json" />
     <Content Include="www_data\css\custom.css" />
     <Content Include="www_data\css\jquery.mobile-1.4.5.min.css" />
     <Content Include="www_data\css\jtsage-datebox.css" />
