@@ -62,7 +62,7 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
         return path
 
-    def api_call(self, method=None):
+    def api_call(self, method=None, data=None):
         #send code 200 response
         self.send_response(200)
         if method is not None:
@@ -70,9 +70,10 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         #send header first
         self.send_header('Content-type','application/json')
         self.end_headers()
-
+        if data is None:
+            data = api_data
         #send content to client
-        self.wfile.write(json.dumps(api_data))
+        self.wfile.write(json.dumps(data))
     
     def do_GET(self):
         logging.warning("======= GET STARTED =======")
@@ -81,6 +82,9 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self.api_call()
             return
         if self.path.startswith("/api/"):
+            if self.path == "/api/config":
+                self.api_call(data=config.SETTINGS)
+                return
             if radio is not None:
                 if self.path == "/api/play":
                     self.api_call(radio.player.play_pause)
@@ -103,6 +107,13 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 if self.path == "/api/vol_mute":
                     self.api_call(radio.player.mute)
                     return
+                if self.path.startswith("/api/change_country/"):
+                    country_code = self.path.split("/")[-1]
+                    filename = radio.download_radio_channels(country_code)
+                    radio.transform_downloaded_channels(country_code)
+                    radio.load_channels(filename)
+                    self.api_call()
+                    return
             else:
                 self.send_error(501, "Radio not set to an instance")
                 return
@@ -115,6 +126,14 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self.data_string = self.rfile.read(int(self.headers['Content-Length']))
             data = json.loads(self.data_string)
             config.save_settings(data, config.CONFIG_FILE)
+            logging.warning("\n")
+            self.send_response(200)
+            return
+        elif self.path == "/dirble_api_key":
+            data_string = self.rfile.read(int(self.headers['Content-Length']))
+            data = json.loads(data_string)
+            config.save_settings(data, "radio/private.json")
+            config.DIRBLE_API_KEY = data["dirble_api_key"]
             logging.warning("\n")
             self.send_response(200)
             return

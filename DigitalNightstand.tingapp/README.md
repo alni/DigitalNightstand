@@ -41,6 +41,24 @@ Supports:
 * Setting up the alarms (total 5)
 * Adding custom internet radio stations
 
+## Configuration and Data Files ##
+
+The configuration and data files are stored within a specific folder path unique for each platform.
+
+* `config.json` - contains all user configured settings. This includes all settings configured with the Web Frontend (excluding the _Dirble API Key_)
+* `radio/<country>.json`  - contains transformed internet stations data downloaded from Dirble a specific `country`
+* `radio/private.json` - contains private user data that should not be shared. This includes the Dirble API Key set from the Web Frontend
+
+### Dirble API Key ###
+
+When downloaded radio channels using the Dirble Service, a Dirble API Key must be provided.
+
+This can be set from the Web Frontend.
+
+When the value of Dirble API Key field is changed the API Key is automatically saved to `radio/private.json`. If successful the field is cleared to prevent reading of the API key.
+
+The Dirble API Key is never loaded to the configuration page.
+
 --------
 
 ## Acknowledgements ##

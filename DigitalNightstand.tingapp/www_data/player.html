@@ -14,8 +14,10 @@
 </head>
 <body>
     <div data-role="page" style="background-image: url(images/banner-911778_1920.jpg); background-position:center; background-size:cover; background-repeat:no-repeat;">
+        <!-- Header -->
         <div data-role="header">
             <h1>Digital Nightstand Frontend</h1>
+            <!-- Navigation Bar -->
             <div data-role="navbar" data-grid="a">
                 <ul>
                     <li><a href="index.html" class="ui-btn ui-icon-prev" data-ajax="false">Setup</a></li>
@@ -25,35 +27,70 @@
         </div><!-- /header -->
 
         <div role="main" class="ui-content">
-            <div class="ui-body ui-body-a ui-corner-all">
+            <!-- Radio Info Top Panel - playback buttons and info -->
+            <div class="ui-body ui-body-a ui-corner-all" 
+                 style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
+                <!-- Outer Grid -->
                 <div class="ui-grid-a">
+                    <!-- Left (Playback) block -->
                     <div class="ui-block-a">
+                        <!-- Playback grid -->
                         <div class="ui-grid-a">
+                            <!-- Play button parent block -->
                             <div class="ui-block-a">
+                                <!-- Play button -->
                                 <a id="play" href="/api/play" class="ui-btn ui-btn-b ui-icon-play ui-nodisc-icon ui-btn-icon-notext my-big-button"></a>
-                            </div>
+                            </div><!-- /block-a -->
+                            <!-- Pause button parent block -->
                             <div class="ui-block-b">
+                                <!-- Pause button -->
                                 <a id="pause" href="/api/pause" class="ui-btn ui-btn-b ui-icon-pause ui-nodisc-icon ui-btn-icon-notext my-big-button"></a>
-                            </div>
+                            </div><!-- /block-b -->
+                        </div><!-- /grid-a -->
+                    </div><!-- /block-a -->
+                    <!-- Right (Info) block -->
+                    <div class="ui-block-b">
+                        <div class="ui-bar ui-bar-a" style="height:60px">
+                            <select id="countries">
+                                <option value="GB">GB</option>
+                                <option value="NO">NO</option>
+                            </select>
                         </div>
-                    </div>
-                    <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Block B</div></div>
+                    </div><!-- /block-b -->
                 </div><!-- /grid-a -->
             </div>
-            <div class="ui-body ui-body-a ui-corner-all">
-                <h4 id="station"></h4>
-                <p id="info"></p>
+        <!-- Radio Info Bottom Panel - Stream info (stream name and title/info) -->
+            <div class="ui-body ui-body-a ui-corner-all" 
+                 style="border-top-left-radius: 0px; border-top-right-radius: 0px;">
+                <h4 id="station"></h4><!-- stream name -->
+                <p id="info"></p><!-- stream title/info -->
             </div>
         </div><!-- /content -->
 
         <div data-role="footer">
+            <!-- Radio Player Control Navigation Bar -->
             <div data-role="navbar" data-grid="d">
                 <ul>
-                    <li><a href="/api/prev" class="ui-btn ui-btn-b ui-icon-prev ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a></li>
-                    <li><a href="/api/next" class="ui-btn ui-btn-b ui-icon-next ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a></li>
-                    <li><a href="/api/vol_down" class="ui-btn ui-btn-b ui-icon-vol-down ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a></li>
-                    <li><a href="/api/vol_up" class="ui-btn ui-btn-b ui-icon-vol-up ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a></li>
-                    <li><a href="/api/vol_mute" class="ui-btn ui-btn-b ui-icon-vol-mute ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a></li>
+                    <li>
+                        <!-- Previous Station button -->
+                        <a href="/api/prev" class="ui-btn ui-btn-b ui-icon-prev ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a>
+                    </li>
+                    <li>
+                        <!-- Next Station button -->
+                        <a href="/api/next" class="ui-btn ui-btn-b ui-icon-next ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a>
+                    </li>
+                    <li>
+                        <!-- Volume Down button -->
+                        <a href="/api/vol_down" class="ui-btn ui-btn-b ui-icon-vol-down ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a>
+                    </li>
+                    <li>
+                        <!-- Volume Up button -->
+                        <a href="/api/vol_up" class="ui-btn ui-btn-b ui-icon-vol-up ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a>
+                    </li>
+                    <li>
+                        <!-- Volume Mute button -->
+                        <a href="/api/vol_mute" class="ui-btn ui-btn-b ui-icon-vol-mute ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a>
+                    </li>
                 </ul>
             </div><!-- /navbar -->
         </div><!-- /footer -->
@@ -65,16 +102,25 @@
                     $("#station").text(data.radio.station);
                     $("#info").text(data.radio.info);
                 });
-            }, 2000);
+            }, 2000); // Update radio station info every 2 seconds
             
+            // Change the current country for the station list
+            $("#countries").on("change", function (e) {
+                $.get("/api/change_country/" + $(this).val()).done(function (data) {
+                    $("#station").text(data.radio.station);
+                    $("#info").text(data.radio.info);
+                });
+            });
 
+            // Call the api for button links with href that starts with "/api/"
             $("a[href^='/api/']").on("click", function (e) {
                 e.preventDefault();
                 var $this = $(this);
                 setTimeout(function () {
                     $this.removeClass("ui-btn-active");
                 }, 250);
-                
+
+                // Call the API with the current href path
                 $.getJSON($this.attr("href")).done(function (data) {
                     $("#station").text(data.radio.station);
                     $("#info").text(data.radio.info);
@@ -83,4 +129,5 @@
         });
     </script>
 </body>
+
 </html>

@@ -1,7 +1,46 @@
 ﻿import Player
+import urllib
+import os
+import json
+from config import DIRBLE_API_KEY, USER_DATA_DIR
 
 class Radio(object):
     """description of class"""
+
+    @staticmethod
+    def download_radio_channels(country_code="NO", count=30, replace=False):
+        url = "http://api.dirble.com/v2/countries/" + country_code + "/stations?"
+        params = urllib.urlencode({
+            "token": DIRBLE_API_KEY,
+            "per_page": count
+        })
+        filename = USER_DATA_DIR + "/radio/" + country_code + ".json"
+        if not os.path.exists(os.path.dirname(filename)):
+            # If the folder path to the User Config Directory does not exists,
+            # then create it + any non-existing parent folders
+            os.makedirs(os.path.dirname(filename))
+        if not os.path.exists(filename) or replace == True:
+            urllib.urlretrieve(url + params, filename)
+        return filename
+
+    @staticmethod
+    def transform_downloaded_channels(country_code="NO"):
+        radio_channels = []
+        filename = USER_DATA_DIR + "/radio/" + country_code + ".json"
+        if os.path.exists(filename):
+            with open(filename) as data_file:
+                radio_data = json.load(data_file)
+            if not "channels" in radio_data:
+                for channel in radio_data:
+                    radio_channels.append({
+                        "name": channel["name"],
+                        "groups": [ country_code ],
+                        "stream_uri": channel["streams"][0]["stream"]
+                    })
+                data = {"channels":radio_channels}
+                with open(filename, "w") as outfile:
+                    print os.path.abspath(outfile.name)
+                    json.dump(data, outfile)
 
     def __init__(self, radio_channels=None, mplayer_path="D:/Personal/Downloads/Software/AudioVideo/MPlayer/MPlayer-x86_64-r37451+g531b0a3/mplayer.exe"):
         if radio_channels == None:
@@ -68,6 +107,12 @@ class Radio(object):
 
     def get_active_channel(self):
         return self.radio_channels[self.active_channel]
+
+    def load_channels(self, filename):
+        if os.path.exists(filename):
+            with open(filename) as data_file:
+                radio_data = json.load(data_file)
+            self.radio_channels = radio_data["channels"]
 
 # radio_player = Radio()
 

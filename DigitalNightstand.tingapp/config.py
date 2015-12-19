@@ -6,6 +6,8 @@ from appdirs import AppDirs
 
 _dirs = AppDirs("DigitalNightstand.tingapp")
 
+USER_DATA_DIR = _dirs.user_data_dir
+
 def load_settings(config_file="config.json"):
     with open(_dirs.user_config_dir + "/" + config_file) as data_file:
         settings_data = json.load(data_file)
@@ -26,7 +28,7 @@ MPLAYER_PATH = "D:/Personal/Downloads/Software/AudioVideo/MPlayer/MPlayer-x86_64
 if sys.platform.startswith("linux"):
     MPLAYER_PATH = "mplayer"
 
-RADIO_STATIONS_PATH = "data/radio/NO.json"
+RADIO_STATIONS_PATH = USER_DATA_DIR + "/radio/NO.json" # "data/radio/NO.json"
 
 try:
     SETTINGS = load_settings(CONFIG_FILE)
@@ -41,3 +43,10 @@ except IOError:
     save_settings(SETTINGS, CONFIG_FILE)
 
 WEB_FRONTENT_PORT = 8000
+MOUSE_VISIBLE = True
+DIRBLE_API_KEY = "<my-api-key>"
+
+try:
+    DIRBLE_API_KEY = load_settings("radio/private.json")["dirble_api_key"]
+except Exception:
+    DIRBLE_API_KEY = None

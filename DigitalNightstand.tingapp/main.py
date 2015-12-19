@@ -271,7 +271,7 @@ def stop_alarm_clock(xy, action):
 @touch(xy=(20,80),size=(50,50),align="topleft")
 @touch(xy=(80,80),size=(50,50),align="topleft")
 def on_touch_radio_play_pause(xy, action):
-    if action == 'down':
+    if action == 'down' and gui.current_page == 1:
         p.player.play_pause()
 
 # Radio Page Previous Channel button touch event
@@ -281,8 +281,9 @@ def on_touch_radio_play_pause(xy, action):
     align=RADIO_PLAYER_BUTTON_CHANNEL_PREV["align"]
 )
 @touch(xy=(10,180),size=(50,50),align="topleft")
-def on_touch_radio_prev(xy, action):
-    if action == 'down':
+@button.press("midright")
+def on_touch_radio_prev(xy=None, action="down"):
+    if action == 'down' and gui.current_page == 1:
         p.prev_channel()
 
 # Radio Page Next Channel button touch event
@@ -292,7 +293,8 @@ def on_touch_radio_prev(xy, action):
     align=RADIO_PLAYER_BUTTON_CHANNEL_NEXT["align"]
 )
 @touch(xy=(70,180),size=(50,50),align="topleft")
-def on_touch_radio_next(xy, action):
+@button.press("right")
+def on_touch_radio_next(xy=None, action="down"):
     if action == 'down' and gui.current_page == 1:
         p.next_channel()
 
@@ -335,6 +337,8 @@ def on_touch_clock_datetime(xy, action):
 
 # BEGIN: loop()
 def loop():
+    if config.MOUSE_VISIBLE:
+        pygame.mouse.set_visible(config.MOUSE_VISIBLE)
     screen.fill(
         color=COLOR_BLUE_DARK
     )

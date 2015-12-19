@@ -12,57 +12,94 @@
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
     <script src="js/jtsage-datebox.min.js"></script>
     <script id="entry-template" type="text/x-handlebars-template">
-        <h2>Alarms Setup</h2>
         <div data-role="collapsibleset" data-theme="a" data-content-theme="a">
-            {{#each alarms}}
             <div data-role="collapsible">
-                <h3>Alarm #{{math @index "+" 1}}</h3>
-                <div class="ui-field-contain">
-                    <label for="alarm_{{@index}}_title">Title:</label>
-                    <input type="text" name="alarm_{{@index}}_title" id="alarm_{{@index}}_title" />
+                <h2>Alarms Setup</h2>
+                <div data-role="collapsibleset" data-theme="a" data-content-theme="a">
+                    {{#each alarms}}
+                    <div data-role="collapsible">
+                        <h3>Alarm #{{math @index "+" 1}}</h3>
+                        <div class="ui-field-contain">
+                            <label for="alarm_{{@index}}_title">Title:</label>
+                            <input type="text" name="alarm_{{@index}}_title" id="alarm_{{@index}}_title" value="{{title}}" />
+                        </div>
+                        <div class="ui-field-contain">
+                            <label for="alarm_{{@index}}_time">Time:</label>
+                            <input type="date" data-role="datebox" name="alarm_{{@index}}_time" id="alarm_{{@index}}_time" data-options='{"mode": "timebox"}' />
+                        </div>
+                        <fieldset data-role="controlgroup" data-type="horizontal" class="ui-field-contain">
+                            <legend>Days</legend>
+                            <input type="checkbox" name="alarm_{{@index}}_days" id="alarm_{{@index}}_days_mon" value="mon" />
+                            <label for="alarm_{{@index}}_days_mon">Mon</label>
+
+                            <input type="checkbox" name="alarm_{{@index}}_days" id="alarm_{{@index}}_days_tue" value="tue" />
+                            <label for="alarm_{{@index}}_days_tue">Tue</label>
+
+                            <input type="checkbox" name="alarm_{{@index}}_days" id="alarm_{{@index}}_days_wed" value="wed" />
+                            <label for="alarm_{{@index}}_days_wed">Wed</label>
+
+                            <input type="checkbox" name="alarm_{{@index}}_days" id="alarm_{{@index}}_days_thu" value="thu" />
+                            <label for="alarm_{{@index}}_days_thu">Thu</label>
+
+                            <input type="checkbox" name="alarm_{{@index}}_days" id="alarm_{{@index}}_days_fri" value="fri" />
+                            <label for="alarm_{{@index}}_days_fri">Fri</label>
+
+                            <input type="checkbox" name="alarm_{{@index}}_days" id="alarm_{{@index}}_days_sat" value="sat" />
+                            <label for="alarm_{{@index}}_days_sat">Sat</label>
+
+                            <input type="checkbox" name="alarm_{{@index}}_days" id="alarm_{{@index}}_days_sun" value="sun" />
+                            <label for="alarm_{{@index}}_days_sun">Sun</label>
+                        </fieldset>
+                    </div>
+                    {{/each}}
                 </div>
-                <div class="ui-field-contain">
-                    <label for="alarm_{{@index}}_time">Time:</label>
-                    <input type="date" data-role="datebox" name="alarm_{{@index}}_time" id="alarm_{{@index}}_time" data-options='{"mode": "timebox"}' />
-                </div>
-                <fieldset data-role="controlgroup" data-type="horizontal" class="ui-field-contain">
-                    <legend>Days</legend>
-                    <input type="checkbox" name="alarm_{{@index}}_days" id="alarm_{{@index}}_days_mon" value="mon" />
-                    <label for="alarm_{{@index}}_days_mon">Mon</label>
-
-                    <input type="checkbox" name="alarm_{{@index}}_days" id="alarm_{{@index}}_days_tue" value="tue" />
-                    <label for="alarm_{{@index}}_days_tue">Tue</label>
-
-                    <input type="checkbox" name="alarm_{{@index}}_days" id="alarm_{{@index}}_days_wed" value="wed" />
-                    <label for="alarm_{{@index}}_days_wed">Wed</label>
-
-                    <input type="checkbox" name="alarm_{{@index}}_days" id="alarm_{{@index}}_days_thu" value="thu" />
-                    <label for="alarm_{{@index}}_days_thu">Thu</label>
-
-                    <input type="checkbox" name="alarm_{{@index}}_days" id="alarm_{{@index}}_days_fri" value="fri" />
-                    <label for="alarm_{{@index}}_days_fri">Fri</label>
-
-                    <input type="checkbox" name="alarm_{{@index}}_days" id="alarm_{{@index}}_days_sat" value="sat" />
-                    <label for="alarm_{{@index}}_days_sat">Sat</label>
-
-                    <input type="checkbox" name="alarm_{{@index}}_days" id="alarm_{{@index}}_days_sun" value="sun" />
-                    <label for="alarm_{{@index}}_days_sun">Sun</label>
-                </fieldset>
             </div>
-            {{/each}}
-        </div>
-        <h2>Internet Radio</h2>
-        <div class="ui-field-contain">
-            <label for="radio_custom_stations">Custom Stations (Stream URI)</label>
-            <textarea name="radio_custom_stations" 
-                      id="radio_custom_stations" 
-                      style="font-family: monospace; overflow: scroll; white-space: pre;" 
-                      placeholder="Stream URIs (one on each line)"
-                      rows="{{math radio_stations.length '+' 2}}">
-{{#each radio_stations}}
+            <div data-role="collapsible">
+                <h2>Internet Radio</h2>
+
+                <div class="ui-field-contain">
+                    <label for="radio_stations_country">Radio Stations country</label>
+                    <select name="radio_stations_country"
+                            id="radio_stations_country"
+                            type="text" 
+                            value="{{radio/country}}">
+                        <option value="GB">GB</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </div>
+                <div class="ui-field-contain">
+                    <label for="dirble_api_key">Dirble API Key</label>
+                    <input name="dirble_api_key"
+                           id="dirble_api_key"
+                           type="text" />
+                </div>
+                <div class="ui-field-contain">
+                    <label for="radio_custom_stations">Custom Stations (Stream URI)</label>
+                    <textarea name="radio_custom_stations"
+                              id="radio_custom_stations"
+                              style="font-family: monospace; overflow: scroll; white-space: pre;"
+                              placeholder="Stream URIs (one on each line)"
+                              rows="{{math radio/custom_stations.length '+' 2}}">
+{{#each radio/custom_stations}}
 {{stream_uri}}
-{{/each}}
-</textarea>
+{{/each}}</textarea>
+                </div>
+            </div>
+            <div data-role="collapsible">
+                <h2>General</h2>
+                <div class="ui-field-contain">
+                    <label for="general_config_file">Config file</label>
+                    <input name="general_config_file"
+                           id="general_mplayer_path"
+                           type="text" value="{{general/config_file}}" />
+                </div>
+                <div class="ui-field-contain">
+                    <label for="general_mplayer_path">MPlayer path</label>
+                    <input name="general_mplayer_path"
+                           id="general_mplayer_path"
+                           type="text" value="{{general/mplayer_path}}" />
+                </div>
+            </div>
         </div>
         <button type="submit" value="Submit">Submit</button>
 </script>
@@ -80,6 +117,8 @@
                 "%": lvalue % rvalue
             }[operator];
         });
+
+        function pad(num, size) { return ('000000000' + num).substr(-size); }
     </script>
 </head>
 <body>
@@ -100,67 +139,113 @@
     </div><!-- /page -->
     <script>
         $(document).ready(function () {
-            var context = {
-                alarms: [{
-                    // #1
-                }, {
-                    // #2
-                }, {
-                    // #3
-                }, {
-                    // #4
-                }, {
-                    // #5
-                }],
-                radio_stations: []
-            };
-            var num_alarms = context.alarms.length;
-            var source = $("#entry-template").html();
-            var template = Handlebars.compile(source);
-            var html = template(context);
-            $("#form").html(html).trigger("create");
-            $("#form").on("submit", function (e) {
-                e.preventDefault();
-                var alarms = [];
-                for (var i = 0; i < num_alarms; i++) {
-                    var $time = $("#alarm_" + i + "_time");
-                    var $hour = $("#alarm_" + i + "_hour");
-                    var $min = $("#alarm_" + i + "_min");
-                    var $title = $("#alarm_" + i + "_title");
-                    var $days = $("input[name='alarm_" + i + "_days']:checked");
-
-                    if ($time.val()) {
-                        var time = $time.val().split(":");
-                        var hour = parseInt(time[0], 10);
-                        var min = parseInt(time[1], 10);
-                        var obj = {
-                            time: [hour, min],
-                            //time: [+$hour.val(), +$min.val()],
-                            title: $title.val() || "ALARM",
-                        };
-                        if ($days.length > 0) {
-                            obj.days = [];
-                            $days.each(function (index) {
-                                obj.days[index] = $(this).val();
-                            });
-                        }
-                        alarms.push(obj);
+            $.getJSON("/api/config").done(function (data) {
+                var context = data || {
+                    alarms: [{
+                        // #1
+                    }, {
+                        // #2
+                    }, {
+                        // #3
+                    }, {
+                        // #4
+                    }, {
+                        // #5
+                    }],
+                    radio: {
+                        country: "GB",
+                        custom_stations: []
+                    },
+                    general: {
+                        config_file: "config.json",
+                        mplayer_path: "mplayer"
+                    }
+                };
+                var alarms_length = context.alarms.length; // Configured alarms
+                if (context.alarms.length < 5) {
+                    for (var i = context.alarms.length; i < 5; i++) {
+                        context.alarms.push([]);
                     }
                 }
+                var num_alarms = context.alarms.length;
+                var source = $("#entry-template").html();
+                var template = Handlebars.compile(source);
+                var html = template(context);
+                $("#form").html(html);
 
-                console.log(alarms);
-
-                $.post("/", JSON.stringify({
-                    alarms: alarms,
-                    radio_stations: $("#radio_custom_stations").val().trim().split("\n").map(function (line, index) {
-                        return {
-                            name: "Custom #" + (index + 1),
-                            groups: [ "Custom" ],
-                            stream_uri: line + ""
+                // Only loop through configured alarms
+                for (var i = 0; i < alarms_length; i++) {
+                    var alarm = context.alarms[i];
+                    var $time = $("#alarm_" + i + "_time");
+                    $time.val(pad(alarm.time[0], 2) + ":" + pad(alarm.time[1], 2));
+                    $("input[name='alarm_" + i + "_days']").each(function(index, elem) {
+                        var $this = $(this);
+                        if ($.inArray($this.val(), alarm.days) > -1) {
+                            $this.attr("checked", "checked").trigger("change");
                         }
-                    })
-                }));
+                    });
+                }
+                $("#form").trigger("create");
+                $("#dirble_api_key").on("change", function (e) {
+                    var $this = $(this);
+                    var val = $this.val();
+                    if (val && val.length > 0) {
+                        $.post("/dirble_api_key", JSON.stringify({
+                            dirble_api_key: val
+                        })).done(function () {
+                            $this.val("");
+                        });
+                    }
+                });
+                $("#form").on("submit", function (e) {
+                    e.preventDefault();
+                    var alarms = [];
+                    for (var i = 0; i < num_alarms; i++) {
+                        var $time = $("#alarm_" + i + "_time");
+                        var $hour = $("#alarm_" + i + "_hour");
+                        var $min = $("#alarm_" + i + "_min");
+                        var $title = $("#alarm_" + i + "_title");
+                        var $days = $("input[name='alarm_" + i + "_days']:checked");
 
+                        if ($time.val()) {
+                            var time = $time.val().split(":");
+                            var hour = parseInt(time[0], 10);
+                            var min = parseInt(time[1], 10);
+                            var obj = {
+                                time: [hour, min],
+                                //time: [+$hour.val(), +$min.val()],
+                                title: $title.val() || "ALARM",
+                            };
+                            if ($days.length > 0) {
+                                obj.days = [];
+                                $days.each(function (index) {
+                                    obj.days[index] = $(this).val();
+                                });
+                            }
+                            alarms.push(obj);
+                        }
+                    }
+
+                    console.log(alarms);
+                    var radio_custom_stations = $("#radio_custom_stations").val().trim().split("\n");
+                    if (radio_custom_stations.length > 0) {
+                        radio_custom_stations = radio_custom_stations.map(function (line, index) {
+                            return {
+                                name: "Custom #" + (index + 1),
+                                groups: ["Custom"],
+                                stream_uri: line + ""
+                            };
+                        });
+                    } else {
+                        radio_custom_stations = [];
+                    }
+
+                    $.post("/", JSON.stringify({
+                        alarms: alarms,
+                        radio_stations: radio_custom_stations
+                    }));
+
+                });
             });
         });
     </script>
