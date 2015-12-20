@@ -9,51 +9,62 @@ class Alarm(object):
     def __init__(self, sound, config="data/alarms.json", settings=None):
         self.current_alarm = None
         self.sound = sound
-        if settings == None:
+        if settings is None:
             self.settings = self.load_settings(config)
         else:
             self.settings = settings
         self.s = sched.scheduler(time.time, time.sleep)
 
     def load_settings(self, config):
-        with open(config) as data_file:
-            data = json.load(data_file)
-        return data
+        if config is not None:
+            # Only load settings if config is actually set
+            with open(config) as data_file:
+                data = json.load(data_file)
+            return data
+        else:
+            # Otherwise, return None
+            return None
 
     def _format_time(self, hour, minute):
         return "%02d:%02d" % (hour,minute)
 
     def create_alarms(self):
-        alarms = self.settings["alarms"]
-        for alarm in alarms:
-            time = alarm["time"]
-            days = None
-            title = "ALARM"
-            if "days" in alarm:
-                days = alarm["days"]
-            if "title" in alarm:
-                title = alarm["title"]
-            self.create_alarm(time[0], time[1], days, title)
+        if self.settings is not None:
+            # Only create alarms if settings actually set
+            alarms = self.settings["alarms"]
+            for alarm in alarms:
+                time = alarm["time"]
+                days = None
+                title = "ALARM"
+                if "days" in alarm:
+                    days = alarm["days"]
+                if "title" in alarm:
+                    title = alarm["title"]
+                self.create_alarm(time[0], time[1], days, title)
         for job in schedule.jobs:
             print job
 
     def create_alarm(self, hour, minute, days=None, title="ALARM"):
         if days == None:
+            # If days is not defined we assume that the alarm should
+            # be run every day
             schedule.every().day.at(self._format_time(hour, minute)).do(self.play_alarm, (title))
         else:
-            if "mon" in days:
+            # Check if each weekday exists in days.
+            # And schedule the alarm for each weekday found.
+            if "mon" in days: # Monday found... Schedule it!
                 schedule.every().monday.at(self._format_time(hour, minute)).do(self.play_alarm, (title))
-            if "tue" in days:
+            if "tue" in days: # Tuesday found... Schedule it!
                 schedule.every().tuesday.at(self._format_time(hour, minute)).do(self.play_alarm, (title))
-            if "wed" in days:
+            if "wed" in days: # Wednesday found... Schedule it!
                 schedule.every().wednesday.at(self._format_time(hour, minute)).do(self.play_alarm, (title))
-            if "thu" in days:
+            if "thu" in days: # Thursday found... Schedule it!
                 schedule.every().thursday.at(self._format_time(hour, minute)).do(self.play_alarm, (title))
-            if "fri" in days:
+            if "fri" in days: # Friday found... Schedule it!
                 schedule.every().friday.at(self._format_time(hour, minute)).do(self.play_alarm, (title))
-            if "sat" in days:
+            if "sat" in days: # Saturday found... Schedule it!
                 schedule.every().saturday.at(self._format_time(hour, minute)).do(self.play_alarm, (title))
-            if "sun" in days:
+            if "sun" in days: # Sunday found... Schedule it!
                 schedule.every().sunday.at(self._format_time(hour, minute)).do(self.play_alarm, (title))
         # self.s.enterabs(secs, 1, self.play_alarm, ())
 
@@ -73,6 +84,7 @@ class Alarm(object):
         pygame.mixer.music.stop()
 
     def next_alarm(self):
+        # Return the datetime object of next scheduled alarm
         return schedule.next_run()
 
     @staticmethod
@@ -85,30 +97,4 @@ class Alarm(object):
 
         for i in range(1, num_alarms+1):
             hour = settings_form.getvalue("alarm_" + str(i) + "_hour")
-
-
-
-curr_dir = os.path.dirname(os.path.realpath(__file__))
-# alarm = Alarm(curr_dir + "/res/sounds/Argon_48k.wav")
-alarm_time = time.localtime()
-print alarm_time.tm_isdst
-alarm_time = time.struct_time((alarm_time.tm_year,
-                               alarm_time.tm_mon,
-                               alarm_time.tm_mday,
-                               12, # hours
-                               20, # minutes
-                               0, # seconds
-                               alarm_time.tm_wday,
-                               alarm_time.tm_yday,
-                               alarm_time.tm_isdst
-                              ))
-print time.strftime("%X", alarm_time)
-# alarm.create_alarms()
-print schedule.next_run()
-# alarm.create_alarm(time.mktime(alarm_time))
-# alarm.run_alarm()
-#alarm.play_alarm()
-while 0:
-    time.sleep(1.0/30)
-    schedule.run_pending()
 

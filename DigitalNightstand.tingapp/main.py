@@ -239,9 +239,10 @@ def draw_clock_page():
         font_size=CLOCK_LABEL_DATE["font_size"],
         align=CLOCK_LABEL_DATE["align"]
     )
-
-    # Humanize the next alarm datetime to a string
-    next_alarm = arrow.get(alarm.next_alarm()).humanize()
+    next_alarm = "(no current alarms)"
+    if alarm.next_alarm() is not None:
+        # Humanize the next alarm datetime to a string
+        next_alarm = arrow.get(alarm.next_alarm()).humanize()
     # Draw the next alarm info on the bottom left of the the screen
     screen.text(
         CLOCK_LABEL_ALARM_NEXT["text"] % next_alarm,

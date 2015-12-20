@@ -9,6 +9,8 @@ class Radio(object):
 
     @staticmethod
     def download_radio_channels(country_code="NO", count=30, replace=False):
+        if DIRBLE_API_KEY is None:
+            return None
         url = "http://api.dirble.com/v2/countries/" + country_code + "/stations?"
         params = urllib.urlencode({
             "token": DIRBLE_API_KEY,
@@ -109,7 +111,7 @@ class Radio(object):
         return self.radio_channels[self.active_channel]
 
     def load_channels(self, filename):
-        if os.path.exists(filename):
+        if filename is not None and os.path.exists(filename):
             with open(filename) as data_file:
                 radio_data = json.load(data_file)
             self.radio_channels = radio_data["channels"]
