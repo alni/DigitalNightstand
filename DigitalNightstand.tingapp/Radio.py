@@ -2,6 +2,8 @@
 import urllib
 import os
 import json
+import base64
+import config
 from config import DIRBLE_API_KEY, USER_DATA_DIR
 
 class Radio(object):
@@ -11,17 +13,19 @@ class Radio(object):
     def download_radio_channels(country_code="NO", count=30, replace=False):
         if DIRBLE_API_KEY is None:
             return None
-        url = "http://api.dirble.com/v2/countries/" + country_code + "/stations?"
-        params = urllib.urlencode({
-            "token": DIRBLE_API_KEY,
-            "per_page": count
-        })
         filename = USER_DATA_DIR + "/radio/" + country_code + ".json"
         if not os.path.exists(os.path.dirname(filename)):
             # If the folder path to the User Config Directory does not exists,
             # then create it + any non-existing parent folders
             os.makedirs(os.path.dirname(filename))
         if not os.path.exists(filename) or replace == True:
+            url = "http://api.dirble.com/v2/countries/" + country_code + "/stations?"
+            params = urllib.urlencode({
+                # Base64 decode the API Key before sending it with the request
+                "token": base64.b64decode(config.DIRBLE_API_KEY),
+                "per_page": count
+            })
+            print url + params
             urllib.urlretrieve(url + params, filename)
         return filename
 
@@ -108,13 +112,22 @@ class Radio(object):
             self.set_channel(-1)
 
     def get_active_channel(self):
-        return self.radio_channels[self.active_channel]
+        if self.active_channel < len(self.radio_channels):
+            return self.radio_channels[self.active_channel]
+        else:
+            return {}
 
     def load_channels(self, filename):
         if filename is not None and os.path.exists(filename):
             with open(filename) as data_file:
                 radio_data = json.load(data_file)
             self.radio_channels = radio_data["channels"]
+
+    def change_country(self, country_code):
+        filename = Radio.download_radio_channels(country_code)
+        Radio.transform_downloaded_channels(country_code)
+        self.load_channels(filename)
+        self.set_channel(0)
 
 # radio_player = Radio()
 

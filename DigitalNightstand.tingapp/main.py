@@ -8,6 +8,7 @@ import json
 import string
 import thread
 import os
+import locale
 from multiprocessing.pool import ThreadPool
 
 from defs.colors import *
@@ -25,7 +26,7 @@ frontend = None
 alarm = None
 radio_config = config.RADIO_STATIONS_PATH # "data/radio.json"
 p = None
-current_coding = None
+current_locale, current_coding = locale.getdefaultlocale()
 if os.name == 'nt':
     # On windows platforms, current character encoding is never "utf-8".
     # Instead it is a special "windows/cp" encoding
@@ -43,11 +44,14 @@ thread_pool = ThreadPool(4)
 
 @every(seconds=0.5)
 def update():
+    local = arrow.now()
     # Every 500ms check for new alarms and update the
     # current_time and current_date variables
     alarm.run_alarm()
-    gui.current_date = time.strftime("%d %B %Y")
-    gui.current_time = time.strftime("%H %M")
+    gui.current_date = local.format('D MMMM YYYY', current_locale)
+    # time.strftime("%d %B %Y")
+    gui.current_time = local.format("HH mm", current_locale)
+   # time.strftime("%H %M")
 
 @every(seconds=2)
 def update_radio():
@@ -110,7 +114,7 @@ def draw_radio_page():
     # Setup of the Stream Name and Title/Info
     radio_info = '(none)' # Initial value of the Stream Info
     station_name = p.player.get_name() # Get the Stream Name from the player output
-    if station_name is None:
+    if station_name is None and 'name' in p.get_active_channel():
         # If the Stream Name could not be set/not yet set from the player output,
         # then set the Station Name to the name from the station list instead
         station_name = p.get_active_channel()['name']
@@ -375,8 +379,11 @@ with open(radio_config) as data_file:
     radio_data = json.load(data_file)
 
 p = Radio(radio_channels=radio_data['channels'], mplayer_path=config.MPLAYER_PATH)
-if "radio_stations" in settings_data and len(settings_data['radio_stations']) > 0:
-    p.radio_channels.extend(settings_data['radio_stations'])
+if "radio" in settings_data:
+    _radio_settings = settings_data['radio']
+    p.change_country(_radio_settings['country'])
+    if "radio_stations" in _radio_settings and len(_radio_settings['radio_stations']) > 0:
+        p.radio_channels.extend(_radio_settings['radio_stations'])
 
 web_frontend.radio = p
 alarm = Alarm("res/sounds/Argon_48k.wav", settings=settings_data)

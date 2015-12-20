@@ -10,23 +10,62 @@
     <link rel="stylesheet" href="css/custom.css" />
     <script src="js/jquery-1.11.3.min.js"></script>
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script id="entry-template" type="text/x-handlebars-template">
+    {{#select country}}
+    {{#each countries}}
+    <option value="{{country_code}}">{{name}} ({{country_code}})</option>
+    {{/each}}
+    {{/select}}
+    </script>
     <script type="text/javascript" src="js/handlebars-v4.0.2.js"></script>
+    <script>
+        Handlebars.registerHelper("math", function (lvalue, operator, rvalue, options) {
+            lvalue = parseFloat(lvalue);
+            rvalue = parseFloat(rvalue);
+
+            return {
+                "+": lvalue + rvalue,
+                "-": lvalue - rvalue,
+                "*": lvalue * rvalue,
+                "/": lvalue / rvalue,
+                "%": lvalue % rvalue
+            }[operator];
+        });
+
+        window.Handlebars.registerHelper('select', function (value, options) {
+            var $el = $('<select />').html(options.fn(this));
+            $el.find('[value="' + value + '"]').attr({ 'selected': 'selected' });
+            return $el.html();
+        });
+
+        function pad(num, size) { return ('000000000' + num).substr(-size); }
+    </script>
 </head>
 <body>
-    <div data-role="page" style="background-image: url(images/banner-911778_1920.jpg); background-position:center; background-size:cover; background-repeat:no-repeat;">
+    <div data-role="page" 
+         style="background-image: url(images/banner-911778_1920.jpg); background-position:center; background-size:cover; background-repeat:no-repeat;">
         <!-- Header -->
         <div data-role="header">
             <h1>Digital Nightstand Frontend</h1>
             <!-- Navigation Bar -->
-            <div data-role="navbar" data-grid="a">
+            <div data-role="navbar" 
+                 data-grid="a">
                 <ul>
-                    <li><a href="index.html" class="ui-btn ui-icon-prev" data-ajax="false">Setup</a></li>
-                    <li><a href="player.html" class="ui-btn ui-btn-active ui-state-persist ui-icon-prev">Radio Player</a></li>
+                    <li>
+                        <a href="index.html"
+                           class="ui-btn ui-icon-prev"
+                           data-ajax="false">Setup</a>
+                    </li>
+                    <li>
+                        <a href="player.html" 
+                           class="ui-btn ui-btn-active ui-state-persist ui-icon-prev">Radio Player</a>
+                    </li>
                 </ul>
             </div><!-- /navbar -->
         </div><!-- /header -->
 
-        <div role="main" class="ui-content">
+        <div role="main" 
+             class="ui-content">
             <!-- Radio Info Top Panel - playback buttons and info -->
             <div class="ui-body ui-body-a ui-corner-all" 
                  style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
@@ -39,21 +78,24 @@
                             <!-- Play button parent block -->
                             <div class="ui-block-a">
                                 <!-- Play button -->
-                                <a id="play" href="/api/play" class="ui-btn ui-btn-b ui-icon-play ui-nodisc-icon ui-btn-icon-notext my-big-button"></a>
+                                <a id="play" 
+                                   href="/api/play" 
+                                   class="ui-btn ui-btn-b ui-icon-play ui-nodisc-icon ui-btn-icon-notext my-big-button"></a>
                             </div><!-- /block-a -->
                             <!-- Pause button parent block -->
                             <div class="ui-block-b">
                                 <!-- Pause button -->
-                                <a id="pause" href="/api/pause" class="ui-btn ui-btn-b ui-icon-pause ui-nodisc-icon ui-btn-icon-notext my-big-button"></a>
+                                <a id="pause" 
+                                   href="/api/pause" 
+                                   class="ui-btn ui-btn-b ui-icon-pause ui-nodisc-icon ui-btn-icon-notext my-big-button"></a>
                             </div><!-- /block-b -->
                         </div><!-- /grid-a -->
                     </div><!-- /block-a -->
                     <!-- Right (Info) block -->
                     <div class="ui-block-b">
-                        <div class="ui-bar ui-bar-a" style="height:60px">
+                        <div class="ui-bar ui-bar-a" 
+                             style="height:60px">
                             <select id="countries">
-                                <option value="GB">GB</option>
-                                <option value="NO">NO</option>
                             </select>
                         </div>
                     </div><!-- /block-b -->
@@ -69,31 +111,40 @@
 
         <div data-role="footer">
             <!-- Radio Player Control Navigation Bar -->
-            <div data-role="navbar" data-grid="d">
+            <div data-role="navbar" 
+                 data-grid="d">
                 <ul>
                     <li>
                         <!-- Previous Station button -->
-                        <a href="/api/prev" class="ui-btn ui-btn-b ui-icon-prev ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a>
+                        <a href="/api/prev" 
+                           class="ui-btn ui-btn-b ui-icon-prev ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a>
                     </li>
                     <li>
                         <!-- Next Station button -->
-                        <a href="/api/next" class="ui-btn ui-btn-b ui-icon-next ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a>
+                        <a href="/api/next" 
+                           class="ui-btn ui-btn-b ui-icon-next ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a>
                     </li>
                     <li>
                         <!-- Volume Down button -->
-                        <a href="/api/vol_down" class="ui-btn ui-btn-b ui-icon-vol-down ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a>
+                        <a href="/api/vol_down" 
+                           class="ui-btn ui-btn-b ui-icon-vol-down ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a>
                     </li>
                     <li>
                         <!-- Volume Up button -->
-                        <a href="/api/vol_up" class="ui-btn ui-btn-b ui-icon-vol-up ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a>
+                        <a href="/api/vol_up" 
+                           class="ui-btn ui-btn-b ui-icon-vol-up ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a>
                     </li>
                     <li>
                         <!-- Volume Mute button -->
-                        <a href="/api/vol_mute" class="ui-btn ui-btn-b ui-icon-vol-mute ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a>
+                        <a href="/api/vol_mute" 
+                           class="ui-btn ui-btn-b ui-icon-vol-mute ui-nodisc-icon ui-btn-icon-notext my-big-button my-full-width-button"></a>
                     </li>
                 </ul>
             </div><!-- /navbar -->
         </div><!-- /footer -->
+        <div data-role="popup" id="popupCountryChange">
+            <p>The chosen country is only temporary changed. To permantly change the country it must be changed from the setup page.</p>
+        </div>
     </div><!-- /page -->
     <script>
         $(document).ready(function () {
@@ -103,10 +154,26 @@
                     $("#info").text(data.radio.info);
                 });
             }, 2000); // Update radio station info every 2 seconds
-            
+
+            $.getJSON("/api/list_countries").done(function (countries) {
+                console.log(countries);
+                var context = {
+                    countries: countries
+                };
+                var source = $("#entry-template").html();
+                var template = Handlebars.compile(source);
+                var html = template(context);
+                $("#countries").html(html);
+            });
             // Change the current country for the station list
             $("#countries").on("change", function (e) {
+                // This will only temporary change the chosen country.
+                // To permantly change the country it must be changed from the
+                // setup page
                 $.get("/api/change_country/" + $(this).val()).done(function (data) {
+                    $("#popupCountryChange").popup("open", {
+                        positionTo: "#countries"
+                    });
                     $("#station").text(data.radio.station);
                     $("#info").text(data.radio.info);
                 });

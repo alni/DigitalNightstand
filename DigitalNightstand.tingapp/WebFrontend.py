@@ -8,7 +8,9 @@ import sys
 import os
 import posixpath
 import urllib
+import urllib2
 import json
+import base64
 
 import config
 
@@ -109,10 +111,18 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                     return
                 if self.path.startswith("/api/change_country/"):
                     country_code = self.path.split("/")[-1]
-                    filename = radio.download_radio_channels(country_code)
-                    radio.transform_downloaded_channels(country_code)
-                    radio.load_channels(filename)
+                    radio.change_country(country_code)
                     self.api_call()
+                    return
+                if self.path == "/api/list_countries":
+                    url = "http://api.dirble.com/v2/countries?"
+                    params = urllib.urlencode({
+                        # Base64 decode the API Key before sending it with the request
+                        "token": base64.b64decode(config.DIRBLE_API_KEY)
+                    })
+                    response = urllib2.urlopen(url + params)
+                    data = json.loads(response.read())
+                    self.api_call(data=data)
                     return
             else:
                 self.send_error(501, "Radio not set to an instance")
