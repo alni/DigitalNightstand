@@ -155,15 +155,17 @@
                 });
             }, 2000); // Update radio station info every 2 seconds
 
-            $.getJSON("/api/list_countries").done(function (countries) {
+            $.when($.getJSON("/api/config"), $.getJSON("/api/list_countries")).done(function (settings, countries) {
+                console.log(settings[0]);
                 console.log(countries);
                 var context = {
-                    countries: countries
+                    countries: countries[0],
+                    country: settings[0].radio.country
                 };
                 var source = $("#entry-template").html();
                 var template = Handlebars.compile(source);
                 var html = template(context);
-                $("#countries").html(html);
+                $("#countries").html(html).selectmenu( "refresh" );
             });
             // Change the current country for the station list
             $("#countries").on("change", function (e) {

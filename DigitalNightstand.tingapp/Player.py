@@ -39,8 +39,16 @@ class Player(object):
         self.player.stdin.write("volume 1\n")
         self.player.stdin.flush()
 
-    def mute(self):
+    def toggle_mute(self):
         self.player.stdin.write("mute\n")
+        self.player.stdin.flush()
+
+    def mute(self):
+        self.player.stdin.write("mute 1\n")
+        self.player.stdin.flush()
+
+    def unmute(self):
+        self.player.stdin.write("mute 0\n")
         self.player.stdin.flush()
 
     def load(self, channel):

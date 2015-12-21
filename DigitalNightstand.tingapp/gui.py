@@ -101,7 +101,7 @@ ALARM_LABEL_TITLE = {
     "type": "text",
     "xy": (160, 110),
     "color": COLOR_BLUE_LIGHT,
-    "font_size": 85,
+    "font_size": 50,
     "align": "center",
     "touch_size": (160, 120),
     "text": "%s"

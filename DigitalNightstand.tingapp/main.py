@@ -271,6 +271,7 @@ def stop_alarm_clock(xy, action):
     if action == 'down':
         if alarm.current_alarm is not None:
             alarm.stop_alarm()
+            p.player.unmute()
 
 # Radio Page Play/Pause button touch event
 @touch(xy=(20,80),size=(50,50),align="topleft")
@@ -319,7 +320,7 @@ def on_touch_radio_vol_up(xy, action):
 @touch(xy=(250,180),size=(50,50),align="topleft")
 def on_touch_radio_mute(xy, action):
     if action == 'down' and gui.current_page == 1:
-        p.player.mute()
+        p.player.toggle_mute()
 
 # Radio Page DateTime touch event - switch to the Clock Page
 @touch(xy=(8,0),size=(304,68),align="topleft")
@@ -363,6 +364,7 @@ def loop():
             font_size=ALARM_LABEL_TITLE["font_size"],
             align=ALARM_LABEL_TITLE["align"]
         )
+        p.player.mute()
     elif gui.current_page == 1:
         draw_radio_page()
     elif gui.current_page == 2:
