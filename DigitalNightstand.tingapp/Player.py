@@ -4,16 +4,18 @@ import re
 
 class Player(object):
     """description of class"""
-    def __init__(self, channel, mplayer_path="D:/Personal/Downloads/Software/AudioVideo/MPlayer/MPlayer-x86_64-r37451+g531b0a3/mplayer.exe"):
+    def __init__(self, channel, params=None, mplayer_path="D:/Personal/Downloads/Software/AudioVideo/MPlayer/MPlayer-x86_64-r37451+g531b0a3/mplayer.exe"):
         print channel
         self.info = None
         self.title = None
         self.name = None
         self.mplayer_path = mplayer_path
-        self.player = self._create_player(channel, mplayer_path)
+        self.player = self._create_player(channel, params, mplayer_path)
 
-    def _create_player(self, channel, mplayer_path):
+    def _create_player(self, channel, params, mplayer_path):
         args = [mplayer_path, "-slave", "-quiet", "-cache", "1024"]
+        if params is not None:
+            args.extend(params)
         if channel.endswith(".m3u") or channel.endswith(".pls"):
             args.append("-playlist")
         args.append(channel)
@@ -53,12 +55,16 @@ class Player(object):
         self.player.stdin.write("mute 0\n")
         self.player.stdin.flush()
 
-    def load(self, channel):
+    def seek(self, sec=120):
+        self.player.stdin.write("seek %d\n" % sec)
+        self.player.stdin.flush()
+
+    def load(self, channel, params=None):
         command = "loadfile " + channel + "\n"
         self.name = None
         self.info = None
         self.player.kill()
-        self.player = self._create_player(channel, self.mplayer_path)
+        self.player = self._create_player(channel, params, self.mplayer_path)
 
     def set_name(self):
         not_found = True

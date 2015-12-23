@@ -85,7 +85,10 @@ class Radio(object):
 
         self.radio_channels = radio_channels
         self.active_channel = 0
-        self.player = Player.Player(self.radio_channels[self.active_channel]['stream_uri'], mplayer_path)
+        self.player = Player.Player(
+            self.radio_channels[self.active_channel]['stream_uri'], 
+            ["-ss", "60"],
+            mplayer_path)
 
     def next_channel(self):
         self.set_channel(self.active_channel + 1)
@@ -100,7 +103,10 @@ class Radio(object):
             index = len(self.radio_channels) - 1
         self.active_channel = index
         print "Currently playing: " + self.radio_channels[self.active_channel]['name']
-        self.player.load(self.radio_channels[self.active_channel]['stream_uri'])
+        self.player.load(
+            self.radio_channels[self.active_channel]['stream_uri'],
+             ["-ss", "60"]
+        )
 
     def add_channel(self, display_name, channel, switch_to=False):
         self.radio_channels.append({
