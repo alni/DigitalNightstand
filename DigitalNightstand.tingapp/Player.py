@@ -7,6 +7,7 @@ class Player(object):
     def __init__(self, channel, mplayer_path="D:/Personal/Downloads/Software/AudioVideo/MPlayer/MPlayer-x86_64-r37451+g531b0a3/mplayer.exe"):
         print channel
         self.info = None
+        self.title = None
         self.name = None
         self.mplayer_path = mplayer_path
         self.player = self._create_player(channel, mplayer_path)
@@ -30,6 +31,7 @@ class Player(object):
     def stop(self):
         self.player.stdin.write("quit\n")
         self.player.stdin.flush()
+        self.player.kill()
 
     def vol_down(self):
         self.player.stdin.write("volume -1\n")
@@ -75,19 +77,33 @@ class Player(object):
     def get_name(self):
         return self.name
 
+    def set_title(self):
+        str = u'(none)'
+        attrs = None
+        # line = self.player.stdout.readline()
+        for line in iter(self.player.stdout.readline, ''):
+            # print line
+            if line.startswith('ICY Info: StreamTitle='):
+                title = line.split("ICY Info: StreamTitle=")[1]
+                if title is not None:
+                    self.title = title[1:-3]
+                print '\nStream title: '+self.title
+
     def get_info(self, attr="StreamTitle"):
         str = u'(none)'
-        line = self.player.stdout.readline()
-        # for line in self.player.stdout:
-        # print line
-        if line.startswith('ICY Info:'):
-            info = line.split(':', 1)[1].strip()
-            attrs = dict(re.findall("(\w+)='([^']*)'", info))
-            # print 'Stream title: '+attrs.get('StreamTitle', '(none)')
-            self.info = attrs
-        if self.info is not None:
-            str = self.info.get(attr, '(none)')
-        print '\nStream title: '+str
+        attrs = None
+        # line = self.player.stdout.readline()
+        for line in iter(self.player.stdout.readline, ''):
+            print line
+            if line.startswith('ICY Info:'):
+                info = line.split(':', 1)[1].strip()
+                attrs = dict(re.findall("(\w+)='([^']*)'", info))
+                # print 'Stream title: '+attrs.get('StreamTitle', '(none)')
+                if attrs is not None and attrs.has_key(attr):
+                    self.info = attrs
+            if self.info is not None:
+                str = self.info.get(attr, '(none)')
+            # print '\nStream title: '+str
         return str 
 
 # player = Player("http://http-live.sr.se/p1-mp3-192")

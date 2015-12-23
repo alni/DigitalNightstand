@@ -22,7 +22,29 @@ def save_settings(data, config_file="config.json"):
         # If the folder path to the User Config Directory does not exists,
         # then create it + any non-existing parent folders
         os.makedirs(os.path.dirname(filename))
-    with open(_dirs.user_config_dir + "/" + config_file, "w") as outfile:
+    with open(filename, "w") as outfile:
+        print os.path.abspath(outfile.name)
+        json.dump(data, outfile)
+
+def load_last_state(file="last_state.json"):
+    filename = USER_DATA_DIR + "/" + file
+    if not os.path.exists(filename):
+        return None
+    with open(USER_DATA_DIR + "/" + file) as data_file:
+        last_state = json.load(data_file)
+    return last_state
+
+def save_last_state(last_radio_station=0, last_page=1, file="last_state.json"):
+    filename = USER_DATA_DIR + "/" + file
+    data = {
+        "last_radio_station": last_radio_station,
+        "last_page": last_page
+    }
+    if not os.path.exists(os.path.dirname(filename)):
+        # If the folder path to the User Data Directory does not exists,
+        # then create it + any non-existing parent folders
+        os.makedirs(os.path.dirname(filename))
+    with open(filename, "w") as outfile:
         print os.path.abspath(outfile.name)
         json.dump(data, outfile)
 

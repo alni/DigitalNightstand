@@ -3,11 +3,13 @@ import pygame
 from tingbot import *
 import arrow
 
+import atexit
 import time
 import json
 import string
 import thread
 import os
+import sys
 import locale
 from multiprocessing.pool import ThreadPool
 
@@ -42,6 +44,18 @@ print current_coding
 # Create a thread pool to keep the number of running threads to a minimum
 thread_pool = ThreadPool(4)
 
+@atexit.register
+def clean_up():
+    frontend.stop()
+    p.player.stop()
+    config.save_last_state(
+        last_radio_station=p.active_channel, 
+        last_page=gui.current_page
+    )
+    thread_pool.close()
+    pygame.quit()
+    sys.exit()
+
 @every(seconds=0.5)
 def update():
     local = arrow.now()
@@ -51,7 +65,7 @@ def update():
     gui.current_date = local.format('D MMMM YYYY', current_locale)
     # time.strftime("%d %B %Y")
     gui.current_time = local.format("HH mm", current_locale)
-   # time.strftime("%H %M")
+    # time.strftime("%H %M")
 
 @every(seconds=2)
 def update_radio():
@@ -59,7 +73,8 @@ def update_radio():
     # - Radio Player info object, and the 
     # - Radio Player stream name
     # Do this async on another thread to prevent lock/freeze
-    thread_pool.apply_async(p.player.get_info, ())
+    # thread_pool.apply_async(p.player.get_info, ())
+    thread_pool.apply_async(p.player.set_title, ())
     thread_pool.apply_async(p.player.set_name, ())
 
 
@@ -118,12 +133,16 @@ def draw_radio_page():
         # If the Stream Name could not be set/not yet set from the player output,
         # then set the Station Name to the name from the station list instead
         station_name = p.get_active_channel()['name']
-    if p.player.info is not None:
-        # If the Player info is set, then try to get the latest StreamTitle (Info)
-        radio_info = p.player.info.get("StreamTitle")
+    if p.player.title is not None:
+        radio_info = p.player.title
     else:
-        # Otherwise, set the Info to the default "(none)" value
         radio_info = '(none)'
+    # if p.player.info is not None:
+        # If the Player info is set, then try to get the latest StreamTitle (Info)
+        # radio_info = p.player.info.get("StreamTitle")
+    #else:
+        # Otherwise, set the Info to the default "(none)" value
+        #radio_info = '(none)'
     if radio_info is None:
         # If the Player info was set but the latest StreamTitle (Info) was not,
         # then set the Info to the default "(none)" value
@@ -390,5 +409,10 @@ if "radio" in settings_data:
 web_frontend.radio = p
 alarm = Alarm("res/sounds/Argon_48k.wav", settings=settings_data)
 alarm.create_alarms()
+
+last_state = config.load_last_state()
+if last_state is not None:
+    p.set_channel(last_state["last_radio_station"])
+    gui.current_page = last_state["last_page"]
 
 tingbot.run(loop)
