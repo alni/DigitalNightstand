@@ -286,7 +286,10 @@ def draw_clock_page():
 
 
 def set_current_page(val):
-    gui.current_page = val
+    if gui.last_touch == -1 or time.time() - gui.last_touch > 1:
+        # only switch page if there is more than 1 second since last page change
+        gui.last_touch = time.time() # set last page change to current time
+        gui.current_page = val
 
 # Alarm Page touch event
 # Stop the alarm if the alarm title is touched
@@ -317,7 +320,7 @@ def on_touch_radio_play_pause(xy, action):
 @touch(xy=(10,180),size=(50,50),align="topleft")
 @button.press("midright")
 def on_touch_radio_prev(xy=None, action="down"):
-    if action == 'down' and gui.current_page == 1:
+    if action == 'down' and gui.current_page == PAGE_INDEX_RADIO:
         p.prev_channel()
 
 # Radio Page Next Channel button touch event
@@ -329,44 +332,38 @@ def on_touch_radio_prev(xy=None, action="down"):
 @touch(xy=(70,180),size=(50,50),align="topleft")
 @button.press("right")
 def on_touch_radio_next(xy=None, action="down"):
-    if action == 'down' and gui.current_page == 1:
+    if action == 'down' and gui.current_page == PAGE_INDEX_RADIO:
         p.next_channel()
 
 # Radio Page Volume Down button touch event
 @touch(xy=(130,180),size=(50,50),align="topleft")
 def on_touch_radio_vol_down(xy, action):
-    if action == 'down' and gui.current_page == 1:
+    if action == 'down' and gui.current_page == PAGE_INDEX_RADIO:
         p.player.vol_down()
 
 # Radio Page Volume Up button touch event
 @touch(xy=(190,180),size=(50,50),align="topleft")
 def on_touch_radio_vol_up(xy, action):
-    if action == 'down' and gui.current_page == 1:
+    if action == 'down' and gui.current_page == PAGE_INDEX_RADIO:
         p.player.vol_up()
 
 # Radio Page Volume Mute button touch event
 @touch(xy=(250,180),size=(50,50),align="topleft")
 def on_touch_radio_mute(xy, action):
-    if action == 'down' and gui.current_page == 1:
+    if action == 'down' and gui.current_page == PAGE_INDEX_RADIO:
         p.player.toggle_mute()
 
 # Radio Page DateTime touch event - switch to the Clock Page
 @touch(xy=(8,0),size=(304,68),align="topleft")
 def on_touch_radio_datetime(xy, action):
-    if action == 'down' and gui.current_page == 1:
-        if gui.last_touch == -1 or time.time() - gui.last_touch > 1:
-            # only switch page if there is more than 1 second since last page change
-            gui.last_touch = time.time() # set last page change to current time
-            set_current_page(2)
+    if action == 'down' and gui.current_page == PAGE_INDEX_RADIO:
+        set_current_page(PAGE_INDEX_CLOCK)
 
 # Clock Page DateTime touch event - switch to the Radio Page
 @touch(xy=(8,8),size=(304,224),align="topleft")
 def on_touch_clock_datetime(xy, action):
-    if action == 'down' and gui.current_page == 2:
-        if gui.last_touch == -1 or time.time() - gui.last_touch > 1:
-            # only switch page if there is more than 1 second since last page change
-            gui.last_touch = time.time() # set last page change to current time
-            set_current_page(1)
+    if action == 'down' and gui.current_page == PAGE_INDEX_CLOCK:
+        set_current_page(PAGE_INDEX_RADIO)
 
 
 # BEGIN: loop()
@@ -393,9 +390,9 @@ def loop():
             align=ALARM_LABEL_TITLE["align"]
         )
         p.player.mute()
-    elif gui.current_page == 1:
+    elif gui.current_page == PAGE_INDEX_RADIO:
         draw_radio_page()
-    elif gui.current_page == 2:
+    elif gui.current_page == PAGE_INDEX_CLOCK:
         draw_clock_page()
 
 # END: loop()

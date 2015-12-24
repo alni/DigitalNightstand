@@ -8,6 +8,9 @@ current_time = ""
 
 radio_info_scroll_text = None
 
+PAGE_INDEX_RADIO = 1
+PAGE_INDEX_CLOCK = 2
+
 RADIO_PAGE_CLOCK_LABEL_TIME = {
     "type": "text",
     "xy": (160, 20),

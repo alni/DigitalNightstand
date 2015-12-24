@@ -36,12 +36,13 @@ class ScrollText(object):
             self.hpos = hpos
         self.surface.blit(self.text_surface, 
             (self.margin[0], self.hpos), 
-            (self.position-self.margin[1], 0, self.surface.get_width()-self.margin[0]-self.margin[1], self.size)
+            (self.position, 0, self.surface.get_width()-self.margin[0]-self.margin[1], self.size)
         )
-        if self.position < self.text_surface.get_width()-self.margin[1]:
+        if self.position < self.surface.get_width():
             self.position += 1
         else:
-            self.position = 0
+            # set position on the far right, just outside the viewable area
+            self.position = -self.surface.get_width() 
 
     def update_text(self, text):
         if text != self.text:
