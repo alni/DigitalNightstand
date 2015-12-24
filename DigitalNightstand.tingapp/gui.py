@@ -6,6 +6,8 @@ last_touch = -1
 current_date = ""
 current_time = ""
 
+radio_info_scroll_text = None
+
 RADIO_PAGE_CLOCK_LABEL_TIME = {
     "type": "text",
     "xy": (160, 20),

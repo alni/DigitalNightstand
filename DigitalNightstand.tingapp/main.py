@@ -23,6 +23,8 @@ import gui
 from gui import *
 import config
 
+from ScrollText import ScrollText
+
 # Intitalize global objects
 frontend = None
 alarm = None
@@ -176,13 +178,20 @@ def draw_radio_page():
     )
 
     # Draw the Station Info at the end/bottom in the bottom info panel
-    screen.text(
-        radio_info,
-        xy=(12, 159),
-        font_size=15,
-        color=COLOR_BLUE_LIGHT,
-        align="topleft"
-    )
+    if gui.radio_info_scroll_text is None:
+        gui.radio_info_scroll_text = ScrollText(screen.surface, 
+        radio_info, 159, COLOR_BLUE_LIGHT, (12,12), 15)
+    else:
+        gui.radio_info_scroll_text.update_text(radio_info)
+        gui.radio_info_scroll_text.update()
+        # pygame.display.flip()
+    #screen.text(
+    #    radio_info,
+    #    xy=(12, 159),
+    #    font_size=15,
+    #    color=COLOR_BLUE_LIGHT,
+    #    align="topleft"
+    #)
 
     # Play Button - Drawn at the left in the top info panel
     screen.image(

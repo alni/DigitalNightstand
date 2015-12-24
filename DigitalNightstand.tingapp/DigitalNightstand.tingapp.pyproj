@@ -44,6 +44,9 @@
     <Compile Include="Radio.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ScrollText.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="WebFrontend.py">
       <SubType>Code</SubType>
     </Compile>
