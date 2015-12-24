@@ -83,6 +83,7 @@ class Radio(object):
                 ("P1 Ostfold", "http://lyd.nrk.no/nrk_radio_p1_ostfold_mp3_h"),
             ]
 
+        self.country_code = None
         self.radio_channels = radio_channels
         self.active_channel = 0
         self.player = Player.Player(
@@ -130,10 +131,18 @@ class Radio(object):
             self.radio_channels = radio_data["channels"]
 
     def change_country(self, country_code):
-        filename = Radio.download_radio_channels(country_code)
-        Radio.transform_downloaded_channels(country_code)
-        self.load_channels(filename)
-        self.set_channel(0)
+        filename = USER_DATA_DIR + "/radio/" + country_code + ".json"
+        if self.country_code is None or self.country_code != country_code:
+            self.country_code = country_code
+            filename = Radio.download_radio_channels(country_code)
+            Radio.transform_downloaded_channels(country_code)
+            self.load_channels(filename)
+            self.set_channel(0)
+            return True
+        else:
+            self.load_channels(filename)
+            return False
+
 
 # radio_player = Radio()
 

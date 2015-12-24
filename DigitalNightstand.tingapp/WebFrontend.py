@@ -22,6 +22,7 @@ api_data = {
 }
 
 radio = None
+alarm = None
 
 # modify this to add additional routes
 ROUTES = (
@@ -136,6 +137,15 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self.data_string = self.rfile.read(int(self.headers['Content-Length']))
             data = json.loads(self.data_string)
             config.save_settings(data, config.CONFIG_FILE)
+            config.SETTINGS = data
+            if alarm is not None:
+                alarm.set_settings(config.SETTINGS)
+            if radio is not None and "radio" in config.SETTINGS:
+                _radio_settings = config.SETTINGS['radio']
+                radio.change_country(_radio_settings['country'])
+                if "radio_stations" in _radio_settings and len(_radio_settings['radio_stations']) > 0:
+                    radio.radio_channels.extend(_radio_settings['radio_stations'])
+
             logging.warning("\n")
             self.send_response(200)
             return

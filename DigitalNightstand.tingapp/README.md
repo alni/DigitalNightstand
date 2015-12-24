@@ -75,7 +75,7 @@ This project uses the following Python libraries:
 
 * `appdirs` - [`appdirs`][appdirs] is created by [ActiveState Software Inc][activestate-software-inc] and distributed under the [MIT license][appdirs-license]
 * `arrow` - [`arrow`][arrow] is created by [Chris Smith][chris-smith] and licensed under the [Apache License, Version 2.0][apache-license-2-0]
-* `pygame` - [`pygame`][pygame] is created by the [Pygame Community][pygame-community] and distributed under [GNU LGPL version 2.1][pygame-license]
+* `pygame` - [`pygame`][pygame] is developed by the [Pygame Community][pygame-community] and distributed under [GNU LGPL version 2.1][pygame-license]
 * `schedule` - [`schedule`][schedule] is created by [Daniel Bader][daniel-bader] and distributed under the [MIT license][schedule-license]
 * `tingbot-python` - [`tingbot-python`][tingbot-python] is created by [Tingbot][tingbot] and licensed under the ['BSD 2-clause license'][tingbot-python-license]
 

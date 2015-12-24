@@ -3,22 +3,32 @@ import subprocess
 import re
 
 class Player(object):
-    """description of class"""
-    def __init__(self, channel, params=None, mplayer_path="D:/Personal/Downloads/Software/AudioVideo/MPlayer/MPlayer-x86_64-r37451+g531b0a3/mplayer.exe"):
-        print channel
+    """
+    Player class used to initialize and provide control of MPlayer
+    """
+    def __init__(self, stream, params=None, mplayer_path="D:/Personal/Downloads/Software/AudioVideo/MPlayer/MPlayer-x86_64-r37451+g531b0a3/mplayer.exe"):
+        """
+        Initialize the Player with stream.
+
+        Parameters:
+        - stream : the stream to pass to MPlayer
+        - params : (optional) pass extra arguments to the MPlayer subproccess
+        - mplayer_path : (optional) the path to the MPlayer executable
+        """
+        print stream
         self.info = None
         self.title = None
         self.name = None
         self.mplayer_path = mplayer_path
-        self.player = self._create_player(channel, params, mplayer_path)
+        self.player = self._create_player(stream, params, mplayer_path)
 
-    def _create_player(self, channel, params, mplayer_path):
+    def _create_player(self, stream, params, mplayer_path):
         args = [mplayer_path, "-slave", "-quiet", "-cache", "1024"]
         if params is not None:
             args.extend(params)
-        if channel.endswith(".m3u") or channel.endswith(".pls"):
+        if stream.endswith(".m3u") or stream.endswith(".pls"):
             args.append("-playlist")
-        args.append(channel)
+        args.append(stream)
         self.player = subprocess.Popen(args, 
                                        stdin=subprocess.PIPE, 
                                        stdout=subprocess.PIPE, 
@@ -59,12 +69,12 @@ class Player(object):
         self.player.stdin.write("seek %d\n" % sec)
         self.player.stdin.flush()
 
-    def load(self, channel, params=None):
-        command = "loadfile " + channel + "\n"
+    def load(self, stream, params=None):
+        command = "loadfile " + stream + "\n"
         self.name = None
         self.info = None
         self.player.kill()
-        self.player = self._create_player(channel, params, self.mplayer_path)
+        self.player = self._create_player(stream, params, self.mplayer_path)
 
     def set_name(self):
         not_found = True
@@ -90,9 +100,9 @@ class Player(object):
         for line in iter(self.player.stdout.readline, ''):
             # print line
             if line.startswith('ICY Info: StreamTitle='):
-                title = line.split("ICY Info: StreamTitle=")[1]
+                title = line.split("ICY Info: StreamTitle=")[1].strip()
                 if title is not None:
-                    self.title = title[1:-3]
+                    self.title = title[1:-2]
                 print '\nStream title: '+self.title
 
     def get_info(self, attr="StreamTitle"):

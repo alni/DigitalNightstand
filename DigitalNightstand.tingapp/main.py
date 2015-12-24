@@ -410,6 +410,8 @@ web_frontend.radio = p
 alarm = Alarm("res/sounds/Argon_48k.wav", settings=settings_data)
 alarm.create_alarms()
 
+web_frontend.alarm = alarm
+
 last_state = config.load_last_state()
 if last_state is not None:
     p.set_channel(last_state["last_radio_station"])

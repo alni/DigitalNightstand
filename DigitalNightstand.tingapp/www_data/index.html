@@ -38,6 +38,12 @@
                                    id="alarm_{{@index}}_time" 
                                    data-options='{"mode": "timebox"}' />
                         </div>
+                        <fieldset>
+                            <div data-role="fieldcontain">
+                                <label for="alarm_{{@index}}_repeat">Repeat?</label>
+                                <input type="checkbox" id="alarm_{{@index}}_repeat" data-role="flipswitch">
+                            </div>
+                        </fieldset>
                         <fieldset data-role="controlgroup" 
                                   data-type="horizontal" 
                                   class="ui-field-contain">
@@ -246,13 +252,19 @@
                 for (var i = 0; i < alarms_length; i++) {
                     var alarm = context.alarms[i];
                     var $time = $("#alarm_" + i + "_time");
+                    var $repeat = $("#alarm_" + i + "_repeat");
                     $time.val(pad(alarm.time[0], 2) + ":" + pad(alarm.time[1], 2));
-                    $("input[name='alarm_" + i + "_days']").each(function(index, elem) {
-                        var $this = $(this);
-                        if ($.inArray($this.val(), alarm.days) > -1) {
-                            $this.attr("checked", "checked").trigger("change");
-                        }
-                    });
+                    if (!!alarm.repeat) {
+                        $repeat.attr("checked", "checked").trigger("change");
+                    }
+                    if (alarm.days && alarm.days.length > 0) {
+                        $("input[name='alarm_" + i + "_days']").each(function (index, elem) {
+                            var $this = $(this);
+                            if ($.inArray($this.val(), alarm.days) > -1) {
+                                $this.attr("checked", "checked").trigger("change");
+                            }
+                        });
+                    }
                 }
                 $("#form").trigger("create");
                 $("#dirble_api_key").on("change", function (e) {
@@ -278,12 +290,14 @@
                         var $min = $("#alarm_" + i + "_min");
                         var $title = $("#alarm_" + i + "_title");
                         var $days = $("input[name='alarm_" + i + "_days']:checked");
+                        var $repeat = $("#alarm_" + i + "_repeat:checked");
 
                         if ($time.val()) {
                             var time = $time.val().split(":");
                             var hour = parseInt(time[0], 10);
                             var min = parseInt(time[1], 10);
                             var obj = {
+                                repeat: !!$repeat.length,
                                 time: [hour, min],
                                 //time: [+$hour.val(), +$min.val()],
                                 title: $title.val() || "ALARM",
