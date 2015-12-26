@@ -11,6 +11,7 @@ import thread
 import os
 import sys
 import locale
+import inspect
 from multiprocessing.pool import ThreadPool
 
 from defs.colors import *
@@ -180,7 +181,8 @@ def draw_radio_page():
     # Draw the Station Info at the end/bottom in the bottom info panel
     if gui.radio_info_scroll_text is None:
         gui.radio_info_scroll_text = ScrollText(screen.surface, 
-        radio_info, 159, COLOR_BLUE_LIGHT, (12,12), 15)
+        radio_info, 159, COLOR_BLUE_LIGHT, (12,12), 15,
+        font=os.path.join(os.path.dirname(inspect.getfile(tingbot)), 'Geneva.ttf'))
     else:
         gui.radio_info_scroll_text.update_text(radio_info)
         gui.radio_info_scroll_text.update()

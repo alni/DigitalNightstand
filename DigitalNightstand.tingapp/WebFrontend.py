@@ -12,6 +12,8 @@ import urllib2
 import json
 import base64
 
+import pygame
+
 import config
 
 api_data = {
@@ -87,6 +89,9 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         if self.path.startswith("/api/"):
             if self.path == "/api/config":
                 self.api_call(data=config.SETTINGS)
+                return
+            if self.path == "/api/get_fonts":
+                self.api_call(data=pygame.font.get_fonts())
                 return
             if radio is not None:
                 if self.path == "/api/play":

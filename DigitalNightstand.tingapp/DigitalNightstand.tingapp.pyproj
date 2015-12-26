@@ -98,6 +98,9 @@
     <Content Include="res\sounds\Argon_48k.ogg" />
     <Content Include="res\sounds\Argon_48k.wav" />
     <Content Include="test123456.json" />
+    <Content Include="www_data\player.js" />
+    <Content Include="www_data\config.js" />
+    <Content Include="www_data\main.js" />
     <Content Include="www_data\css\custom.css" />
     <Content Include="www_data\css\jquery.mobile-1.4.5.min.css" />
     <Content Include="www_data\css\jtsage-datebox.css" />

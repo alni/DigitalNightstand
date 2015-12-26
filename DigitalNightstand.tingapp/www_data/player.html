@@ -146,55 +146,15 @@
             <p>The chosen country is only temporary changed. To permantly change the country it must be changed from the setup page.</p>
         </div>
     </div><!-- /page -->
+    <script src="main.js"></script>
+    <script src="player.js"></script>
     <script>
         $(document).ready(function () {
             setInterval(function () {
-                $.getJSON("/api/").done(function (data) {
-                    $("#station").text(data.radio.station);
-                    $("#info").text(data.radio.info);
-                });
+                DigitalNightstandPlayer.updateInfo();
             }, 2000); // Update radio station info every 2 seconds
 
-            $.when($.getJSON("/api/config"), $.getJSON("/api/list_countries")).done(function (settings, countries) {
-                console.log(settings[0]);
-                console.log(countries);
-                var context = {
-                    countries: countries[0],
-                    country: settings[0].radio.country
-                };
-                var source = $("#entry-template").html();
-                var template = Handlebars.compile(source);
-                var html = template(context);
-                $("#countries").html(html).selectmenu( "refresh" );
-            });
-            // Change the current country for the station list
-            $("#countries").on("change", function (e) {
-                // This will only temporary change the chosen country.
-                // To permantly change the country it must be changed from the
-                // setup page
-                $.get("/api/change_country/" + $(this).val()).done(function (data) {
-                    $("#popupCountryChange").popup("open", {
-                        positionTo: "#countries"
-                    });
-                    $("#station").text(data.radio.station);
-                    $("#info").text(data.radio.info);
-                });
-            });
-
-            // Call the api for button links with href that starts with "/api/"
-            $("a[href^='/api/']").on("click", function (e) {
-                e.preventDefault();
-                var $this = $(this);
-                setTimeout(function () {
-                    $this.removeClass("ui-btn-active");
-                }, 250);
-
-                // Call the API with the current href path
-                $.getJSON($this.attr("href")).done(function (data) {
-                    $("#station").text(data.radio.station);
-                    $("#info").text(data.radio.info);
-                });
-            });
+            DigitalNightstandPlayer.init();
         });
     </script>
 </body>

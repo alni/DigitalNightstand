@@ -9,7 +9,7 @@ import sys
 class ScrollText(object):
     """Simple 2d Scrolling Text"""
     
-    def __init__(self, surface, text, hpos, color, margin=(0,0), size=30):
+    def __init__(self, surface, text, hpos, color, margin=(0,0), size=30, font=None):
         """
         (pygame.Surface) surface - surface to draw on
         (string) text - text to draw
@@ -27,7 +27,10 @@ class ScrollText(object):
         self.size = size
         # initialize
         self.position = 0
-        self.font = pygame.font.SysFont("mono", self.size, bold=True)
+        if font is None:
+            self.font = pygame.font.SysFont("mono", self.size, bold=True)
+        else:
+            self.font = pygame.font.Font(font, self.size)
         self.text_surface = self.font.render(self.text, True, self.color)
 
     def update(self, hpos=None):
@@ -38,7 +41,7 @@ class ScrollText(object):
             (self.margin[0], self.hpos), 
             (self.position, 0, self.surface.get_width()-self.margin[0]-self.margin[1], self.size)
         )
-        if self.position < self.surface.get_width():
+        if self.position < self.text_surface.get_width():
             self.position += 1
         else:
             # set position on the far right, just outside the viewable area
