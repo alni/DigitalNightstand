@@ -1,3 +1,12 @@
+@font-face {
+    font-family: Geneva;
+    src: url(/tingbot/Geneva.ttf);
+}
+
+body, .ui-btn {
+    font-family: Geneva;
+}
+
 .ui-icon-pause:after {
     background-image: url(/icons/av/2x_web/ic_pause_circle_outline_white_24dp.png);
     background-size: contain;

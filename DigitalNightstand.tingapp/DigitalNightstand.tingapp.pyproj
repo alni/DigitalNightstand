@@ -111,10 +111,8 @@
     <Content Include="www_data\index.html" />
     <Content Include="www_data\js\handlebars-v4.0.2.js" />
     <Content Include="www_data\js\jquery-1.11.3.min.js" />
-    <Content Include="www_data\js\jquery.mobile-1.4.5.js" />
     <Content Include="www_data\js\jquery.mobile-1.4.5.min.js" />
     <Content Include="www_data\js\jquery.mobile-1.4.5.min.map" />
-    <Content Include="www_data\js\jtsage-datebox.js" />
     <Content Include="www_data\js\jtsage-datebox.js.map" />
     <Content Include="www_data\js\jtsage-datebox.min.js" />
   </ItemGroup>

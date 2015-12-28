@@ -11,8 +11,10 @@ import urllib
 import urllib2
 import json
 import base64
+import inspect
 
 import pygame
+import tingbot
 
 import config
 
@@ -31,6 +33,7 @@ ROUTES = (
     # [url_prefix ,  directory_path]
     ['/media', '/var/www/media'],
     ['/icons', './res/icons/material-design-icons-2.0'],
+    ['/tingbot', os.path.dirname(inspect.getfile(tingbot))],
     ['',       './www_data']  # empty string for the 'default' match
 )
 
@@ -93,6 +96,16 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             if self.path == "/api/get_fonts":
                 self.api_call(data=pygame.font.get_fonts())
                 return
+            if self.path == "/api/list_countries":
+                url = "http://api.dirble.com/v2/countries?"
+                params = urllib.urlencode({
+                    # Base64 decode the API Key before sending it with the request
+                    "token": base64.b64decode(config.DIRBLE_API_KEY)
+                })
+                response = urllib2.urlopen(url + params)
+                data = json.loads(response.read())
+                self.api_call(data=data)
+                return
             if radio is not None:
                 if self.path == "/api/play":
                     self.api_call(radio.player.play_pause)
@@ -119,16 +132,6 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                     country_code = self.path.split("/")[-1]
                     radio.change_country(country_code)
                     self.api_call()
-                    return
-                if self.path == "/api/list_countries":
-                    url = "http://api.dirble.com/v2/countries?"
-                    params = urllib.urlencode({
-                        # Base64 decode the API Key before sending it with the request
-                        "token": base64.b64decode(config.DIRBLE_API_KEY)
-                    })
-                    response = urllib2.urlopen(url + params)
-                    data = json.loads(response.read())
-                    self.api_call(data=data)
                     return
             else:
                 self.send_error(501, "Radio not set to an instance")
@@ -179,9 +182,12 @@ class WebFrontend(object):
     def stop(self):
         self.server.shutdown()
 
+def test():
+    frontend = WebFrontend()
+    frontend.serve()
 
-# frontend = WebFrontend()
-# frontend.serve()
+    while 1:
+        continue
 
-while 0:
-    continue
+if __name__ == '__main__':
+    test()

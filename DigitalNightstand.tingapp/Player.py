@@ -122,29 +122,32 @@ class Player(object):
             # print '\nStream title: '+str
         return str 
 
-# player = Player("http://http-live.sr.se/p1-mp3-192")
+def test():
+    player = Player("http://http-live.sr.se/p1-mp3-192")
 
-while 0:
-    command = raw_input("command\n")
-    if command == "vol_down":
-        player.vol_down()
-    if command == "vol_up":
-        player.vol_up()
-    if command == "mute":
-        player.mute()
-    if command == "play" or command == "pause":
-        player.play_pause()
-    if command == "stop":
-        player.stop()
-    if command == "name":
-        player.set_name()
-        print player.get_name()
-    if command == "new":
-        channel = raw_input("new radio channel")
-        player.stop()
-        player.load(channel)
-        # player = Player(channel)
-        # player.play()
-    if command == "exit":
-        break
+    while 1:
+        command = raw_input("command\n")
+        if command == "vol_down":
+            player.vol_down()
+        if command == "vol_up":
+            player.vol_up()
+        if command == "mute":
+            player.mute()
+        if command == "play" or command == "pause":
+            player.play_pause()
+        if command == "stop":
+            player.stop()
+        if command == "name":
+            player.set_name()
+            print player.get_name()
+        if command == "new":
+            channel = raw_input("new radio channel")
+            player.stop()
+            player.load(channel)
+            # player = Player(channel)
+            # player.play()
+        if command == "exit":
+            break
 
+if __name__ == '__main__':
+    test()

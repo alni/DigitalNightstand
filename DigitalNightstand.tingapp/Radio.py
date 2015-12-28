@@ -144,26 +144,30 @@ class Radio(object):
             return False
 
 
-# radio_player = Radio()
+def test():
+    radio_player = Radio()
 
-while 0:
-    command = "" # raw_input("command\n")
-    if command == "next":
-        radio_player.next_channel()
-    if command == "prev":
-        radio_player.prev_channel()
-    if command == "play" or command == "pause":
-        radio_player.player.play_pause()
-    if command == "stop":
-        radio_player.player.stop()
-    if command == "new":
-        channel = raw_input("new radio channel").split(";")
-        radio_player.add_channel(channel[0], channel[1])
-        # radio_player.player.stop()
-        # radio_player.player = Player(channel)
-        # player.play()
-    if command == "title":
+    while 1:
+        command = "" # raw_input("command\n")
+        if command == "next":
+            radio_player.next_channel()
+        if command == "prev":
+            radio_player.prev_channel()
+        if command == "play" or command == "pause":
+            radio_player.player.play_pause()
+        if command == "stop":
+            radio_player.player.stop()
+        if command == "new":
+            channel = raw_input("new radio channel").split(";")
+            radio_player.add_channel(channel[0], channel[1])
+            # radio_player.player.stop()
+            # radio_player.player = Player(channel)
+            # player.play()
+        if command == "title":
+            radio_player.player.get_info(None)
+        if command == "exit":
+            break
         radio_player.player.get_info(None)
-    if command == "exit":
-        break
-    radio_player.player.get_info(None)
+
+if __name__ == '__main__':
+    test()

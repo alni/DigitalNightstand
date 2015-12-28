@@ -89,6 +89,12 @@ Uses icons from the [Material design icons][material-icons] by Google, Inc
 
 Uses [Material][material-alarm-sounds] alarm sounds from the [`platforms_frameworks_base`][platforms-frameworks-base] repository by [The Android Open Source Project][aosp]
 
+### The Web Frontend ###
+
+Built with [jQuery Mobile][jqm] by [jQuery Foundation, Inc.][jquery-foundation] released under the [MIT license][jqm-license].
+
+Also uses the [DateBox][jtsage-datebox] JavaScript library by [J.T. Sage][jtsage] released under the [MIT license][jtsage-datebox-license].
+
 
 [dirble]: https://dirble.com/ "Dirble"
 [background-image]: https://pixabay.com/en/banner-header-lines-light-rays-911778/ "background image"
@@ -118,3 +124,9 @@ Uses [Material][material-alarm-sounds] alarm sounds from the [`platforms_framewo
 [platforms-frameworks-base]: https://github.com/android/platform_frameworks_base "platforms frameworks base"
 [aosp]: http://source.android.com/ "The Android Open Source Project"
 [material-icons]: https://github.com/google/material-design-icons/ "Material design icons"
+[jqm]: http://jquerymobile.com/ "jQuery Mobile"
+[jquery-foundation]: https://jquery.org/ "jQuery Foundation, Inc."
+[jqm-license]: https://github.com/jquery/jquery-mobile/blob/master/LICENSE.txt "MIT license"
+[jtsage-datebox]: https://github.com/jtsage/jquery-mobile-datebox "Datebox"
+[jtsage]: https://github.com/jtsage "J.T. Sage"
+[jtsage-datebox-license]: https://github.com/jtsage/jquery-mobile-datebox/blob/master/LICENSE.txt "MIT license"
