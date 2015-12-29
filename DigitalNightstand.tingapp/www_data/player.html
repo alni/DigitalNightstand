@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="css/jtsage-datebox.min.css" />
     <link rel="stylesheet" href="css/custom.css" />
     <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="vendor/cldrjs/cldr.js"></script>
+    <script src="vendor/cldrjs/cldr/event.js"></script>
+    <script src="vendor/cldrjs/cldr/supplemental.js"></script>
+    <script src="vendor/cldrjs/cldr/unresolved.js"></script>
+    <script src="vendor/globalize/globalize.js"></script>
+    <script src="vendor/globalize/globalize/message.js"></script>
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
     <script id="entry-template" type="text/x-handlebars-template">
     {{#select country}}
@@ -46,7 +52,7 @@
          style="background-image: url(images/banner-911778_1920.jpg); background-position:center; background-size:cover; background-repeat:no-repeat;">
         <!-- Header -->
         <div data-role="header">
-            <h1>Digital Nightstand Frontend</h1>
+            <h1 data-globalize="setup/title">Digital Nightstand Frontend</h1>
             <!-- Navigation Bar -->
             <div data-role="navbar" 
                  data-grid="a">
@@ -54,11 +60,12 @@
                     <li>
                         <a href="index.html"
                            class="ui-btn ui-icon-prev"
-                           data-ajax="false">Setup</a>
+                           data-ajax="false"
+                           data-globalize="setup/header">Setup</a>
                     </li>
                     <li>
                         <a href="player.html" 
-                           class="ui-btn ui-btn-active ui-state-persist ui-icon-prev">Radio Player</a>
+                           class="ui-btn ui-btn-active ui-state-persist ui-icon-prev"data-globalize="player/header">Radio Player</a>
                     </li>
                 </ul>
             </div><!-- /navbar -->
@@ -143,7 +150,7 @@
             </div><!-- /navbar -->
         </div><!-- /footer -->
         <div data-role="popup" id="popupCountryChange">
-            <p>The chosen country is only temporary changed. To permantly change the country it must be changed from the setup page.</p>
+            <p data-globalize="player/msg_country_change">The chosen country is only temporary changed. To permantly change the country it must be changed from the setup page.</p>
         </div>
     </div><!-- /page -->
     <script src="main.js"></script>

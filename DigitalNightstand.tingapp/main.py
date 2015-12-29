@@ -23,6 +23,7 @@ from WebFrontend import WebFrontend
 import gui
 from gui import *
 import config
+import locales
 
 from ScrollText import ScrollText
 
@@ -43,6 +44,9 @@ if os.name == 'nt':
     # have used "windows-" as prefix)
     current_coding = "cp" + subprocess.check_output("chcp", shell=True).split(": ")[1].strip()
 print current_coding
+
+localized_strings = locales.get_locale(current_locale)
+print localized_strings
 
 # Create a thread pool to keep the number of running threads to a minimum
 thread_pool = ThreadPool(4)
@@ -273,13 +277,15 @@ def draw_clock_page():
         font_size=CLOCK_LABEL_DATE["font_size"],
         align=CLOCK_LABEL_DATE["align"]
     )
-    next_alarm = "(no current alarms)"
+    # next_alarm = "(no current alarms)"
+    next_alarm = localized_strings.get_alarm(None)
     if alarm.next_alarm() is not None:
         # Humanize the next alarm datetime to a string
-        next_alarm = arrow.get(alarm.next_alarm()).humanize()
+        next_alarm = localized_strings.get_alarm(arrow.get(alarm.next_alarm()).humanize(locale=current_locale))
+        # next_alarm = arrow.get(alarm.next_alarm()).humanize()
     # Draw the next alarm info on the bottom left of the the screen
     screen.text(
-        CLOCK_LABEL_ALARM_NEXT["text"] % next_alarm,
+        next_alarm,
         xy=CLOCK_LABEL_ALARM_NEXT["xy"],
         color=CLOCK_LABEL_ALARM_NEXT["color"],
         font_size=CLOCK_LABEL_ALARM_NEXT["font_size"],

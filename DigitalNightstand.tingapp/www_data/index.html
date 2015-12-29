@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="css/jtsage-datebox.min.css" />
     <link rel="stylesheet" href="css/custom.css" />
     <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="vendor/cldrjs/cldr.js"></script>
+    <script src="vendor/cldrjs/cldr/event.js"></script>
+    <script src="vendor/cldrjs/cldr/supplemental.js"></script>
+    <script src="vendor/cldrjs/cldr/unresolved.js"></script>
+    <script src="vendor/globalize/globalize.js"></script>
+    <script src="vendor/globalize/globalize/message.js"></script>
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
     <script src="js/jtsage-datebox.min.js"></script>
     <script id="entry-template" type="text/x-handlebars-template">
@@ -16,22 +22,26 @@
              data-theme="a" 
              data-content-theme="a">
             <div data-role="collapsible">
-                <h2>Alarms Setup</h2>
+                <!--<h2>Alarms Setup</h2>-->
+                <h2>{{globalize lang "setup/alarms/header"}}</h2>
                 <div data-role="collapsibleset" 
                      data-theme="a" 
                      data-content-theme="a">
                     {{#each alarms}}
                     <div data-role="collapsible">
-                        <h3>Alarm #{{math @index "+" 1}}</h3>
+                        <!--h3>Alarm #{{math @index "+" 1}}</h3-->
+                        <h3>{{globalize @root.lang "setup/alarms/item_no" (math @index "+" 1)}}</h3>
                         <div class="ui-field-contain">
-                            <label for="alarm_{{@index}}_title">Title:</label>
+                            <!--<label for="alarm_{{@index}}_title">Title:</label>-->
+                            <label for="alarm_{{@index}}_title">{{globalize @root.lang "setup/alarms/label_title"}}</label>
                             <input type="text" 
                                    name="alarm_{{@index}}_title" 
                                    id="alarm_{{@index}}_title" 
                                    value="{{title}}" />
                         </div>
                         <div class="ui-field-contain">
-                            <label for="alarm_{{@index}}_time">Time:</label>
+                            <!--<label for="alarm_{{@index}}_time">Time:</label>-->
+                            <label for="alarm_{{@index}}_time">{{globalize @root.lang "setup/alarms/label_time"}}</label>
                             <input type="date" 
                                    data-role="datebox" 
                                    name="alarm_{{@index}}_time" 
@@ -40,65 +50,76 @@
                         </div>
                         <fieldset>
                             <div data-role="fieldcontain">
-                                <label for="alarm_{{@index}}_repeat">Repeat?</label>
+                                <!--<label for="alarm_{{@index}}_repeat">Repeat?</label>-->
+                                <label for="alarm_{{@index}}_repeat">{{globalize @root.lang "setup/alarms/label_repeat"}}</label>
                                 <input type="checkbox" id="alarm_{{@index}}_repeat" data-role="flipswitch">
                             </div>
                         </fieldset>
                         <fieldset data-role="controlgroup" 
                                   data-type="horizontal" 
                                   class="ui-field-contain">
-                            <legend>Days</legend>
+                            <!--<legend>Days</legend>-->
+                            <legend>{{globalize @root.lang "setup/alarms/days/label"}}</legend>
                             <input type="checkbox" 
                                    name="alarm_{{@index}}_days" 
                                    id="alarm_{{@index}}_days_mon" 
                                    value="mon" />
-                            <label for="alarm_{{@index}}_days_mon">Mon</label>
+                            <label for="alarm_{{@index}}_days_mon">{{globalize @root.lang "setup/alarms/days/mon"}}</label>
+                            <!--<label for="alarm_{{@index}}_days_mon">Mon</label>-->
 
                             <input type="checkbox" 
                                    name="alarm_{{@index}}_days" 
                                    id="alarm_{{@index}}_days_tue" 
                                    value="tue" />
-                            <label for="alarm_{{@index}}_days_tue">Tue</label>
+                            <label for="alarm_{{@index}}_days_tue">{{globalize @root.lang "setup/alarms/days/tue"}}</label>
+                            <!--<label for="alarm_{{@index}}_days_tue">Tue</label>-->
 
                             <input type="checkbox" 
                                    name="alarm_{{@index}}_days" 
                                    id="alarm_{{@index}}_days_wed" 
                                    value="wed" />
-                            <label for="alarm_{{@index}}_days_wed">Wed</label>
+                            <label for="alarm_{{@index}}_days_wed">{{globalize @root.lang "setup/alarms/days/wed"}}</label>
+                            <!--<label for="alarm_{{@index}}_days_wed">Wed</label>-->
 
                             <input type="checkbox" 
                                    name="alarm_{{@index}}_days" 
                                    id="alarm_{{@index}}_days_thu" 
                                    value="thu" />
-                            <label for="alarm_{{@index}}_days_thu">Thu</label>
+                            <label for="alarm_{{@index}}_days_thu">{{globalize @root.lang "setup/alarms/days/thu"}}</label>
+                            <!--<label for="alarm_{{@index}}_days_thu">Thu</label>-->
 
                             <input type="checkbox" 
                                    name="alarm_{{@index}}_days" 
                                    id="alarm_{{@index}}_days_fri" 
                                    value="fri" />
-                            <label for="alarm_{{@index}}_days_fri">Fri</label>
+                            <label for="alarm_{{@index}}_days_fri">{{globalize @root.lang "setup/alarms/days/fri"}}</label>
+                            <!--<label for="alarm_{{@index}}_days_fri">Fri</label>-->
 
                             <input type="checkbox" 
                                    name="alarm_{{@index}}_days" 
                                    id="alarm_{{@index}}_days_sat" 
                                    value="sat" />
-                            <label for="alarm_{{@index}}_days_sat">Sat</label>
+                            <label for="alarm_{{@index}}_days_sat">{{globalize @root.lang "setup/alarms/days/sat"}}</label>
+                            <!--<label for="alarm_{{@index}}_days_sat">Sat</label>-->
 
                             <input type="checkbox" 
                                    name="alarm_{{@index}}_days" 
                                    id="alarm_{{@index}}_days_sun" 
                                    value="sun" />
-                            <label for="alarm_{{@index}}_days_sun">Sun</label>
+                            <label for="alarm_{{@index}}_days_sun">{{globalize @root.lang "setup/alarms/days/sun"}}</label>
+                            <!--<label for="alarm_{{@index}}_days_sun">Sun</label>-->
                         </fieldset>
                     </div>
                     {{/each}}
                 </div>
             </div>
             <div data-role="collapsible">
-                <h2>Internet Radio</h2>
+                <!--<h2>Internet Radio</h2>-->
+                <h2>{{globalize @root.lang "setup/radio/header"}}</h2>
 
                 <div class="ui-field-contain">
-                    <label for="radio_stations_country">Radio Stations country</label>
+                    <!--<label for="radio_stations_country">Radio Stations country</label>-->
+                    <label for="radio_stations_country">{{globalize @root.lang "setup/radio/label_country"}}</label>
                     <select name="radio_stations_country"
                             id="radio_stations_country"
                             type="text" 
@@ -111,17 +132,20 @@
                     </select>
                 </div>
                 <div class="ui-field-contain">
-                    <label for="dirble_api_key">Dirble API Key</label>
+                    <!--<label for="dirble_api_key">Dirble API Key</label>-->
+                    <label for="dirble_api_key">{{globalize @root.lang "setup/radio/label_api_key"}}</label>
                     <input name="dirble_api_key"
                            id="dirble_api_key"
                            type="text" />
                 </div>
                 <div class="ui-field-contain">
-                    <label for="radio_custom_stations">Custom Stations (Stream URI)</label>
+                    <!--<label for="radio_custom_stations">Custom Stations (Stream URI)</label>-->
+                    <label for="radio_custom_stations">{{globalize @root.lang "setup/radio/label_custom_stations"}}</label>
                     <textarea name="radio_custom_stations"
                               id="radio_custom_stations"
                               style="font-family: monospace; overflow: scroll; white-space: pre;"
-                              placeholder="Stream URIs (one on each line)"
+                              placeholde="Stream URIs (one on each line)"
+                              placeholder="{{globalize @root.lang "setup/radio/placeholder_custom_stations"}}"
                               rows="{{math radio/custom_stations.length '+' 2}}">
 {{#each radio/custom_stations}}
 {{stream_uri}}
@@ -129,16 +153,19 @@
                 </div>
             </div>
             <div data-role="collapsible">
-                <h2>General</h2>
+                <!--<h2>General</h2>-->
+                <h2>{{globalize @root.lang "setup/general/header"}}</h2>
                 <div class="ui-field-contain">
-                    <label for="general_config_file">Config file</label>
+                    <!--<label for="general_config_file">Config file</label>-->
+                    <label for="general_config_file">{{globalize @root.lang "setup/general/label_config_file"}}</label>
                     <input name="general_config_file"
                            id="general_mplayer_path"
                            type="text" 
                            value="{{general/config_file}}" />
                 </div>
                 <div class="ui-field-contain">
-                    <label for="general_mplayer_path">MPlayer path</label>
+                    <!--<label for="general_mplayer_path">MPlayer path</label>-->
+                    <label for="general_mplayer_path">{{globalize @root.lang "setup/general/label_mplayer_path"}}</label>
                     <input name="general_mplayer_path"
                            id="general_mplayer_path"
                            type="text" 
@@ -175,18 +202,20 @@
 <body>
     <div data-role="page">
         <div data-role="header">
-            <h1>Digital Nightstand Frontend</h1>
+            <h1 data-globalize="setup/title">Digital Nightstand Frontend</h1>
             <div data-role="navbar" 
                  data-grid="a">
                 <ul>
                     <li>
                         <a href="index.html"
-                           class="ui-btn ui-btn-active ui-state-persist ui-icon-prev">Setup</a>
+                           class="ui-btn ui-btn-active ui-state-persist ui-icon-prev"
+                            data-globalize="setup/header">Setup</a>
                     </li>
                     <li>
                         <a href="player.html" 
                            class="ui-btn ui-icon-prev" 
-                           data-ajax="false">Radio Player</a>
+                           data-ajax="false"
+                           data-globalize="player/header">Radio Player</a>
                     </li>
                 </ul>
             </div><!-- /navbar -->

@@ -34,6 +34,7 @@
     <Compile Include="defs\__init__.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="locales.py" />
     <Compile Include="main.py" />
     <Compile Include="gui.py">
       <SubType>Code</SubType>
@@ -70,9 +71,14 @@
     <Folder Include="www_data\js\" />
     <Folder Include="www_data\css\" />
     <Folder Include="www_data\images\" />
+    <Folder Include="www_data\data\" />
+    <Folder Include="www_data\vendor\" />
+    <Folder Include="www_data\vendor\cldrjs\cldr\" />
+    <Folder Include="www_data\vendor\cldrjs\" />
+    <Folder Include="www_data\vendor\globalize\" />
+    <Folder Include="www_data\vendor\globalize\globalize\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="data\alarms.default" />
     <Content Include="data\alarms.json" />
     <Content Include="data\radio.json" />
     <Content Include="data\radio\NO.json" />
@@ -98,6 +104,7 @@
     <Content Include="res\sounds\Argon_48k.ogg" />
     <Content Include="res\sounds\Argon_48k.wav" />
     <Content Include="test123456.json" />
+    <Content Include="www_data\data\messages.json" />
     <Content Include="www_data\player.js" />
     <Content Include="www_data\config.js" />
     <Content Include="www_data\main.js" />
@@ -115,6 +122,19 @@
     <Content Include="www_data\js\jquery.mobile-1.4.5.min.map" />
     <Content Include="www_data\js\jtsage-datebox.js.map" />
     <Content Include="www_data\js\jtsage-datebox.min.js" />
+    <Content Include="www_data\vendor\cldrjs\cldr.js" />
+    <Content Include="www_data\vendor\cldrjs\cldr\event.js" />
+    <Content Include="www_data\vendor\cldrjs\cldr\supplemental.js" />
+    <Content Include="www_data\vendor\cldrjs\cldr\unresolved.js" />
+    <Content Include="www_data\vendor\cldrjs\node_main.js" />
+    <Content Include="www_data\vendor\globalize\globalize.js" />
+    <Content Include="www_data\vendor\globalize\globalize\currency.js" />
+    <Content Include="www_data\vendor\globalize\globalize\date.js" />
+    <Content Include="www_data\vendor\globalize\globalize\message.js" />
+    <Content Include="www_data\vendor\globalize\globalize\number.js" />
+    <Content Include="www_data\vendor\globalize\globalize\plural.js" />
+    <Content Include="www_data\vendor\globalize\globalize\relative-time.js" />
+    <Content Include="www_data\vendor\globalize\globalize\unit.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

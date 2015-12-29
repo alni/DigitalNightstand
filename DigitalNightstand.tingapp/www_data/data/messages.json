@@ -1,0 +1,89 @@
+{
+  "root": {
+    "setup": {
+      "header": "Setup",
+      "title": "Digital Nightstand Frontend",
+      "alarms": {
+        "header": "Alarms Setup",
+        "item_no": "Alarm #{0}",
+        "label_title": "Title:",
+        "label_time": "Time:",
+        "label_repeat": "Repeat?",
+        "label_days": "Days",
+        "days": {
+          "label": "Days",
+          "mon": "Mon",
+          "tue": "Tue",
+          "wed": "Wed",
+          "thu": "Thu",
+          "fri": "fri",
+          "sat": "Sat",
+          "sun": "Sun"
+        }
+      },
+      "radio": {
+        "header": "Internet Radio",
+        "label_country": "Radio Stations country",
+        "label_api_key": "Dirble API Key",
+        "label_custom_stations": "Custom Stations (Stream URI)",
+        "placeholder_custom_stations": "Stream URIs (one on each line)"
+      },
+      "general": {
+        "header": "General",
+        "label_config_file": "Config file",
+        "label_mplayer_path": "MPlayer path"
+      }
+    },
+    "player": {
+      "header": "Radio Player",
+      "msg_country_change": [
+        "The chosen country is only temporary changed.",
+        "To permantly change the country it must be selected from the setup page."
+      ]
+    }
+  },
+  "en": { },
+  "nb": {
+    "setup": {
+      "header": "Oppsett",
+      "title": "Grensesnitt for Digitalt Nattbord",
+      "alarms": {
+        "header": "Oppsett av Alarmer",
+        "item_no": "Alarm Nr. {0}",
+        "label_title": "Tittel:",
+        "label_time": "Tid:",
+        "label_repeat": "Gjenta?",
+        "label_days": "Dager",
+        "days": {
+          "label": "Dager",
+          "mon": "Man",
+          "tue": "Tir",
+          "wed": "Ons",
+          "thu": "Tors",
+          "fri": "Fre",
+          "sat": "L\u00F8r",
+          "sun": "S\u00F8n"
+        }
+      },
+      "radio": {
+        "header": "Internett Radio",
+        "label_country": "Land for radio stasjoner",
+        "label_api_key": "Dirble API N\u00F8kkel",
+        "label_custom_stations": "Egne stasjoner (URI for str\u00F8m)",
+        "placeholder_custom_stations": "Str\u00F8m URIer (en per linje)"
+      },
+      "general": {
+        "header": "Generelt",
+        "label_config_file": "Oppsettsfil",
+        "label_mplayer_path": "Bane til MPlayer"
+      }
+    },
+    "player": {
+      "header": "Radio Spiller",
+      "msg_country_change": [
+        "Det valgte landet har bare blitt midlertidig endret.",
+        "For \u00E5 endre landet permanent m\u00E5 den bli valgt fra oppsettsiden."
+      ]
+    }
+  }
+}
