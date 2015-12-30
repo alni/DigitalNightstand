@@ -73,10 +73,13 @@
     <Folder Include="www_data\images\" />
     <Folder Include="www_data\data\" />
     <Folder Include="www_data\vendor\" />
+    <Folder Include="www_data\vendor\chartist\" />
     <Folder Include="www_data\vendor\cldrjs\cldr\" />
     <Folder Include="www_data\vendor\cldrjs\" />
     <Folder Include="www_data\vendor\globalize\" />
     <Folder Include="www_data\vendor\globalize\globalize\" />
+    <Folder Include="www_data\vendor\waves\" />
+    <Folder Include="www_data\vendor\wow\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="data\alarms.json" />
@@ -104,7 +107,31 @@
     <Content Include="res\sounds\Argon_48k.ogg" />
     <Content Include="res\sounds\Argon_48k.wav" />
     <Content Include="test123456.json" />
+    <Content Include="www_data\css\flexboxgrid.min.css" />
+    <Content Include="www_data\css\material-design-iconic-font.min.css" />
+    <Content Include="www_data\css\nativedroid2.color.amber.css" />
+    <Content Include="www_data\css\nativedroid2.color.blue-grey.css" />
+    <Content Include="www_data\css\nativedroid2.color.blue.css" />
+    <Content Include="www_data\css\nativedroid2.color.brown.css" />
+    <Content Include="www_data\css\nativedroid2.color.cyan.css" />
+    <Content Include="www_data\css\nativedroid2.color.deep-orange.css" />
+    <Content Include="www_data\css\nativedroid2.color.deep-purple.css" />
+    <Content Include="www_data\css\nativedroid2.color.green.css" />
+    <Content Include="www_data\css\nativedroid2.color.grey.css" />
+    <Content Include="www_data\css\nativedroid2.color.indigo.css" />
+    <Content Include="www_data\css\nativedroid2.color.light-blue.css" />
+    <Content Include="www_data\css\nativedroid2.color.light-green.css" />
+    <Content Include="www_data\css\nativedroid2.color.lime.css" />
+    <Content Include="www_data\css\nativedroid2.color.orange.css" />
+    <Content Include="www_data\css\nativedroid2.color.pink.css" />
+    <Content Include="www_data\css\nativedroid2.color.purple.css" />
+    <Content Include="www_data\css\nativedroid2.color.red.css" />
+    <Content Include="www_data\css\nativedroid2.color.teal.css" />
+    <Content Include="www_data\css\nativedroid2.color.yellow.css" />
+    <Content Include="www_data\css\nativedroid2.css" />
     <Content Include="www_data\data\messages.json" />
+    <Content Include="www_data\config.html" />
+    <Content Include="www_data\js\nativedroid2.js" />
     <Content Include="www_data\player.js" />
     <Content Include="www_data\config.js" />
     <Content Include="www_data\main.js" />
@@ -122,6 +149,8 @@
     <Content Include="www_data\js\jquery.mobile-1.4.5.min.map" />
     <Content Include="www_data\js\jtsage-datebox.js.map" />
     <Content Include="www_data\js\jtsage-datebox.min.js" />
+    <Content Include="www_data\vendor\chartist\chartist.min.js" />
+    <Content Include="www_data\vendor\chartist\style.css" />
     <Content Include="www_data\vendor\cldrjs\cldr.js" />
     <Content Include="www_data\vendor\cldrjs\cldr\event.js" />
     <Content Include="www_data\vendor\cldrjs\cldr\supplemental.js" />
@@ -135,6 +164,11 @@
     <Content Include="www_data\vendor\globalize\globalize\plural.js" />
     <Content Include="www_data\vendor\globalize\globalize\relative-time.js" />
     <Content Include="www_data\vendor\globalize\globalize\unit.js" />
+    <Content Include="www_data\vendor\waves\waves.min.css" />
+    <Content Include="www_data\vendor\waves\waves.min.js" />
+    <Content Include="www_data\vendor\waves\waves.min.js.map" />
+    <Content Include="www_data\vendor\wow\animate.css" />
+    <Content Include="www_data\vendor\wow\wow.min.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

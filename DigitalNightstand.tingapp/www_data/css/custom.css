@@ -45,6 +45,8 @@ body, .ui-btn {
 .my-big-button {
     height: 50px;
     width: 50px;
+    font-size: 50px;
+    margin: 0 !important;
 }
 
 .my-big-button:after {
@@ -61,4 +63,8 @@ body, .ui-btn {
 
 .my-full-width-button:after {
     width: 100%;
+}
+
+.my-no-textshadow {
+    text-shadow: none;
 }

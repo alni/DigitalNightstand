@@ -7,6 +7,10 @@
     <title></title>
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
     <link rel="stylesheet" href="css/jtsage-datebox.min.css" />
+    <link rel="stylesheet" href="/vendor/waves/waves.min.css" />
+    <link rel="stylesheet" href="/vendor/wow/animate.css" />
+    <link rel="stylesheet" href="/css/nativedroid2.css" />
+    <link rel="stylesheet" href="/css/nativedroid2.color.indigo.css" />
     <link rel="stylesheet" href="css/custom.css" />
     <script src="js/jquery-1.11.3.min.js"></script>
     <script src="vendor/cldrjs/cldr.js"></script>
@@ -16,6 +20,9 @@
     <script src="vendor/globalize/globalize.js"></script>
     <script src="vendor/globalize/globalize/message.js"></script>
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="/vendor/waves/waves.min.js"></script>
+    <script src="/vendor/wow/wow.min.js"></script>
+    <script src="/js/nativedroid2.js"></script>
     <script id="entry-template" type="text/x-handlebars-template">
     {{#select country}}
     {{#each countries}}
@@ -73,46 +80,48 @@
 
         <div role="main" 
              class="ui-content">
-            <!-- Radio Info Top Panel - playback buttons and info -->
-            <div class="ui-body ui-body-a ui-corner-all" 
-                 style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
-                <!-- Outer Grid -->
-                <div class="ui-grid-a">
-                    <!-- Left (Playback) block -->
-                    <div class="ui-block-a">
-                        <!-- Playback grid -->
-                        <div class="ui-grid-a">
-                            <!-- Play button parent block -->
-                            <div class="ui-block-a">
-                                <!-- Play button -->
-                                <a id="play" 
-                                   href="/api/play" 
-                                   class="ui-btn ui-btn-b ui-icon-play ui-nodisc-icon ui-btn-icon-notext my-big-button"></a>
-                            </div><!-- /block-a -->
-                            <!-- Pause button parent block -->
-                            <div class="ui-block-b">
-                                <!-- Pause button -->
-                                <a id="pause" 
-                                   href="/api/pause" 
-                                   class="ui-btn ui-btn-b ui-icon-pause ui-nodisc-icon ui-btn-icon-notext my-big-button"></a>
-                            </div><!-- /block-b -->
-                        </div><!-- /grid-a -->
-                    </div><!-- /block-a -->
-                    <!-- Right (Info) block -->
-                    <div class="ui-block-b">
-                        <div class="ui-bar ui-bar-a" 
-                             style="height:60px">
-                            <select id="countries">
-                            </select>
-                        </div>
-                    </div><!-- /block-b -->
-                </div><!-- /grid-a -->
-            </div>
-        <!-- Radio Info Bottom Panel - Stream info (stream name and title/info) -->
-            <div class="ui-body ui-body-a ui-corner-all" 
-                 style="border-top-left-radius: 0px; border-top-right-radius: 0px;">
-                <h4 id="station"></h4><!-- stream name -->
-                <p id="info"></p><!-- stream title/info -->
+            <div class="clr-bg-orange">
+                <!-- Radio Info Top Panel - playback buttons and info -->
+                <div class="ui-body ui-body-a ui-corner-all clr-bg-indigo" 
+                     style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; border: 2px solid transparent; border-bottom-width: 1px;">
+                    <!-- Outer Grid -->
+                    <div class="ui-grid-a">
+                        <!-- Left (Playback) block -->
+                        <div class="ui-block-a">
+                            <!-- Playback grid -->
+                            <div class="ui-grid-a">
+                                <!-- Play button parent block -->
+                                <div class="ui-block-a">
+                                    <!-- Play button -->
+                                    <a id="play" 
+                                       href="/api/play" 
+                                       class="ui-btn ui-btn-b ui-icon-play ui-nodisc-icon ui-btn-icon-notext my-big-button"></a>
+                                </div><!-- /block-a -->
+                                <!-- Pause button parent block -->
+                                <div class="ui-block-b">
+                                    <!-- Pause button -->
+                                    <a id="pause" 
+                                       href="/api/pause" 
+                                       class="ui-btn ui-btn-b ui-icon-pause ui-nodisc-icon ui-btn-icon-notext my-big-button"></a>
+                                </div><!-- /block-b -->
+                            </div><!-- /grid-a -->
+                        </div><!-- /block-a -->
+                        <!-- Right (Info) block -->
+                        <div class="ui-block-b">
+                            <div class="ui-bar ui-bar-a" 
+                                 style="height:60px">
+                                <select id="countries">
+                                </select>
+                            </div>
+                        </div><!-- /block-b -->
+                    </div><!-- /grid-a -->
+                </div>
+            <!-- Radio Info Bottom Panel - Stream info (stream name and title/info) -->
+                <div class="ui-body ui-body-a ui-corner-all clr-bg-indigo" 
+                     style="border-top-left-radius: 0px; border-top-right-radius: 0px; border: 2px solid transparent; border-top-width: 1px;">
+                    <h4 id="station" class="clr-orange my-no-textshadow"></h4><!-- stream name -->
+                    <p id="info" class="clr-light-green my-no-textshadow"></p><!-- stream title/info -->
+                </div>
             </div>
         </div><!-- /content -->
 

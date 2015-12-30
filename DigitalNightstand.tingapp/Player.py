@@ -23,60 +23,64 @@ class Player(object):
         self.player = self._create_player(stream, params, mplayer_path)
 
     def _create_player(self, stream, params, mplayer_path):
-        args = [mplayer_path, "-slave", "-quiet", "-cache", "1024"]
-        if params is not None:
-            args.extend(params)
-        if stream.endswith(".m3u") or stream.endswith(".pls"):
-            args.append("-playlist")
-        args.append(stream)
-        self.player = subprocess.Popen(args, 
-                                       stdin=subprocess.PIPE, 
-                                       stdout=subprocess.PIPE, 
-                                       stderr=subprocess.STDOUT,
-                                       bufsize = 1, universal_newlines = True)
+        if stream is not None:
+            args = [mplayer_path, "-slave", "-quiet", "-cache", "1024"]
+            if params is not None:
+                args.extend(params)
+            if stream.endswith(".m3u") or stream.endswith(".pls"):
+                args.append("-playlist")
+            args.append(stream)
+            self.player = subprocess.Popen(args, 
+                                           stdin=subprocess.PIPE, 
+                                           stdout=subprocess.PIPE, 
+                                           stderr=subprocess.STDOUT,
+                                           bufsize = 1, universal_newlines = True)
+        else:
+            self.player = None
         return self.player
 
+    def _send_command(self, command):
+        if self.player:
+            self.player.stdin.write(command + "\n")
+            self.player.stdin.flush()
+
     def play_pause(self):
-        self.player.stdin.write("pause\n")
-        self.player.stdin.flush()
+        self._send_command("pause")
 
     def stop(self):
-        self.player.stdin.write("quit\n")
-        self.player.stdin.flush()
-        self.player.kill()
+        self._send_command("quit")
+        if self.player:
+            self.player.kill()
 
     def vol_down(self):
-        self.player.stdin.write("volume -1\n")
-        self.player.stdin.flush()
+        self._send_command("volume -1")
 
     def vol_up(self):
-        self.player.stdin.write("volume 1\n")
-        self.player.stdin.flush()
+        self._send_command("volume 1")
 
     def toggle_mute(self):
-        self.player.stdin.write("mute\n")
-        self.player.stdin.flush()
+        self._send_command("mute")
 
     def mute(self):
-        self.player.stdin.write("mute 1\n")
-        self.player.stdin.flush()
+        self._send_command("mute 1")
 
     def unmute(self):
-        self.player.stdin.write("mute 0\n")
-        self.player.stdin.flush()
+        self._send_command("mute 0")
 
     def seek(self, sec=120):
-        self.player.stdin.write("seek %d\n" % sec)
-        self.player.stdin.flush()
+        self._send_command("seek %d" % sec)
 
     def load(self, stream, params=None):
         command = "loadfile " + stream + "\n"
         self.name = None
         self.info = None
-        self.player.kill()
+        if self.player:
+            self.player.kill()
         self.player = self._create_player(stream, params, self.mplayer_path)
 
     def set_name(self):
+        if self.player is None:
+            return
         not_found = True
         while not_found:
             line = self.player.stdout.readline().rstrip()
@@ -94,6 +98,8 @@ class Player(object):
         return self.name
 
     def set_title(self):
+        if self.player is None:
+            return
         str = u'(none)'
         attrs = None
         # line = self.player.stdout.readline()
@@ -106,6 +112,8 @@ class Player(object):
                 print '\nStream title: '+self.title
 
     def get_info(self, attr="StreamTitle"):
+        if self.player is None:
+            return
         str = u'(none)'
         attrs = None
         # line = self.player.stdout.readline()
