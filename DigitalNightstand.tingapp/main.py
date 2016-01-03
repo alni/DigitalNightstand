@@ -29,7 +29,7 @@ import locales
 
 from ScrollText import ScrollText
 
-# Intitalize global objects
+# Initialize global objects
 frontend = None
 alarm = None
 radio_config = config.RADIO_STATIONS_PATH # "data/radio.json"
@@ -115,7 +115,7 @@ def update_radio():
     if current_coding is not None:
         # try decode the radio_info with the current coding
         # This is necessary with Windows systems where the
-        # encoding is not unicode or ascii
+        # encoding is not Unicode or ASCII
         radio_info = radio_info.decode(current_coding)
         try:
             station_name = station_name.decode(current_coding)
@@ -144,7 +144,7 @@ def draw_radio_page():
         align=PAGE_RADIO_TEXT_TIME["align"]
     )
     if time.localtime().tm_sec%2 == 1:
-        # Blink the time seperator every second by
+        # Blink the time separator every second by
         # display it every other second
         screen.text(
             ":",
@@ -228,7 +228,7 @@ def draw_radio_page():
     if current_coding is not None:
         # try decode the radio_info with the current coding
         # This is necessary with Windows systems where the
-        # encoding is not unicode or ascii
+        # encoding is not Unicode or ASCII
         radio_info = radio_info.decode(current_coding)
         try:
             station_name = station_name.decode(current_coding)
@@ -363,7 +363,7 @@ def draw_clock_page():
         align=CLOCK_LABEL_TIME["align"]
     )
     if time.localtime().tm_sec%2 == 1:
-        # Draw the time seperator every other second (blink the separator)
+        # Draw the time separator every other second (blink the separator)
         screen.text(
             ":",
             xy=CLOCK_LABEL_TIME["xy"],

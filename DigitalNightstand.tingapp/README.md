@@ -8,6 +8,10 @@ Features includes:
 * Digital Clock
 * Alarm Clock
 * Web Frontend
+* Translated into:
+    * English (en)
+    * Norwegian Bokmal (nb)
+    * Norwegian Nynorsk (nn)
 
 ## Internet Radio ##
 
@@ -24,11 +28,17 @@ Currently supports:
 
 Shows the current time and date. The time is shown big, and the date medium size but still readable.
 
+The time and date is formatted based on the locale of the computer.
+
+Also shows the next scheduled alarm (if any).
+
 ## Alarms ##
 
 Supports configurable alarms from a JSON file.
 
-The alarms can have a customized `title`, `days`, and `time`.
+The alarms can have a customized `title`, `time`, `repeat`, and `days`.
+
+Easily set-up from the Web Frontend.
 
 ## Web Frontend ##
 
@@ -40,14 +50,15 @@ Supports:
 
 * Radio Player control
 * Setting up the alarms (total 5)
-* Adding custom internet radio stations
+* Setting the current country for Internet radio list
+* Adding custom Internet radio stations
 
 ## Configuration and Data Files ##
 
 The configuration and data files are stored within a specific folder path unique for each platform.
 
 * `config.json` - contains all user configured settings. This includes all settings configured with the Web Frontend (excluding the _Dirble API Key_)
-* `radio/<country>.json`  - contains transformed internet stations data downloaded from Dirble a specific `country`
+* `radio/<country>.json`  - contains transformed Internet stations data downloaded from Dirble a specific `country`
 * `radio/private.json` - contains private user data that should not be shared. This includes the Dirble API Key set from the Web Frontend
 
 ### Dirble API Key ###
@@ -64,7 +75,7 @@ The Dirble API Key is never loaded to the configuration page.
 
 ## Acknowledgements ##
 
-This app has been inspired, and contains/uses other projects.
+This application has been inspired, and contains/uses other projects.
 
 * Background [image][background-image] by [geralt][pixabay-geralt] from [Pixabay][pixabay]
 * Color palette was generated from the background image with the [Pictaculous][pictaculous] service

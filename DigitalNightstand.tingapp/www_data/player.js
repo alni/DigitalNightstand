@@ -17,7 +17,7 @@
             // Change the current country for the station list
             $("#countries").on("change", function (e) {
                 // This will only temporary change the chosen country.
-                // To permantly change the country it must be changed from the
+                // To permanently change the country it must be changed from the
                 // setup page
                 $.get("/api/change_country/" + $(this).val()).done(function (data) {
                     $("#popupCountryChange").popup("open", {
@@ -28,7 +28,7 @@
                 });
             });
 
-            // Call the api for button links with href that starts with "/api/"
+            // Call the API for button links with href that starts with "/api/"
             $("a[href^='/api/']").on("click", function (e) {
                 e.preventDefault();
                 var $this = $(this);

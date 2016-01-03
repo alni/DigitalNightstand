@@ -9,7 +9,7 @@ import sys
 
 def get_locale(name):
     '''Returns an appropriate :class:`Locale <locale.Locale>` corresponding
-    to an inpute locale name.
+    to an input locale name.
 
     :param name: the name of the locale.
 
@@ -91,7 +91,7 @@ class FinnishLocale(Locale):
 
     names = ['fi', 'fi_fi']
 
-    # The finnish grammar is very complex, and its hard to convert
+    # The Finnish grammar is very complex, and its hard to convert
     # 1-to-1 to something like English.
 
 
@@ -257,176 +257,20 @@ def _map_locales():
 
 class CatalaLocale(Locale):
     names = ['ca', 'ca_ca']
-    past = 'Fa {0}'
-    future = '{0}' # I don't know what's the right phrase in catala for the future.
 
-    timeframes = {
-        'now': 'Ara mateix',
-        'seconds': 'segons',
-        'minute': '1 minut',
-        'minutes': '{0} minuts',
-        'hour': 'una hora',
-        'hours': '{0} hores',
-        'day': 'un dia',
-        'days': '{0} dies',
-        'month': 'un mes',
-        'months': '{0} messos',
-        'year': 'un any',
-        'years': '{0} anys',
-    }
-
-    month_names = ['', 'Jener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Decembre']
-    month_abbreviations = ['', 'Jener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Decembre']
-    day_names = ['', 'Dilluns', 'Dimars', 'Dimecres', 'Dijous', 'Divendres', 'Disabte', 'Diumenge']
-    day_abbreviations = ['', 'Dilluns', 'Dimars', 'Dimecres', 'Dijous', 'Divendres', 'Disabte', 'Diumenge']
 
 class BasqueLocale(Locale):
     names = ['eu', 'eu_eu']
-    past = 'duela {0}'
-    future = '{0}' # I don't know what's the right phrase in Basque for the future.
-
-    timeframes = {
-        'now': 'Orain',
-        'seconds': 'segundu',
-        'minute': 'minutu bat',
-        'minutes': '{0} minutu',
-        'hour': 'ordu bat',
-        'hours': '{0} ordu',
-        'day': 'egun bat',
-        'days': '{0} egun',
-        'month': 'hilabete bat',
-        'months': '{0} hilabet',
-        'year': 'urte bat',
-        'years': '{0} urte',
-    }
-
-    month_names = ['', 'Urtarrilak', 'Otsailak', 'Martxoak', 'Apirilak', 'Maiatzak', 'Ekainak', 'Uztailak', 'Abuztuak', 'Irailak', 'Urriak', 'Azaroak', 'Abenduak']
-    month_abbreviations = ['', 'urt', 'ots', 'mar', 'api', 'mai', 'eka', 'uzt', 'abu', 'ira', 'urr', 'aza', 'abe']
-    day_names = ['', 'Asteleehna', 'Asteartea', 'Asteazkena', 'Osteguna', 'Ostirala', 'Larunbata', 'Igandea']
-    day_abbreviations = ['', 'al', 'ar', 'az', 'og', 'ol', 'lr', 'ig']
 
 
 class HungarianLocale(Locale):
 
     names = ['hu', 'hu_hu']
 
-    past = '{0} ezelőtt'
-    future = '{0} múlva'
-
-    timeframes = {
-        'now': 'éppen most',
-        'seconds': {
-            'past': 'másodpercekkel',
-            'future': 'pár másodperc'
-        },
-        'minute': {'past': 'egy perccel', 'future': 'egy perc'},
-        'minutes': {'past': '{0} perccel', 'future': '{0} perc'},
-        'hour': {'past': 'egy órával', 'future': 'egy óra'},
-        'hours': {'past': '{0} órával', 'future': '{0} óra'},
-        'day': {
-            'past': 'egy nappal',
-            'future': 'egy nap'
-        },
-        'days': {
-            'past': '{0} nappal',
-            'future': '{0} nap'
-        },
-        'month': {'past': 'egy hónappal', 'future': 'egy hónap'},
-        'months': {'past': '{0} hónappal', 'future': '{0} hónap'},
-        'year': {'past': 'egy évvel', 'future': 'egy év'},
-        'years': {'past': '{0} évvel', 'future': '{0} év'},
-    }
-
-    month_names = ['', 'Január', 'Február', 'Március', 'Április', 'Május',
-                   'Június', 'Július', 'Augusztus', 'Szeptember',
-                   'Október', 'November', 'December']
-    month_abbreviations = ['', 'Jan', 'Febr', 'Márc', 'Ápr', 'Máj', 'Jún',
-                           'Júl', 'Aug', 'Szept', 'Okt', 'Nov', 'Dec']
-
-    day_names = ['', 'Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek',
-                 'Szombat', 'Vasárnap']
-    day_abbreviations = ['', 'Hét', 'Kedd', 'Szer', 'Csüt', 'Pént',
-                         'Szom', 'Vas']
-
-    meridians = {
-        'am': 'de',
-        'pm': 'du',
-        'AM': 'DE',
-        'PM': 'DU',
-    }
-
-    def _format_timeframe(self, timeframe, delta):
-        form = self.timeframes[timeframe]
-
-        if isinstance(form, dict):
-            if delta > 0:
-                form = form['future']
-            else:
-                form = form['past']
-
-        return form.format(abs(delta))
-
 
 class ThaiLocale(Locale):
 
     names = ['th', 'th_th']
-
-    past = '{0}{1}ที่ผ่านมา'
-    future = 'ในอีก{1}{0}'
-
-    timeframes = {
-        'now': 'ขณะนี้',
-        'seconds': 'ไม่กี่วินาที',
-        'minute': '1 นาที',
-        'minutes': '{0} นาที',
-        'hour': '1 ชั่วโมง',
-        'hours': '{0} ชั่วโมง',
-        'day': '1 วัน',
-        'days': '{0} วัน',
-        'month': '1 เดือน',
-        'months': '{0} เดือน',
-        'year': '1 ปี',
-        'years': '{0} ปี',
-    }
-
-    month_names = ['', 'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน',
-                   'พฤษภาคม', 'มิถุนายน', 'กรกฏาคม', 'สิงหาคม',
-                   'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม']
-    month_abbreviations = ['', 'ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.',
-                           'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.',
-                           'พ.ย.', 'ธ.ค.']
-
-    day_names = ['', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์',
-                 'เสาร์', 'อาทิตย์']
-    day_abbreviations = ['', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส', 'อา']
-
-    meridians = {
-        'am': 'am',
-        'pm': 'pm',
-        'AM': 'AM',
-        'PM': 'PM',
-    }
-
-    BE_OFFSET = 543
-
-    def year_full(self, year):
-        '''Thai always use Buddhist Era (BE) which is CE + 543'''
-        year += self.BE_OFFSET
-        return '{0:04d}'.format(year)
-
-    def year_abbreviation(self, year):
-        '''Thai always use Buddhist Era (BE) which is CE + 543'''
-        year += self.BE_OFFSET
-        return '{0:04d}'.format(year)[2:]
-
-    def _format_relative(self, humanized, timeframe, delta):
-        '''Thai normally doesn't have any space between words'''
-        if timeframe == 'now':
-            return humanized
-        space = '' if timeframe == 'seconds' else ' '
-        direction = self.past if delta < 0 else self.future
-
-        return direction.format(humanized, space)
 
 
 _locales = _map_locales()

@@ -16,7 +16,7 @@
           "tue": "Tue",
           "wed": "Wed",
           "thu": "Thu",
-          "fri": "fri",
+          "fri": "Fri",
           "sat": "Sat",
           "sun": "Sun"
         }
@@ -38,7 +38,7 @@
       "header": "Radio Player",
       "msg_country_change": [
         "The chosen country is only temporary changed.",
-        "To permantly change the country it must be selected from the setup page."
+        "To permanently change the country it must be selected from the setup page."
       ]
     }
   },

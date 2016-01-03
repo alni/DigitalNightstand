@@ -61,7 +61,7 @@ class Alarm(object):
         if repeat:
             _args = (title)
         else:
-            # If repeat is falsy, then the alarm should only be run once
+            # If repeat is false, then the alarm should only be run once
             _args = (title, True)
         if days == None or len(days) == 7:
             # If days is not defined, or it contains 7 entries, we assume 

@@ -12,7 +12,7 @@ class Player(object):
 
         Parameters:
         - stream : the stream to pass to MPlayer
-        - params : (optional) pass extra arguments to the MPlayer subproccess
+        - params : (optional) pass extra arguments to the MPlayer subprocess
         - mplayer_path : (optional) the path to the MPlayer executable
         """
         print stream
