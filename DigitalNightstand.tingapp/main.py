@@ -509,7 +509,11 @@ def on_touch_radio_datetime(xy, action):
         set_current_page(PAGE_INDEX_CLOCK)
 
 # Clock Page DateTime touch event - switch to the Radio Page
-@touch(xy=(8,8),size=(304,224),align="topleft")
+#@touch(xy=(8,8),size=(304,224),align="topleft")
+@touch(
+    xy=CLOCK_RADIO_TOUCH_TIME['touch_xy'],
+    size=CLOCK_RADIO_TOUCH_TIME['touch_size'],
+    align=CLOCK_RADIO_TOUCH_TIME['align'])
 def on_touch_clock_datetime(xy, action):
     if action == 'down' and gui.current_page == PAGE_INDEX_CLOCK:
         set_current_page(PAGE_INDEX_RADIO)

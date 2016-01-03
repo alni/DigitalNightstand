@@ -18,6 +18,24 @@ radio_info_scroll_text = None
 tree = ET.parse("data/gui/pages.xml")
 root = tree.getroot()
 
+def get_touch_node(name, page_index=1):
+    node = root[page_index-1].findall(".//*[@name='{0}']/touch".format(name))[0]
+    return node
+
+def gen_touch_object(node_name, page_index=1):
+    touch_obj = {}
+    node = get_touch_node(node_name, page_index)
+    align = node.get("align")
+    position = node.find("position")
+    touch_xy = (int(position.get("x")), int(position.get("y")))
+    size = node.find("size")
+    touch_size = (int(size.get("w")), int(size.get("h")))
+    return {
+        "touch_xy": touch_xy,
+        "touch_size": touch_size,
+        "align": align
+    }
+
 def should_perform_radio_event(xy, action, alarm):
     # Default action: only perform if touch event "down" and at the radio page
     should_perform = action == 'down' and current_page == PAGE_INDEX_RADIO
@@ -32,6 +50,20 @@ PAGE_INDEX_RADIO = 1
 PAGE_INDEX_CLOCK = 2
 
 _ICON_BASE_PATH = "res/icons/material-design-icons-2.0/"
+
+PAGE_RADIO_TOUCH_TIME = gen_touch_object("time", PAGE_INDEX_RADIO)
+
+PAGE_RADIO_BUTTON_PLAY = gen_touch_object("btn_play", PAGE_INDEX_RADIO)
+PAGE_RADIO_BUTTON_PAUSE = gen_touch_object("btn_pause", PAGE_INDEX_RADIO)
+PAGE_RADIO_BUTTON_STATION_PREV = gen_touch_object("btn_station_prev", PAGE_INDEX_RADIO)
+PAGE_RADIO_BUTTON_STATION_NEXT = gen_touch_object("btn_station_next", PAGE_INDEX_RADIO)
+PAGE_RADIO_BUTTON_VOL_DOWN = gen_touch_object("btn_vol_down", PAGE_INDEX_RADIO)
+PAGE_RADIO_BUTTON_VOL_UP = gen_touch_object("btn_vol_up", PAGE_INDEX_RADIO)
+PAGE_RADIO_BUTTON_VOL_MUTE = gen_touch_object("btn_vol_mute", PAGE_INDEX_RADIO)
+
+
+CLOCK_RADIO_TOUCH_TIME = gen_touch_object("time", PAGE_INDEX_CLOCK)
+
 
 PAGE_RADIO_TEXT_TIME = {
     "xy"         : (160, 20),
@@ -49,11 +81,11 @@ PAGE_RADIO_TEXT_DATE = {
     "align"      : "center"
 }
 
-PAGE_RADIO_TOUCH_TIME = {
-    "align"      : "topleft",
-    "touch_xy"   : (8,0),
-    "touch_size" : (304,68)
-}
+#PAGE_RADIO_TOUCH_TIME = {
+#    "align"      : "topleft",
+#    "touch_xy"   : (8,0),
+#    "touch_size" : (304,68)
+#}
 
 PAGE_RADIO_RECT_INFO_PANEL_OUTER = {
     "xy"         : (8, 70),
@@ -84,68 +116,68 @@ PAGE_RADIO_TEXT_STATION_NAME = {
     "align"      : "topleft"
 }
 
-PAGE_RADIO_BUTTON_PLAY = {
-    "xy"         : (21,81),
-    "scale"      : 1.0,
-    "align"      : "topleft",
-    "touch_xy"   : (20,80),
-    "touch_size" : (50,50),
-    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_play_circle_outline_white_24dp.png"
-}
+#PAGE_RADIO_BUTTON_PLAY = {
+#    "xy"         : (21,81),
+#    "scale"      : 1.0,
+#    "align"      : "topleft",
+#    "touch_xy"   : (20,80),
+#    "touch_size" : (50,50),
+#    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_play_circle_outline_white_24dp.png"
+#}
 
-PAGE_RADIO_BUTTON_PAUSE = {
-    "xy"         : (81,81),
-    "scale"      : 1.0,
-    "align"      : "topleft",
-    "touch_xy"   : (80,80),
-    "touch_size" : (50,50),
-    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_pause_circle_outline_white_24dp.png"
-}
+#PAGE_RADIO_BUTTON_PAUSE = {
+#    "xy"         : (81,81),
+#    "scale"      : 1.0,
+#    "align"      : "topleft",
+#    "touch_xy"   : (80,80),
+#    "touch_size" : (50,50),
+#    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_pause_circle_outline_white_24dp.png"
+#}
 
-PAGE_RADIO_BUTTON_STATION_PREV = {
-    "xy"         : (11,181),
-    "scale"      : 1.0,
-    "align"      : "topleft",
-    "touch_xy"   : (10,180),
-    "touch_size" : (50,50),
-    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_skip_previous_white_24dp.png"
-}
+#PAGE_RADIO_BUTTON_STATION_PREV = {
+#    "xy"         : (11,181),
+#    "scale"      : 1.0,
+#    "align"      : "topleft",
+#    "touch_xy"   : (10,180),
+#    "touch_size" : (50,50),
+#    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_skip_previous_white_24dp.png"
+#}
 
-PAGE_RADIO_BUTTON_STATION_NEXT = {
-    "xy"         : (71,181),
-    "scale"      : 1.0,
-    "align"      : "topleft",
-    "touch_xy"   : (70,180),
-    "touch_size" : (50,50),
-    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_skip_next_white_24dp.png"
-}
+#PAGE_RADIO_BUTTON_STATION_NEXT = {
+#    "xy"         : (71,181),
+#    "scale"      : 1.0,
+#    "align"      : "topleft",
+#    "touch_xy"   : (70,180),
+#    "touch_size" : (50,50),
+#    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_skip_next_white_24dp.png"
+#}
 
-PAGE_RADIO_BUTTON_VOL_DOWN = {
-    "xy"         : (131,181),
-    "scale"      : 1.0,
-    "align"      : "topleft",
-    "touch_xy"   : (130,180),
-    "touch_size" : (50,50),
-    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_volume_down_white_24dp.png"
-}
+#PAGE_RADIO_BUTTON_VOL_DOWN = {
+#    "xy"         : (131,181),
+#    "scale"      : 1.0,
+#    "align"      : "topleft",
+#    "touch_xy"   : (130,180),
+#    "touch_size" : (50,50),
+#    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_volume_down_white_24dp.png"
+#}
 
-PAGE_RADIO_BUTTON_VOL_UP = {
-    "xy"         : (191,181),
-    "scale"      : 1.0,
-    "align"      : "topleft",
-    "touch_xy"   : (190,180),
-    "touch_size" : (50,50),
-    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_volume_up_white_24dp.png"
-}
+#PAGE_RADIO_BUTTON_VOL_UP = {
+#    "xy"         : (191,181),
+#    "scale"      : 1.0,
+#    "align"      : "topleft",
+#    "touch_xy"   : (190,180),
+#    "touch_size" : (50,50),
+#    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_volume_up_white_24dp.png"
+#}
 
-PAGE_RADIO_BUTTON_VOL_MUTE = {
-    "xy"         : (251,181),
-    "scale"      : 1.0,
-    "align"      : "topleft",
-    "touch_xy"   : (250,180),
-    "touch_size" : (50,50),
-    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_volume_mute_white_24dp.png"
-}
+#PAGE_RADIO_BUTTON_VOL_MUTE = {
+#    "xy"         : (251,181),
+#    "scale"      : 1.0,
+#    "align"      : "topleft",
+#    "touch_xy"   : (250,180),
+#    "touch_size" : (50,50),
+#    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_volume_mute_white_24dp.png"
+#}
 
 
 RADIO_PAGE_CLOCK_LABEL_TIME = {

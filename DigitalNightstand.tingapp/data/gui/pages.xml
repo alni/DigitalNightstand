@@ -8,6 +8,10 @@
       <position x="160" y="20" />
       <color red="153" green="174" blue="249" />
       <text>%H %M</text>
+      <touch align="topleft">
+        <position x="8" y="0" />
+        <size w="304" h="68" />
+      </touch>
     </text>
     <text name="time_sep" font_size="40" align="center">
       <position x="160" y="20" />
@@ -47,7 +51,7 @@
     <image name="btn_play" scale="1.0" align="topleft" 
            src="res/icons/material-design-icons-2.0/av/2x_web/ic_play_circle_outline_white_24dp.png">
       <position x="21" y="81" />
-      <touch>
+      <touch align="topleft">
         <position x="20" y="80" />
         <size w="50" h="50" />
       </touch>
@@ -55,7 +59,7 @@
     <image name="btn_pause" scale="1.0" align="topleft"
            src="res/icons/material-design-icons-2.0/av/2x_web/ic_pause_circle_outline_white_24dp.png">
       <position x="81" y="81" />
-      <touch>
+      <touch align="topleft">
         <position x="80" y="80" />
         <size w="50" h="50" />
       </touch>
@@ -63,7 +67,7 @@
     <image name="btn_station_prev" scale="1.0" align="topleft"
            src="res/icons/material-design-icons-2.0/av/2x_web/ic_skip_previous_white_24dp.png">
       <position x="11" y="181" />
-      <touch>
+      <touch align="topleft">
         <position x="10" y="180" />
         <size w="50" h="50" />
       </touch>
@@ -71,7 +75,7 @@
     <image name="btn_station_next" scale="1.0" align="topleft"
            src="res/icons/material-design-icons-2.0/av/2x_web/ic_skip_next_white_24dp.png">
       <position x="71" y="181" />
-      <touch>
+      <touch align="topleft">
         <position x="70" y="180" />
         <size w="50" h="50" />
       </touch>
@@ -79,7 +83,7 @@
     <image name="btn_vol_down" scale="1.0" align="topleft"
            src="res/icons/material-design-icons-2.0/av/2x_web/ic_volume_down_white_24dp.png">
       <position x="131" y="181" />
-      <touch>
+      <touch align="topleft">
         <position x="130" y="180" />
         <size w="50" h="50" />
       </touch>
@@ -87,7 +91,7 @@
     <image name="btn_vol_up" scale="1.0" align="topleft"
            src="res/icons/material-design-icons-2.0/av/2x_web/ic_volume_up_white_24dp.png">
       <position x="191" y="181" />
-      <touch>
+      <touch align="topleft">
         <position x="190" y="180" />
         <size w="50" h="50" />
       </touch>
@@ -95,7 +99,7 @@
     <image name="btn_vol_mute" scale="1.0" align="topleft"
            src="res/icons/material-design-icons-2.0/av/2x_web/ic_volume_mute_white_24dp.png">
       <position x="251" y="181" />
-      <touch>
+      <touch align="topleft">
         <position x="250" y="180" />
         <size w="50" h="50" />
       </touch>
@@ -109,6 +113,10 @@
       <position x="160" y="110" />
       <color red="153" green="174" blue="249" />
       <text>%H %M</text>
+      <touch align="topleft">
+        <position x="8" y="8" />
+        <size w="304" h="224" />
+      </touch>
     </text>
     <text name="time_sep" font_size="85" align="center">
       <position x="160" y="110" />
