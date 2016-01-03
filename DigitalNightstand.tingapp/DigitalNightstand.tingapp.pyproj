@@ -28,6 +28,9 @@
     <Compile Include="config.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="data\gui\test.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="defs\colors.py">
       <SubType>Code</SubType>
     </Compile>
@@ -54,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="data\" />
+    <Folder Include="data\gui\" />
     <Folder Include="data\radio\" />
     <Folder Include="docs\" />
     <Folder Include="docs\mplayer\" />
@@ -68,6 +72,7 @@
     <Folder Include="res\icons\material-design-icons-2.0\av\" />
     <Folder Include="res\images\" />
     <Folder Include="res\sounds\" />
+    <Folder Include="www_data\fonts\" />
     <Folder Include="www_data\js\" />
     <Folder Include="www_data\css\" />
     <Folder Include="www_data\images\" />
@@ -83,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="data\alarms.json" />
+    <Content Include="data\gui\pages.xml" />
     <Content Include="data\radio.json" />
     <Content Include="data\radio\NO.json" />
     <Content Include="data\radio\GB.json" />
@@ -130,7 +136,10 @@
     <Content Include="www_data\css\nativedroid2.color.yellow.css" />
     <Content Include="www_data\css\nativedroid2.css" />
     <Content Include="www_data\data\messages.json" />
-    <Content Include="www_data\config.html" />
+    <Content Include="www_data\fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="www_data\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="www_data\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="www_data\fonts\Material-Design-Iconic-Font.woff" />
     <Content Include="www_data\js\nativedroid2.js" />
     <Content Include="www_data\player.js" />
     <Content Include="www_data\config.js" />

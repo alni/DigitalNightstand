@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<gui>
+  <page name="Radio">
+    <image name="bg" scale="1.0" align="top" src="res/images/banner-911778_1280.jpg">
+      <position x="0" y="0" />
+    </image>
+    <text name="time" font_size="40" align="center">
+      <position x="160" y="20" />
+      <color red="153" green="174" blue="249" />
+      <text>%H %M</text>
+    </text>
+    <text name="time_sep" font_size="40" align="center">
+      <position x="160" y="20" />
+      <color red="153" green="174" blue="249" />
+      <text>:</text>
+    </text>
+    <text name="date" font_size="20" align="center">
+      <position x="160" y="50" />
+      <color red="235" green="185" blue="119" />
+      <text>%d %B %Y</text>
+    </text>
+    <rectangle name="info_panel_outer" align="topleft">
+      <position x="8" y="70" />
+      <size w="304" h="108" />
+      <color red="235" green="185" blue="119" />
+    </rectangle>
+    <rectangle name="info_panel_top" align="topleft">
+      <position x="10" y="72" />
+      <size w="300" h="69" />
+      <color red="69" green="42" blue="89" />
+    </rectangle>
+    <rectangle name="info_panel_bottom" align="topleft">
+      <position x="10" y="143" />
+      <size w="300" h="33" />
+      <color red="69" green="42" blue="89" />
+    </rectangle>
+    <text name="station_name" font_size="15" align="topleft">
+      <position x="13" y="143" />
+      <color red="235" green="185" blue="119" />
+      <text>{Station Name}</text>
+    </text>
+    <scroll_text name="station_info" hpos="159" font_size="15">
+      <margin left="12" right="12" />
+      <color red="153" green="174" blue="249" />
+      <text>{Station Name}</text>
+    </scroll_text>
+    <image name="btn_play" scale="1.0" align="topleft" 
+           src="res/icons/material-design-icons-2.0/av/2x_web/ic_play_circle_outline_white_24dp.png">
+      <position x="21" y="81" />
+      <touch>
+        <position x="20" y="80" />
+        <size w="50" h="50" />
+      </touch>
+    </image>
+    <image name="btn_pause" scale="1.0" align="topleft"
+           src="res/icons/material-design-icons-2.0/av/2x_web/ic_pause_circle_outline_white_24dp.png">
+      <position x="81" y="81" />
+      <touch>
+        <position x="80" y="80" />
+        <size w="50" h="50" />
+      </touch>
+    </image>
+    <image name="btn_station_prev" scale="1.0" align="topleft"
+           src="res/icons/material-design-icons-2.0/av/2x_web/ic_skip_previous_white_24dp.png">
+      <position x="11" y="181" />
+      <touch>
+        <position x="10" y="180" />
+        <size w="50" h="50" />
+      </touch>
+    </image>
+    <image name="btn_station_next" scale="1.0" align="topleft"
+           src="res/icons/material-design-icons-2.0/av/2x_web/ic_skip_next_white_24dp.png">
+      <position x="71" y="181" />
+      <touch>
+        <position x="70" y="180" />
+        <size w="50" h="50" />
+      </touch>
+    </image>
+    <image name="btn_vol_down" scale="1.0" align="topleft"
+           src="res/icons/material-design-icons-2.0/av/2x_web/ic_volume_down_white_24dp.png">
+      <position x="131" y="181" />
+      <touch>
+        <position x="130" y="180" />
+        <size w="50" h="50" />
+      </touch>
+    </image>
+    <image name="btn_vol_up" scale="1.0" align="topleft"
+           src="res/icons/material-design-icons-2.0/av/2x_web/ic_volume_up_white_24dp.png">
+      <position x="191" y="181" />
+      <touch>
+        <position x="190" y="180" />
+        <size w="50" h="50" />
+      </touch>
+    </image>
+    <image name="btn_vol_mute" scale="1.0" align="topleft"
+           src="res/icons/material-design-icons-2.0/av/2x_web/ic_volume_mute_white_24dp.png">
+      <position x="251" y="181" />
+      <touch>
+        <position x="250" y="180" />
+        <size w="50" h="50" />
+      </touch>
+    </image>
+  </page>
+  <page name="Clock">
+    <image name="bg" scale="1.0" align="top" src="res/images/banner-911778_1280.jpg">
+      <position x="0" y="0" />
+    </image>
+    <text name="time" font_size="85" align="center">
+      <position x="160" y="110" />
+      <color red="153" green="174" blue="249" />
+      <text>%H %M</text>
+    </text>
+    <text name="time_sep" font_size="85" align="center">
+      <position x="160" y="110" />
+      <color red="153" green="174" blue="249" />
+      <text>:</text>
+    </text>
+    <text name="date" font_size="24" align="center">
+      <position x="160" y="180" />
+      <color red="235" green="185" blue="119" />
+      <text>%d %B %Y</text>
+    </text>
+  </page>
+</gui>

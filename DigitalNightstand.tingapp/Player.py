@@ -140,7 +140,7 @@ def test():
         if command == "vol_up":
             player.vol_up()
         if command == "mute":
-            player.mute()
+            player.toggle_mute()
         if command == "play" or command == "pause":
             player.play_pause()
         if command == "stop":

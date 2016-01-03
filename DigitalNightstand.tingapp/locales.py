@@ -53,6 +53,8 @@ class EnglishLocale(Locale):
 
     names = ['en', 'en_us', 'en_gb', 'en_au', 'en_be', 'en_jp', 'en_za']
 
+    title = 'Digital Nightstand'
+
     alarm = {
         'next': 'Next alarm {0}',
         'none': '(no alarms set)'
@@ -152,6 +154,8 @@ class AustriaLocale(Locale):
 class NorwegianLocale(Locale):
 
     names = ['nb', 'nb_no']
+
+    title = 'Digitalt Nattbord'
 
     alarm = {
         'next': 'Neste alarm {0}',

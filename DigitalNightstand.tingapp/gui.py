@@ -1,15 +1,152 @@
-﻿from defs.colors import *
+﻿import xml.etree.ElementTree as ET
+
+from defs.colors import *
 
 current_page = 1
 last_touch = -1
+initialized = False
 
 current_date = ""
 current_time = ""
 
+scroll_texts = {}
+
+radio_station_name_text = ''
+radio_station_info_text = ''
 radio_info_scroll_text = None
+
+tree = ET.parse("data/gui/pages.xml")
+root = tree.getroot()
+
+def should_perform_radio_event(xy, action, alarm):
+    # Default action: only perform if touch event "down" and at the radio page
+    should_perform = action == 'down' and current_page == PAGE_INDEX_RADIO
+    # Alternative action: if xy is not set (physical button press) then always perform
+    should_perform = (should_perform) or xy is None
+    # Condition: only perform if no current alarm is running (includes both default and
+    # alternative actions)
+    should_perform = (should_perform) and alarm.current_alarm is None
+    return should_perform
 
 PAGE_INDEX_RADIO = 1
 PAGE_INDEX_CLOCK = 2
+
+_ICON_BASE_PATH = "res/icons/material-design-icons-2.0/"
+
+PAGE_RADIO_TEXT_TIME = {
+    "xy"         : (160, 20),
+    "text"       :  "%H %M", 
+    "color"      : COLOR_BLUE_LIGHT, 
+    "font_size"  : 40, 
+    "align"      : "center"
+}
+
+PAGE_RADIO_TEXT_DATE = {
+    "xy"         : (160, 50),
+    "text"       : "%d %B %Y", 
+    "color"      : COLOR_TAN, 
+    "font_size"  : 20, 
+    "align"      : "center"
+}
+
+PAGE_RADIO_TOUCH_TIME = {
+    "align"      : "topleft",
+    "touch_xy"   : (8,0),
+    "touch_size" : (304,68)
+}
+
+PAGE_RADIO_RECT_INFO_PANEL_OUTER = {
+    "xy"         : (8, 70),
+    "size"       : (304, 108), 
+    "color"      : COLOR_TAN, 
+    "align"      : "topleft"
+}
+
+PAGE_RADIO_RECT_INFO_PANEL_TOP = {
+    "xy"         : (10, 72),
+    "size"       : (300, 69), 
+    "color"      : COLOR_BLUE_DARK, 
+    "align"      : "topleft"
+}
+
+PAGE_RADIO_RECT_INFO_PANEL_BOTTOM = {
+    "xy"         : (10, 143),
+    "size"       : (300, 33), 
+    "color"      : COLOR_BLUE_DARK, 
+    "align"      : "topleft"
+}
+
+PAGE_RADIO_TEXT_STATION_NAME = {
+    "xy"         : (13, 143),
+    "text"       : "", 
+    "color"      : COLOR_TAN, 
+    "font_size"  : 15, 
+    "align"      : "topleft"
+}
+
+PAGE_RADIO_BUTTON_PLAY = {
+    "xy"         : (21,81),
+    "scale"      : 1.0,
+    "align"      : "topleft",
+    "touch_xy"   : (20,80),
+    "touch_size" : (50,50),
+    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_play_circle_outline_white_24dp.png"
+}
+
+PAGE_RADIO_BUTTON_PAUSE = {
+    "xy"         : (81,81),
+    "scale"      : 1.0,
+    "align"      : "topleft",
+    "touch_xy"   : (80,80),
+    "touch_size" : (50,50),
+    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_pause_circle_outline_white_24dp.png"
+}
+
+PAGE_RADIO_BUTTON_STATION_PREV = {
+    "xy"         : (11,181),
+    "scale"      : 1.0,
+    "align"      : "topleft",
+    "touch_xy"   : (10,180),
+    "touch_size" : (50,50),
+    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_skip_previous_white_24dp.png"
+}
+
+PAGE_RADIO_BUTTON_STATION_NEXT = {
+    "xy"         : (71,181),
+    "scale"      : 1.0,
+    "align"      : "topleft",
+    "touch_xy"   : (70,180),
+    "touch_size" : (50,50),
+    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_skip_next_white_24dp.png"
+}
+
+PAGE_RADIO_BUTTON_VOL_DOWN = {
+    "xy"         : (131,181),
+    "scale"      : 1.0,
+    "align"      : "topleft",
+    "touch_xy"   : (130,180),
+    "touch_size" : (50,50),
+    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_volume_down_white_24dp.png"
+}
+
+PAGE_RADIO_BUTTON_VOL_UP = {
+    "xy"         : (191,181),
+    "scale"      : 1.0,
+    "align"      : "topleft",
+    "touch_xy"   : (190,180),
+    "touch_size" : (50,50),
+    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_volume_up_white_24dp.png"
+}
+
+PAGE_RADIO_BUTTON_VOL_MUTE = {
+    "xy"         : (251,181),
+    "scale"      : 1.0,
+    "align"      : "topleft",
+    "touch_xy"   : (250,180),
+    "touch_size" : (50,50),
+    "src"        : _ICON_BASE_PATH + "av/2x_web/ic_volume_mute_white_24dp.png"
+}
+
 
 RADIO_PAGE_CLOCK_LABEL_TIME = {
     "type": "text",
