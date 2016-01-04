@@ -4,7 +4,7 @@ Digital Nightstand for the Tingbot/Raspberry Pi.
 
 Features includes:
 
-* Internet Radio, 
+* Internet Radio,
 * Digital Clock
 * Alarm Clock
 * Web Frontend
@@ -12,6 +12,19 @@ Features includes:
     * English (en)
     * Norwegian Bokmal (nb)
     * Norwegian Nynorsk (nn)
+
+## Keyboard shortcuts ##
+
+Key               | Action
+----------------- | ---------------------
+<kbd>F1</kbd>     | Switch to Radio Page
+<kbd>F2</kbd>     | Switch to Clock Page
+<kbd>Space</kbd>  | Pause/Play
+<kbd>&larr;</kbd> | Volume Down
+<kbd>&rarr;</kbd> | Volume Up
+<kbd>&uarr;</kbd> | Next station
+<kbd>&darr;</kbd> | Previous station
+
 
 ## Internet Radio ##
 

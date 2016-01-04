@@ -71,6 +71,7 @@
         <position x="10" y="180" />
         <size w="50" h="50" />
       </touch>
+      <button name="left" />
     </image>
     <image name="btn_station_next" scale="1.0" align="topleft"
            src="res/icons/material-design-icons-2.0/av/2x_web/ic_skip_next_white_24dp.png">
@@ -79,6 +80,7 @@
         <position x="70" y="180" />
         <size w="50" h="50" />
       </touch>
+      <button name="midleft" />
     </image>
     <image name="btn_vol_down" scale="1.0" align="topleft"
            src="res/icons/material-design-icons-2.0/av/2x_web/ic_volume_down_white_24dp.png">

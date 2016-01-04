@@ -1,8 +1,9 @@
-﻿import Player
-import urllib
+﻿import urllib
 import os
 import json
 import base64
+
+import Player
 import config
 from config import DIRBLE_API_KEY, USER_DATA_DIR
 

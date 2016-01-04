@@ -4,6 +4,8 @@ from defs.colors import *
 
 current_page = 1
 last_touch = -1
+last_key_down = -1.0
+last_key_pressed = None
 initialized = False
 
 current_date = ""
@@ -18,23 +20,35 @@ radio_info_scroll_text = None
 tree = ET.parse("data/gui/pages.xml")
 root = tree.getroot()
 
-def get_touch_node(name, page_index=1):
-    node = root[page_index-1].findall(".//*[@name='{0}']/touch".format(name))[0]
+def get_event_node(name, page_index=1, node_name="touch"):
+    node = root[page_index-1].findall(".//*[@name='{0}']/{1}".format(name, node_name))
+    if node and len(node) > 0:
+        node = node[0]
+    else:
+        node  = None
     return node
 
-def gen_touch_object(node_name, page_index=1):
-    touch_obj = {}
-    node = get_touch_node(node_name, page_index)
-    align = node.get("align")
-    position = node.find("position")
+
+def gen_event_object(node_name, page_index=1):
+    event_object = {}
+    touch_node = get_event_node(node_name, page_index, "touch")
+    align = touch_node.get("align")
+    position = touch_node.find("position")
     touch_xy = (int(position.get("x")), int(position.get("y")))
-    size = node.find("size")
+    size = touch_node.find("size")
     touch_size = (int(size.get("w")), int(size.get("h")))
-    return {
-        "touch_xy": touch_xy,
-        "touch_size": touch_size,
-        "align": align
-    }
+
+    event_object["touch_xy"] = touch_xy
+    event_object["touch_size"] = touch_size
+    event_object["align"] = align
+
+    button_node = get_event_node(node_name, page_index, "button")
+    if button_node is not None:
+        button = button_node.get("name")
+        event_object["button"] = button
+
+    return event_object
+
 
 def should_perform_radio_event(xy, action, alarm):
     # Default action: only perform if touch event "down" and at the radio page
@@ -51,18 +65,18 @@ PAGE_INDEX_CLOCK = 2
 
 _ICON_BASE_PATH = "res/icons/material-design-icons-2.0/"
 
-PAGE_RADIO_TOUCH_TIME = gen_touch_object("time", PAGE_INDEX_RADIO)
+PAGE_RADIO_TOUCH_TIME = gen_event_object("time", PAGE_INDEX_RADIO)
 
-PAGE_RADIO_BUTTON_PLAY = gen_touch_object("btn_play", PAGE_INDEX_RADIO)
-PAGE_RADIO_BUTTON_PAUSE = gen_touch_object("btn_pause", PAGE_INDEX_RADIO)
-PAGE_RADIO_BUTTON_STATION_PREV = gen_touch_object("btn_station_prev", PAGE_INDEX_RADIO)
-PAGE_RADIO_BUTTON_STATION_NEXT = gen_touch_object("btn_station_next", PAGE_INDEX_RADIO)
-PAGE_RADIO_BUTTON_VOL_DOWN = gen_touch_object("btn_vol_down", PAGE_INDEX_RADIO)
-PAGE_RADIO_BUTTON_VOL_UP = gen_touch_object("btn_vol_up", PAGE_INDEX_RADIO)
-PAGE_RADIO_BUTTON_VOL_MUTE = gen_touch_object("btn_vol_mute", PAGE_INDEX_RADIO)
+PAGE_RADIO_BUTTON_PLAY = gen_event_object("btn_play", PAGE_INDEX_RADIO)
+PAGE_RADIO_BUTTON_PAUSE = gen_event_object("btn_pause", PAGE_INDEX_RADIO)
+PAGE_RADIO_BUTTON_STATION_PREV = gen_event_object("btn_station_prev", PAGE_INDEX_RADIO)
+PAGE_RADIO_BUTTON_STATION_NEXT = gen_event_object("btn_station_next", PAGE_INDEX_RADIO)
+PAGE_RADIO_BUTTON_VOL_DOWN = gen_event_object("btn_vol_down", PAGE_INDEX_RADIO)
+PAGE_RADIO_BUTTON_VOL_UP = gen_event_object("btn_vol_up", PAGE_INDEX_RADIO)
+PAGE_RADIO_BUTTON_VOL_MUTE = gen_event_object("btn_vol_mute", PAGE_INDEX_RADIO)
 
 
-CLOCK_RADIO_TOUCH_TIME = gen_touch_object("time", PAGE_INDEX_CLOCK)
+CLOCK_RADIO_TOUCH_TIME = gen_event_object("time", PAGE_INDEX_CLOCK)
 
 
 PAGE_RADIO_TEXT_TIME = {

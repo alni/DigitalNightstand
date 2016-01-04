@@ -42,7 +42,10 @@ class Player(object):
     def _send_command(self, command):
         if self.player:
             self.player.stdin.write(command + "\n")
-            self.player.stdin.flush()
+            try:
+                self.player.stdin.flush()
+            finally:
+                return
 
     def play_pause(self):
         self._send_command("pause")

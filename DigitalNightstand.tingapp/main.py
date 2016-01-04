@@ -441,7 +441,8 @@ def on_touch_radio_play_pause(xy, action):
     xy=PAGE_RADIO_BUTTON_STATION_PREV['touch_xy'],
     size=PAGE_RADIO_BUTTON_STATION_PREV['touch_size'],
     align=PAGE_RADIO_BUTTON_STATION_PREV['align'])
-@button.press("midright")
+@button.press(PAGE_RADIO_BUTTON_STATION_PREV['button'])
+#@button.press("midright")
 def on_touch_radio_prev(xy=None, action="down"):
     # if action == 'down' and gui.current_page == PAGE_INDEX_RADIO:
     if gui.should_perform_radio_event(xy, action, alarm):
@@ -458,7 +459,8 @@ def on_touch_radio_prev(xy=None, action="down"):
     xy=PAGE_RADIO_BUTTON_STATION_NEXT['touch_xy'],
     size=PAGE_RADIO_BUTTON_STATION_NEXT['touch_size'],
     align=PAGE_RADIO_BUTTON_STATION_NEXT['align'])
-@button.press("right")
+@button.press(PAGE_RADIO_BUTTON_STATION_NEXT['button'])
+#@button.press("right")
 def on_touch_radio_next(xy=None, action="down"):
     # if action == 'down' and gui.current_page == PAGE_INDEX_RADIO:
     if gui.should_perform_radio_event(xy, action, alarm):
@@ -518,6 +520,27 @@ def on_touch_clock_datetime(xy, action):
     if action == 'down' and gui.current_page == PAGE_INDEX_CLOCK:
         set_current_page(PAGE_INDEX_RADIO)
 
+def perform_key_events():
+    if gui.last_key_down == -1.0 or time.time() - gui.last_key_down > 0.125:
+        # only switch page if there is more than 1 second since last page change
+        gui.last_key_down = time.time() + 0.0 # set last page change to current time
+        keys_pressed = pygame.key.get_pressed()
+        if keys_pressed:
+            if keys_pressed[pygame.K_F1]:
+                set_current_page(PAGE_INDEX_RADIO)
+            elif keys_pressed[pygame.K_F2]:
+                set_current_page(PAGE_INDEX_CLOCK)
+            else:
+                if keys_pressed[pygame.K_SPACE]:
+                    p.player.play_pause()
+                if keys_pressed[pygame.K_UP]:
+                    p.next_channel()
+                elif keys_pressed[pygame.K_DOWN]:
+                    p.prev_channel()
+                if keys_pressed[pygame.K_LEFT]:
+                    p.player.vol_down()
+                elif keys_pressed[pygame.K_RIGHT]:
+                    p.player.vol_up()
 
 # BEGIN: loop()
 def loop():
@@ -526,6 +549,7 @@ def loop():
             pygame.mouse.set_visible(config.MOUSE_VISIBLE)
         pygame.display.set_caption(localized_strings.title)
         gui.initialized = True
+    perform_key_events()
     screen.fill(
         color=COLOR_BLUE_DARK
     )

@@ -41,7 +41,7 @@ def save_last_state(last_radio_station=0, last_page=1, file="last_state.json"):
         "last_page": last_page
     }
     if not os.path.exists(os.path.dirname(filename)):
-        # If the folder path to the User Data Directory does not exists,
+        # If the folder path to the User Data Directory does not exists, 
         # then create it + any non-existing parent folders
         os.makedirs(os.path.dirname(filename))
     with open(filename, "w") as outfile:
@@ -54,6 +54,11 @@ if sys.platform.startswith("linux"):
     MPLAYER_PATH = "mplayer"
 
 RADIO_STATIONS_PATH = USER_DATA_DIR + "/radio/NO.json" # "data/radio/NO.json"
+
+if not os.path.exists(RADIO_STATIONS_PATH):
+    # If the file does not exists, fall back to the file in the application 
+    # data folder
+    RADIO_STATIONS_PATH = "data/radio/NO.json"
 
 try:
     SETTINGS = load_settings(CONFIG_FILE)
