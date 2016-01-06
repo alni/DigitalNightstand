@@ -60,9 +60,12 @@ thread_pool = ThreadPool(4)
 @atexit.register
 def clean_up():
     frontend.stop()
-    p.player.stop()
+    active_channel = 0
+    if p is not None and p.player:
+        active_channel = p.active_channel
+        p.player.stop()
     config.save_last_state(
-        last_radio_station=p.active_channel, 
+        last_radio_station=active_channel, 
         last_page=gui.current_page
     )
     thread_pool.close()
@@ -647,10 +650,15 @@ frontend.serve()
 
 settings_data = config.SETTINGS
 
+radio_channels = None
+
 with open(radio_config) as data_file:
     radio_data = json.load(data_file)
 
-p = Radio(radio_channels=radio_data['channels'], mplayer_path=config.MPLAYER_PATH)
+if "channels" in radio_data:
+    radio_channels = radio_data['channels']
+
+p = Radio(radio_channels=radio_channels, mplayer_path=config.MPLAYER_PATH)
 if "radio" in settings_data:
     _radio_settings = settings_data['radio']
     p.change_country(_radio_settings['country'])

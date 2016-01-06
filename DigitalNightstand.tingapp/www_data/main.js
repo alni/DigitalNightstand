@@ -145,10 +145,13 @@
             }
         }
     });
+    var _globalize = function (lang, message, params, options) {
+        var formatter = Globalize(lang).messageFormatter(message);
+        return formatter([params]);
+    };
     var lang = navigator.language;
-    Handlebars.registerHelper("globalize", function (lvalue, operator, rvalue, options) {
-        var formatter = Globalize(lvalue).messageFormatter(operator);
-        return formatter([rvalue]);
+    Handlebars.registerHelper("globalize", function (lang, message, params, options) {
+        return _globalize(lang, message, params);
     });
     var obj = {
         fetchInitialData : function () {
@@ -171,7 +174,10 @@
                 });
             });
             return promise;
-        }
+        },
+        globalize: (function () {
+            return _globalize;
+        })()
     };
 
     return obj;

@@ -29,7 +29,7 @@
             });
 
             // Call the API for button links with href that starts with "/api/"
-            $("a[href^='/api/']").on("click", function (e) {
+            $(document).on("click", "a[href^='/api/']", function (e) {
                 e.preventDefault();
                 var $this = $(this);
                 setTimeout(function () {
@@ -41,6 +41,22 @@
                     $("#station").text(data.radio.station);
                     $("#info").text(data.radio.info);
                 });
+            });
+
+            $.getJSON("/api/list_stations").done(function (data) {
+                alert(data.length);
+                var lang = navigator.language;
+                var context = {
+                    lang: navigator.language,
+                    stations: data
+                };
+                var source = $("#station-list-template").html();
+                var template = Handlebars.compile(source);
+                var html = template(context);
+
+                var message = DigitalNightstand.globalize(lang, "player/station_list/placeholder");
+                $("#station-list-filter").attr("placeholder", message);
+                $("#station-list").html(html).listview("refresh");
             });
         },
 

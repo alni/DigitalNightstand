@@ -1,4 +1,4 @@
-﻿import urllib
+﻿import urllib, urllib2
 import os
 import json
 import base64
@@ -8,7 +8,7 @@ import config
 from config import DIRBLE_API_KEY, USER_DATA_DIR
 
 class Radio(object):
-    """description of class"""
+    """Internet Radio Player"""
 
     @staticmethod
     def download_radio_channels(country_code="NO", count=30, replace=False):
@@ -21,13 +21,28 @@ class Radio(object):
             os.makedirs(os.path.dirname(filename))
         if not os.path.exists(filename) or replace == True:
             url = "http://api.dirble.com/v2/countries/" + country_code + "/stations?"
-            params = urllib.urlencode({
+            params = {
                 # Base64 decode the API Key before sending it with the request
                 "token": base64.b64decode(config.DIRBLE_API_KEY),
                 "per_page": count
-            })
-            print url + params
-            urllib.urlretrieve(url + params, filename)
+            }
+            print url + urllib.urlencode(params)
+            if count > 30:
+                data = []
+                params["offset"] = 0
+                params["per_page"] = 30
+                while count > 30:
+                    response = urllib2.urlopen(url + urllib.urlencode(params))
+                    data.extend(json.loads(response.read()))
+                    params["offset"] += 30
+                    count -= 30
+                params["per_page"] = count
+                response = urllib2.urlopen(url + urllib.urlencode(params))
+                data.extend(json.loads(response.read()))
+                with open(filename, 'w') as outfile:
+                    json.dump(data, outfile)
+            else:
+                urllib.urlretrieve(url + urllib.urlencode(params), filename)
         return filename
 
     @staticmethod
@@ -38,12 +53,15 @@ class Radio(object):
             with open(filename) as data_file:
                 radio_data = json.load(data_file)
             if not "channels" in radio_data:
+                # Only transform if not already transformed
                 for channel in radio_data:
-                    radio_channels.append({
-                        "name": channel["name"],
-                        "groups": [ country_code ],
-                        "stream_uri": channel["streams"][0]["stream"]
-                    })
+                    if "streams" in channel and len(channel["streams"]) > 0:
+                        # Only add channel if it actually has a stream defined
+                        radio_channels.append({
+                            "name": channel["name"],
+                            "groups": [ country_code ],
+                            "stream_uri": channel["streams"][0]["stream"]
+                        })
                 data = {"channels":radio_channels}
                 with open(filename, "w") as outfile:
                     print os.path.abspath(outfile.name)
@@ -109,11 +127,11 @@ class Radio(object):
                 radio_data = json.load(data_file)
             self.radio_channels = radio_data["channels"]
 
-    def change_country(self, country_code):
+    def change_country(self, country_code, count=100):
         filename = USER_DATA_DIR + "/radio/" + country_code + ".json"
         if self.country_code is None or self.country_code != country_code:
             self.country_code = country_code
-            filename = Radio.download_radio_channels(country_code)
+            filename = Radio.download_radio_channels(country_code, count, True)
             Radio.transform_downloaded_channels(country_code)
             self.load_channels(filename)
             self.set_channel(0)

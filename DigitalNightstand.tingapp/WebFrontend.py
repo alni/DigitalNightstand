@@ -129,6 +129,14 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 if self.path == "/api/vol_mute":
                     self.api_call(radio.player.toggle_mute)
                     return
+                if self.path == "/api/list_stations":
+                    self.api_call(data=radio.radio_channels)
+                    return
+                if self.path.startswith("/api/change_station/"):
+                    station_index = int(self.path.split("/")[-1])
+                    radio.set_channel(station_index)
+                    self.api_call()
+                    return
                 if self.path.startswith("/api/change_country/"):
                     country_code = self.path.split("/")[-1]
                     radio.change_country(country_code)

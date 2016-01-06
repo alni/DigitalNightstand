@@ -30,6 +30,12 @@
     {{/each}}
     {{/select}}
     </script>
+    <script id="station-list-template" type="text/x-handlebars-template">
+        <li data-role='list-divider'>{{globalize @root.lang "player/station_list/header"}}</li>
+        {{#each stations}}
+        <li><a href="/api/change_station/{{@index}}" title="{{name}}">{{name}}</a></li>
+        {{/each}}
+    </script>
     <script type="text/javascript" src="js/handlebars-v4.0.2.js"></script>
     <script>
         Handlebars.registerHelper("math", function (lvalue, operator, rvalue, options) {
@@ -57,6 +63,14 @@
 <body>
     <div data-role="page" 
          style="background-image: url(images/banner-911778_1920.jpg); background-position:center; background-size:cover; background-repeat:no-repeat;">
+
+        <div data-role="panel" id="bottomsheet" data-animate="false" data-position="bottom" data-display="overlay">
+            <form class="ui-filterable">
+                <input id="station-list-filter" data-type="search" placeholder="Searching for stations" />
+            </form>
+            <ul id="station-list" data-role="listview" data-filter="true" data-filter-reveal="false"  data-input="#station-list-filter">
+            </ul>
+        </div>
         <!-- Header -->
         <div data-role="header">
             <h1 data-globalize="setup/title">Digital Nightstand Frontend</h1>
@@ -77,6 +91,7 @@
                     </li>
                 </ul>
             </div><!-- /navbar -->
+            <a href="#bottomsheet" class="ui-btn ui-btn-right wow fadeIn" data-wow-delay='1.2s'><i class="zmdi zmdi-more-vert"></i></a>
         </div><!-- /header -->
 
         <div role="main" 
@@ -128,7 +143,7 @@
             </div>
         </div><!-- /content -->
 
-        <div data-role="footer">
+        <div data-role="footer" data-position="fixed">
             <!-- Radio Player Control Navigation Bar -->
             <div data-role="navbar" 
                  data-grid="d">

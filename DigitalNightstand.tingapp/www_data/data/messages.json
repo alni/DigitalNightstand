@@ -36,6 +36,10 @@
     },
     "player": {
       "header": "Radio Player",
+      "station_list": {
+        "header": "Station List",
+        "placeholder": "Search for stations"
+      },
       "msg_country_change": [
         "The chosen country is only temporary changed.",
         "To permanently change the country it must be selected from the setup page."
@@ -80,6 +84,10 @@
     },
     "player": {
       "header": "Radio Spiller",
+      "station_list": {
+        "header": "Radio stasjoner",
+        "placeholder": "S\u00F8k etter stasjoner"
+      },
       "msg_country_change": [
         "Det valgte landet har bare blitt midlertidig endret.",
         "For \u00E5 endre landet permanent m\u00E5 den bli valgt fra oppsettsiden."
