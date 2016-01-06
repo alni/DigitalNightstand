@@ -72,8 +72,8 @@ def clean_up():
 @every(seconds=0.5)
 def update():
     local = arrow.now()
-    # Every 500ms check for new alarms and update the
-    # current_time and current_date variables
+    # Every 500ms check for new alarms and update the current_time and 
+    # current_date variables
     alarm.run_alarm()
     gui.current_date = local.format('D MMMM YYYY', current_locale)
     # time.strftime("%d %B %Y")
@@ -113,9 +113,9 @@ def update_radio():
         radio_info = '(none)'
 
     if current_coding is not None:
-        # try decode the radio_info with the current coding
-        # This is necessary with Windows systems where the
-        # encoding is not Unicode or ASCII
+        # Try decode the radio_info with the current coding.
+        # This is necessary with Windows systems where the encoding is not 
+        # Unicode or ASCII
         radio_info = radio_info.decode(current_coding)
         try:
             station_name = station_name.decode(current_coding)
@@ -522,24 +522,37 @@ def on_touch_clock_datetime(xy, action):
 
 def perform_key_events():
     if gui.last_key_down == -1.0 or time.time() - gui.last_key_down > 0.125:
-        # only switch page if there is more than 1 second since last page change
-        gui.last_key_down = time.time() + 0.0 # set last page change to current time
+        # only get pressed keys if there is more than 125 milliseconds since 
+        # last key press
+        gui.last_key_down = time.time() # set last key down to current time
         keys_pressed = pygame.key.get_pressed()
         if keys_pressed:
             if keys_pressed[pygame.K_F1]:
+                # If <F1> key is pressed, go to the Radio Page
                 set_current_page(PAGE_INDEX_RADIO)
             elif keys_pressed[pygame.K_F2]:
+                # Otherwise, if <F2> key is pressed, go to Clock Page
                 set_current_page(PAGE_INDEX_CLOCK)
-            else:
+            else: # If neither of those keys is pressed:
                 if keys_pressed[pygame.K_SPACE]:
+                    # If <space> key is pressed, toggle Play/Pause of the Radio 
+                    # Player
                     p.player.play_pause()
                 if keys_pressed[pygame.K_UP]:
+                    # If <up> (arrow) key is pressed, switch to next channel of
+                    # the Radio
                     p.next_channel()
                 elif keys_pressed[pygame.K_DOWN]:
+                    # Otherwise, if <down> (arrow) key is pressed, switch to
+                    # previous channel of the Radio
                     p.prev_channel()
                 if keys_pressed[pygame.K_LEFT]:
+                    # If <left> (arrow) key is pressed, decrease the volume of
+                    # the Radio Player
                     p.player.vol_down()
                 elif keys_pressed[pygame.K_RIGHT]:
+                    # Otherwise, if <right> (arrow) key is pressed, increase 
+                    # the volume of the Radio Player
                     p.player.vol_up()
 
 # BEGIN: loop()

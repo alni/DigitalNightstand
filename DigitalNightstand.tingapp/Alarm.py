@@ -16,8 +16,9 @@ class Alarm(object):
         self.s = sched.scheduler(time.time, time.sleep)
 
     def load_settings(self, config):
-        if config is not None:
-            # Only load settings if config is actually set
+        """Load settings from config"""
+        if config is not None and os.path.exists(config):
+            # Only load settings if config is actually set and the file exists
             with open(config) as data_file:
                 data = json.load(data_file)
             return data
@@ -26,17 +27,20 @@ class Alarm(object):
             return None
 
     def set_settings(self, settings):
+        """Set the current settings"""
         if settings is not None and "alarms" in settings:
-            # Only set settings if settings is actually set and
-            # "alarms" exists within settings
+            # Only set settings if settings is actually set and "alarms" exists
+            # within settings
             self.settings = settings
             schedule.clear() # Delete all scheduled alarms
             self.create_alarms()
 
     def _format_time(self, hour, minute):
+        """Format hour and time as 'HH:MM'"""
         return "%02d:%02d" % (hour,minute)
 
     def create_alarms(self):
+        """Create alarms schedule from settings"""
         if self.settings is not None:
             # Only create alarms if settings actually set
             alarms = self.settings["alarms"]
@@ -56,6 +60,15 @@ class Alarm(object):
             print job
 
     def create_alarm(self, hour, minute, repeat, days=None, title="ALARM"):
+        """Create schedule for a single alarm
+        
+        Parameters:
+        - hour : the hour to schedule the alarm for
+        - minute : the minute to schedule the alarm for
+        - repeat : should the alarm repeat?
+        - days : (optional) the list of days to schedule this alarm for
+        - title : (optional) the title of the alarm (defaults to 'ALARM')
+        """
         _time = self._format_time(hour, minute)
         _args = None
         if repeat:
@@ -64,8 +77,8 @@ class Alarm(object):
             # If repeat is false, then the alarm should only be run once
             _args = (title, True)
         if days == None or len(days) == 7:
-            # If days is not defined, or it contains 7 entries, we assume 
-            # that the alarm should be run every day
+            # If days is not defined, or it contains 7 entries, we assume that
+            # the alarm should be run every day
             schedule.every().day.at(_time).do(self.play_alarm, _args)
         else:
             # Check if each weekday exists in days.
@@ -87,10 +100,18 @@ class Alarm(object):
         # self.s.enterabs(secs, 1, self.play_alarm, ())
 
     def run_alarm(self):
+        """Run pending, scheduled alarms"""
         schedule.run_pending()
         # self.s.run()
 
     def play_alarm(self, title, only_once=False):
+        """Play alarm
+        
+        Parameters:
+        - title : the title of the alarm
+        - only_once : (optional) should the schedule of this alarm be cleared 
+          after playing? (defaults to False)
+        """
         self.current_alarm = title
         print self.current_alarm
         pygame.mixer.init()
@@ -100,21 +121,10 @@ class Alarm(object):
             return schedule.CancelJob
     
     def stop_alarm(self):
+        """Stop the playback of the alarm"""
         self.current_alarm = None
         pygame.mixer.music.stop()
 
     def next_alarm(self):
-        # Return the datetime object of next scheduled alarm
+        """Returns the datetime object of next scheduled alarm"""
         return schedule.next_run()
-
-    @staticmethod
-    def save_settings(settings_form, file_path=""):
-        num_alarms = 5
-
-        settings = {
-            "alarms": []
-        }
-
-        for i in range(1, num_alarms+1):
-            hour = settings_form.getvalue("alarm_" + str(i) + "_hour")
-

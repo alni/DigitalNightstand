@@ -48,32 +48,41 @@ class Player(object):
                 return
 
     def play_pause(self):
+        """Toggle Play/Pause"""
         self._send_command("pause")
 
     def stop(self):
+        """Stop, quit and kill the player"""
         self._send_command("quit")
         if self.player:
             self.player.kill()
 
     def vol_down(self):
+        """Decrease the volume"""
         self._send_command("volume -1")
 
     def vol_up(self):
+        """Increase the volume"""
         self._send_command("volume 1")
 
     def toggle_mute(self):
+        """Toggle Mute"""
         self._send_command("mute")
 
     def mute(self):
+        """Mute"""
         self._send_command("mute 1")
 
     def unmute(self):
+        """Unmute"""
         self._send_command("mute 0")
 
     def seek(self, sec=120):
+        """Seek the playback of the given seconds"""
         self._send_command("seek %d" % sec)
 
     def load(self, stream, params=None):
+        """Load new stream with optional additional MPlayer parameters"""
         command = "loadfile " + stream + "\n"
         self.name = None
         self.info = None
@@ -82,6 +91,7 @@ class Player(object):
         self.player = self._create_player(stream, params, self.mplayer_path)
 
     def set_name(self):
+        """Sets the name parsed from the MPlayer output"""
         if self.player is None:
             return
         not_found = True
@@ -98,9 +108,11 @@ class Player(object):
 
 
     def get_name(self):
+        """Returns the name parsed from the MPlayer output"""
         return self.name
 
     def set_title(self):
+        """Set the title parsed from the MPlayer output"""
         if self.player is None:
             return
         str = u'(none)'
@@ -115,6 +127,7 @@ class Player(object):
                 print '\nStream title: '+self.title
 
     def get_info(self, attr="StreamTitle"):
+        """Gets and set the info parsed from the MPlayer output"""
         if self.player is None:
             return
         str = u'(none)'

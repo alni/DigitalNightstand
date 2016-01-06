@@ -19,8 +19,8 @@ def load_settings(config_file="config.json"):
 def save_settings(data, config_file="config.json"):
     filename = _dirs.user_config_dir + "/" + config_file
     if not os.path.exists(os.path.dirname(filename)):
-        # If the folder path to the User Config Directory does not exists,
-        # then create it + any non-existing parent folders
+        # If the folder path to the User Config Directory does not exists, then
+        # create it + any non-existing parent folders
         os.makedirs(os.path.dirname(filename))
     with open(filename, "w") as outfile:
         print os.path.abspath(outfile.name)
@@ -41,8 +41,8 @@ def save_last_state(last_radio_station=0, last_page=1, file="last_state.json"):
         "last_page": last_page
     }
     if not os.path.exists(os.path.dirname(filename)):
-        # If the folder path to the User Data Directory does not exists, 
-        # then create it + any non-existing parent folders
+        # If the folder path to the User Data Directory does not exists, then 
+        # create it + any non-existing parent folders
         os.makedirs(os.path.dirname(filename))
     with open(filename, "w") as outfile:
         print os.path.abspath(outfile.name)

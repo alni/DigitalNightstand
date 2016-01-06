@@ -53,10 +53,11 @@ def gen_event_object(node_name, page_index=1):
 def should_perform_radio_event(xy, action, alarm):
     # Default action: only perform if touch event "down" and at the radio page
     should_perform = action == 'down' and current_page == PAGE_INDEX_RADIO
-    # Alternative action: if xy is not set (physical button press) then always perform
+    # Alternative action: if xy is not set (physical button press) then always 
+    # perform
     should_perform = (should_perform) or xy is None
-    # Condition: only perform if no current alarm is running (includes both default and
-    # alternative actions)
+    # Condition: only perform if no current alarm is running (includes both 
+    # default and alternative actions)
     should_perform = (should_perform) and alarm.current_alarm is None
     return should_perform
 

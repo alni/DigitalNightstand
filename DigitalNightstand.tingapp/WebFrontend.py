@@ -99,7 +99,8 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             if self.path == "/api/list_countries":
                 url = "http://api.dirble.com/v2/countries?"
                 params = urllib.urlencode({
-                    # Base64 decode the API Key before sending it with the request
+                    # Base64 decode the API Key before sending it with the 
+                    # request
                     "token": base64.b64decode(config.DIRBLE_API_KEY)
                 })
                 response = urllib2.urlopen(url + params)
