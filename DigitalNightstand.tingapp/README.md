@@ -36,6 +36,15 @@ Currently supports:
 * Downloading list of radio stations by country with the [Dirble][dirble] service
 * Custom radio stations
 
+User Interface controls:
+
+* Play/Pause toggle
+* Previous/Next station change
+* Decrease/Increase/Mute volume
+* Radio station name
+* Radio station information
+
+
 
 ## Digital Clock ##
 
@@ -65,6 +74,16 @@ Supports:
 * Setting up the alarms (total 5)
 * Setting the current country for Internet radio list
 * Adding custom Internet radio stations
+
+### Radio Player ###
+
+Supports all controls that are available on the Nightstand.
+
+Also supports:
+
+* Changing the current country for the station list temporarily
+* Searching and selecting a radio station from a list
+
 
 ## Configuration and Data Files ##
 

@@ -1,5 +1,20 @@
 ﻿var DigitalNightstandPlayer = (function (DigitalNightstand) {
 
+    var last_key_down = -1;
+
+    var KEY_CODES = {
+        SPACE: 32,
+        LEFT: 37,
+        RIGHT: 39,
+        UP: 38,
+        DOWN: 40,
+        PLAY_PAUSE: 179,
+        VOLUME_UP: 175,
+        VOLUME_DOWN: 174,
+        PREVIOUS: 177,
+        NEXT: 176
+    };
+
     var obj = {
         init: function () {
             DigitalNightstand.fetchInitialData().done(function (data) {
@@ -44,7 +59,7 @@
             });
 
             $.getJSON("/api/list_stations").done(function (data) {
-                alert(data.length);
+                //alert(data.length);
                 var lang = navigator.language;
                 var context = {
                     lang: navigator.language,
@@ -57,6 +72,37 @@
                 var message = DigitalNightstand.globalize(lang, "player/station_list/placeholder");
                 $("#station-list-filter").attr("placeholder", message);
                 $("#station-list").html(html).listview("refresh");
+            });
+
+            $(window).on("keydown", function (e) {
+                if (last_key_down === -1 || +new Date() - last_key_down > 125) {
+                    console.log(e.keyCode);
+                    last_key_down = +new Date();
+                    e.preventDefault();
+
+                    switch (e.keyCode) {
+                        case KEY_CODES.SPACE:
+                        case KEY_CODES.PLAY_PAUSE:
+                            $("#play").trigger("click");
+                            break;
+                        case KEY_CODES.LEFT:
+                        case KEY_CODES.VOLUME_DOWN:
+                            $("#vol_down").trigger("click");
+                            break;
+                        case KEY_CODES.RIGHT:
+                        case KEY_CODES.VOLUME_UP:
+                            $("#vol_up").trigger("click");
+                            break;
+                        case KEY_CODES.UP:
+                        case KEY_CODES.NEXT:
+                            $("#station_next").trigger("click");
+                            break;
+                        case KEY_CODES.DOWN:
+                        case KEY_CODES.PREVIOUS:
+                            $("#station_next").trigger("click");
+                            break;
+                    }
+                }
             });
         },
 
