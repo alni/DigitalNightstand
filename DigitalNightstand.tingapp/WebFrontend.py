@@ -25,7 +25,6 @@ api_data = {
     }
 }
 
-radio = None
 alarm = None
 
 # modify this to add additional routes
@@ -96,55 +95,6 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             if self.path == "/api/get_fonts":
                 self.api_call(data=pygame.font.get_fonts())
                 return
-            if self.path == "/api/list_countries":
-                url = "http://api.dirble.com/v2/countries?"
-                params = urllib.urlencode({
-                    # Base64 decode the API Key before sending it with the 
-                    # request
-                    "token": base64.b64decode(config.DIRBLE_API_KEY)
-                })
-                response = urllib2.urlopen(url + params)
-                data = json.loads(response.read())
-                self.api_call(data=data)
-                return
-            if radio is not None:
-                if self.path == "/api/play":
-                    self.api_call(radio.player.play_pause)
-                    return
-                if self.path == "/api/pause":
-                    self.api_call(radio.player.play_pause)
-                    return
-                if self.path == "/api/prev":
-                    self.api_call(radio.prev_channel)
-                    return
-                if self.path == "/api/next":
-                    self.api_call(radio.next_channel)
-                    return
-                if self.path == "/api/vol_down":
-                    self.api_call(radio.player.vol_down)
-                    return
-                if self.path == "/api/vol_up":
-                    self.api_call(radio.player.vol_up)
-                    return
-                if self.path == "/api/vol_mute":
-                    self.api_call(radio.player.toggle_mute)
-                    return
-                if self.path == "/api/list_stations":
-                    self.api_call(data=radio.radio_channels)
-                    return
-                if self.path.startswith("/api/change_station/"):
-                    station_index = int(self.path.split("/")[-1])
-                    radio.set_channel(station_index)
-                    self.api_call()
-                    return
-                if self.path.startswith("/api/change_country/"):
-                    country_code = self.path.split("/")[-1]
-                    radio.change_country(country_code)
-                    self.api_call()
-                    return
-            else:
-                self.send_error(501, "Radio not set to an instance")
-                return
         SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
 
     def do_POST(self):
@@ -157,20 +107,7 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             config.SETTINGS = data
             if alarm is not None:
                 alarm.set_settings(config.SETTINGS)
-            if radio is not None and "radio" in config.SETTINGS:
-                _radio_settings = config.SETTINGS['radio']
-                radio.change_country(_radio_settings['country'])
-                if "radio_stations" in _radio_settings and len(_radio_settings['radio_stations']) > 0:
-                    radio.radio_channels.extend(_radio_settings['radio_stations'])
 
-            logging.warning("\n")
-            self.send_response(200)
-            return
-        elif self.path == "/dirble_api_key":
-            data_string = self.rfile.read(int(self.headers['Content-Length']))
-            data = json.loads(data_string)
-            config.save_settings(data, "radio/private.json")
-            config.DIRBLE_API_KEY = data["dirble_api_key"]
             logging.warning("\n")
             self.send_response(200)
             return

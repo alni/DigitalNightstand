@@ -37,7 +37,7 @@ def load_last_state(file="last_state.json"):
 def save_last_state(last_radio_station=0, last_page=1, file="last_state.json"):
     filename = USER_DATA_DIR + "/" + file
     data = {
-        "last_radio_station": last_radio_station,
+        # "last_radio_station": last_radio_station,
         "last_page": last_page
     }
     if not os.path.exists(os.path.dirname(filename)):
@@ -49,16 +49,6 @@ def save_last_state(last_radio_station=0, last_page=1, file="last_state.json"):
         json.dump(data, outfile)
 
 CONFIG_FILE = "config.json"
-MPLAYER_PATH = "D:/Personal/Downloads/Software/AudioVideo/MPlayer/MPlayer-x86_64-r37451+g531b0a3/mplayer.exe"
-if sys.platform.startswith("linux"):
-    MPLAYER_PATH = "mplayer"
-
-RADIO_STATIONS_PATH = USER_DATA_DIR + "/radio/NO.json" # "data/radio/NO.json"
-
-if not os.path.exists(RADIO_STATIONS_PATH):
-    # If the file does not exists, fall back to the file in the application 
-    # data folder
-    RADIO_STATIONS_PATH = "data/radio/NO.json"
 
 try:
     SETTINGS = load_settings(CONFIG_FILE)
@@ -68,20 +58,13 @@ except IOError:
     # This ensures that the settings has been correctly set and saved to file
     SETTINGS = {
         "alarms": [],
-        "radio": {
-            "country": "NO",
-            "radio_stations": []
-        }
+        "clock_12h": False
     }
     save_settings(SETTINGS, CONFIG_FILE)
 
 WEB_FRONTENT_PORT = 8000
 MOUSE_VISIBLE = True
-DIRBLE_API_KEY = "<my-api-key>"
 CLOCK_DATE_FORMAT = "DD MMMM YYYY"
 CLOCK_TIME_FORMAT = "HH mm"
 
-try:
-    DIRBLE_API_KEY = load_settings("radio/private.json")["dirble_api_key"]
-except Exception:
-    DIRBLE_API_KEY = None
+CLOCK_TIME_FORMAT_12H = "hh mm"

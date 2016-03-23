@@ -158,9 +158,9 @@
             var promise = $.Deferred();
             $.when(
                 $.getJSON("/api/config"),
-                $.getJSON("/api/list_countries"),
+                //$.getJSON("/api/list_countries"),
                 $.getJSON("/data/messages.json")
-            ).done(function (settings, countries, messages) {
+            ).done(function (settings, messages) { //countries, messages) {
                 Globalize.loadMessages(messages[0]);
                 settings[0].lang = lang + "";
                 $("[data-globalize]").each(function () {
@@ -169,8 +169,8 @@
                     $this.text(formatter());
                 });
                 promise.resolve({
-                    settings: settings[0],
-                    countries: countries[0]
+                    settings: settings[0]//,
+                    //countries: countries[0]
                 });
             });
             return promise;

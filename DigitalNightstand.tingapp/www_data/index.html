@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
-    <link rel="stylesheet" href="css/jtsage-datebox.min.css" />
+    <!--<link rel="stylesheet" href="css/jtsage-datebox.min.css" />-->
     <link rel="stylesheet" href="/vendor/waves/waves.min.css" />
     <link rel="stylesheet" href="/vendor/wow/animate.css" />
     <link rel="stylesheet" href="/css/nativedroid2.css" />
@@ -19,7 +19,7 @@
     <script src="vendor/globalize/globalize.js"></script>
     <script src="vendor/globalize/globalize/message.js"></script>
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
-    <script src="js/jtsage-datebox.min.js"></script>
+    <!--<script src="js/jtsage-datebox.min.js"></script>-->
     <script src="/vendor/waves/waves.min.js"></script>
     <script src="/vendor/wow/wow.min.js"></script>
     <script src="/js/nativedroid2.js"></script>
@@ -50,10 +50,8 @@
                             <!--<label for="alarm_{{@index}}_time">Time:</label>-->
                             <label for="alarm_{{@index}}_time">{{globalize @root.lang "setup/alarms/label_time"}}</label>
                             <input type="time"
-                                   data-role="datebox"
                                    name="alarm_{{@index}}_time"
-                                   id="alarm_{{@index}}_time"
-                                   data-options='{"mode": "timebox"}' />
+                                   id="alarm_{{@index}}_time" />
                         </div>
                         <fieldset>
                             <div data-role="fieldcontain">
@@ -120,7 +118,7 @@
                     {{/each}}
                 </div>
             </div>
-            <div data-role="collapsible">
+            <div data-role="collapsible" style="display: none;">
                 <!--<h2>Internet Radio</h2>-->
                 <h2>{{globalize @root.lang "setup/radio/header"}}</h2>
 
@@ -171,7 +169,7 @@
                            type="text"
                            value="{{general/config_file}}" />
                 </div>
-                <div class="ui-field-contain">
+                <div class="ui-field-contain" style="display: none;">
                     <!--<label for="general_mplayer_path">MPlayer path</label>-->
                     <label for="general_mplayer_path">{{globalize @root.lang "setup/general/label_mplayer_path"}}</label>
                     <input name="general_mplayer_path"
@@ -219,12 +217,12 @@
                            class="ui-btn ui-btn-active ui-state-persist ui-icon-prev"
                            data-globalize="setup/header">Setup</a>
                     </li>
-                    <li>
+                    <!--li>
                         <a href="player.html"
                            class="ui-btn ui-icon-prev"
                            data-ajax="false"
                            data-globalize="player/header">Radio Player</a>
-                    </li>
+                    </li-->
                 </ul>
             </div><!-- /navbar -->
         </div><!-- /header -->
