@@ -17,6 +17,12 @@
                     }, {
                         // #5
                     }],
+                    weather: {
+                        units: "auto",
+                        language: "en",
+                        units_list: [],
+                        languages: []
+                    },
                     radio: {
                         country: "NO",
                         radio_stations: []
@@ -26,6 +32,106 @@
                         mplayer_path: "mplayer"
                     }
                 };
+                context.weather = context.weather || {};
+                context.weather.units_list = [{
+                    units_code: "auto",
+                    name: "Auto"
+                }, {
+                    units_code: "us",
+                    name: "US Units"
+                }, {
+                    units_code: "si",
+                    name: "SI Units"
+                }, {
+                    units_code: "ca",
+                    name: "CA Units"
+                }, {
+                    units_code: "uk2",
+                    name: "UK Units"
+                }];
+                context.weather.languages = [{
+                    language_code: "ar",
+                    name: "Arabic"
+                }, {
+                    language_code: "bs",
+                    name: "Bosnian"
+                }, {
+                    language_code: "cs",
+                    name: "Czech"
+                }, {
+                    language_code: "de",
+                    name: "German"
+                }, {
+                    language_code: "el",
+                    name: "Greek"
+                }, {
+                    language_code: "en",
+                    name: "English"
+                }, {
+                    language_code: "es",
+                    name: "Spanish"
+                }, {
+                    language_code: "fr",
+                    name: "French"
+                }, {
+                    language_code: "hr",
+                    name: "Croatian"
+                }, {
+                    language_code: "hu",
+                    name: "Hungarian"
+                }, {
+                    language_code: "it",
+                    name: "Italian"
+                }, {
+                    language_code: "is",
+                    name: "Icelandic"
+                }, {
+                    language_code: "kw",
+                    name: "Cornish"
+                }, {
+                    language_code: "nb",
+                    name: "Norwegian Bokmål"
+                }, {
+                    language_code: "nl",
+                    name: "Dutch"
+                }, {
+                    language_code: "pl",
+                    name: "Polish"
+                }, {
+                    language_code: "pt",
+                    name: "Portuguese"
+                }, {
+                    language_code: "ru",
+                    name: "Russian"
+                }, {
+                    language_code: "sk",
+                    name: "Slovak"
+                }, {
+                    language_code: "sr",
+                    name: "Serbian"
+                }, {
+                    language_code: "sv",
+                    name: "Swedish"
+                }, {
+                    language_code: "tet",
+                    name: "Tetum"
+                }, {
+                    language_code: "tr",
+                    name: "Turkish"
+                }, {
+                    language_code: "uk",
+                    name: "Ukrainian"
+                }, {
+                    language_code: "x-pig-latin",
+                    name: "Igpay Atinlay (Pig Latin)"
+                }, {
+                    language_code: "zh",
+                    name: "simplified Chinese"
+                }, {
+                    language_code: "zh-tw",
+                    name: "traditional Chinese"
+                }];
+                /*
                 context.radio.countries = data.countries || [{
                     country_code: "GB",
                     name: "United Kingdom"
@@ -33,6 +139,7 @@
                     country_code: "NO",
                     name: "Norway"
                 }];
+                */
                 var alarms_length = context.alarms.length; // Configured alarms
                 if (context.alarms.length < 5) {
                     // If the number of current configured alarms is less than 5, 
@@ -67,6 +174,21 @@
                     }
                 }
                 $("#form").trigger("create");
+                $("#forecastio_api_key").on("change", function (e) {
+                    var $this = $(this);
+                    var val = $this.val();
+                    if (val && val.length > 0) {
+                        // Send and save the key to the main application
+                        $.post("/forecastio_api_key", JSON.stringify({
+                            // Base64 encode the key before sending it
+                            forecastio_api_key: btoa(val)
+                        })).done(function () {
+                            // Clear the field to prevent reading of the API key
+                            $this.val("");
+                        });
+                    }
+                });
+                /*
                 $("#dirble_api_key").on("change", function (e) {
                     var $this = $(this);
                     var val = $this.val();
@@ -81,6 +203,7 @@
                         });
                     }
                 });
+                */
                 $("#form").on("submit", function (e) {
                     e.preventDefault();
                     var alarms = [];
@@ -113,6 +236,15 @@
                     }
 
                     console.log(alarms);
+
+                    var weather = {
+                        latitude: $("#weather_latitude").val(),
+                        longitude: $("#weather_longitude").val(),
+                        units: $("#weather_units").val() || "auto",
+                        language: $("#weather_language").val() || "en"
+                    };
+
+                    /*
                     var radio = {
                         country: $("#radio_stations_country").val(),
                         radio_stations: []
@@ -130,10 +262,12 @@
                         radio_custom_stations = [];
                     }
                     radio.radio_stations.concat(radio_custom_stations);
+                    */
 
                     $.post("/", JSON.stringify({
                         alarms: alarms,
-                        radio: radio
+                        weather: weather
+                        //radio: radio
                         //radio_stations: radio_custom_stations
                     }));
 

@@ -17,10 +17,12 @@ import inspect
 from multiprocessing.pool import ThreadPool
 
 from defs.colors import *
+import defs.weather_icons as wx_icons
 
 from Alarm import Alarm
 import WebFrontend as web_frontend
 from WebFrontend import WebFrontend
+from Weather import Weather
 import gui
 from gui import *
 import config
@@ -31,6 +33,7 @@ from ScrollText import ScrollText
 # Initialize global objects
 frontend = None
 alarm = None
+weather = None
 current_locale, current_coding = locale.getdefaultlocale()
 if os.name == 'nt':
     # On windows platforms, current character encoding is never "utf-8".
@@ -77,12 +80,33 @@ def update():
 
 # Clock Page Draw method
 def draw_clock_page():
+    screen.image(
+        weather.get_icon_path(weather.currently),
+        xy=FORECAST_ICON_CONDITION["xy"],
+        scale=FORECAST_ICON_CONDITION["scale"],
+        align=FORECAST_ICON_CONDITION["align"]
+    )
+    screen.text(
+        FORECAST_LABEL_SUMMARY["text"] % (weather.currently.summary, weather.currently.temperature),
+        xy=FORECAST_LABEL_SUMMARY["xy"],
+        color=FORECAST_LABEL_SUMMARY["color"],
+        font_size=FORECAST_LABEL_SUMMARY["font_size"],
+        align=FORECAST_LABEL_SUMMARY["align"],
+        font=DEFAULT_FONT
+    )
+    screen.line(
+        start_xy=FORECAST_LINE_SEPARATOR["start_xy"],
+        end_xy=FORECAST_LINE_SEPARATOR["end_xy"],
+        color=FORECAST_LINE_SEPARATOR["color"],
+        width=FORECAST_LINE_SEPARATOR["width"]
+    )
     screen.text(
         gui.current_time,
         xy=CLOCK_LABEL_TIME["xy"],
         color=CLOCK_LABEL_TIME["color"],
         font_size=CLOCK_LABEL_TIME["font_size"],
-        align=CLOCK_LABEL_TIME["align"]
+        align=CLOCK_LABEL_TIME["align"],
+        font=DEFAULT_FONT
     )
     if time.localtime().tm_sec%2 == 1:
         # Draw the time separator every other second (blink the separator)
@@ -91,7 +115,8 @@ def draw_clock_page():
             xy=CLOCK_LABEL_TIME["xy"],
             color=CLOCK_LABEL_TIME["color"],
             font_size=CLOCK_LABEL_TIME["font_size"],
-            align=CLOCK_LABEL_TIME["align"]
+            align=CLOCK_LABEL_TIME["align"],
+            font=DEFAULT_FONT
         )
 
     screen.text(
@@ -99,7 +124,8 @@ def draw_clock_page():
         xy=CLOCK_LABEL_DATE["xy"],
         color=CLOCK_LABEL_DATE["color"],
         font_size=CLOCK_LABEL_DATE["font_size"],
-        align=CLOCK_LABEL_DATE["align"]
+        align=CLOCK_LABEL_DATE["align"],
+        font=DEFAULT_FONT
     )
     # next_alarm = "(no current alarms)"
     next_alarm = localized_strings.get_alarm(None)
@@ -113,7 +139,8 @@ def draw_clock_page():
         xy=CLOCK_LABEL_ALARM_NEXT["xy"],
         color=CLOCK_LABEL_ALARM_NEXT["color"],
         font_size=CLOCK_LABEL_ALARM_NEXT["font_size"],
-        align=CLOCK_LABEL_ALARM_NEXT["align"]
+        align=CLOCK_LABEL_ALARM_NEXT["align"],
+        font=DEFAULT_FONT
     )
 
 
@@ -171,7 +198,8 @@ def loop():
             xy=ALARM_LABEL_TITLE["xy"],
             color=ALARM_LABEL_TITLE["color"],
             font_size=ALARM_LABEL_TITLE["font_size"],
-            align=ALARM_LABEL_TITLE["align"]
+            align=ALARM_LABEL_TITLE["align"],
+            font=DEFAULT_FONT
         )
     elif gui.current_page == gui.PAGE_INDEX_CLOCK or True:
         draw_clock_page()
@@ -188,6 +216,9 @@ settings_data = config.SETTINGS
 
 alarm = Alarm("res/sounds/Argon_48k.wav", settings=settings_data)
 alarm.create_alarms()
+
+weather = Weather(settings=settings_data)
+weather.create_forecast()
 
 web_frontend.alarm = alarm
 

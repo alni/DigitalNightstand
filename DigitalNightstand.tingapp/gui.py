@@ -13,6 +13,9 @@ PAGE_INDEX_CLOCK = 1
 PAGE_INDEX_FORECAST = 2
 
 _ICON_BASE_PATH = "res/icons/material-design-icons-2.0/"
+_FONT_BASE_PATH = "res/fonts/"
+
+DEFAULT_FONT = _FONT_BASE_PATH + "Open_Sans/OpenSans-Regular.ttf"
 
 
 CLOCK_LABEL_TIME = {
@@ -52,4 +55,29 @@ ALARM_LABEL_TITLE = {
     "align": "center",
     "touch_size": (160, 120),
     "text": "%s"
+}
+
+
+FORECAST_ICON_CONDITION = {
+    "xy": (256,0),
+    "scale": 0.4210526315789474,
+    "align": "topleft"
+}
+
+FORECAST_LABEL_SUMMARY = {
+    "type": "text",
+    "xy": (256, 32),
+    "color": COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "font_size": 24,
+    "align": "right",
+    "text": u"%s : %d°"
+}
+
+FORECAST_LINE_SEPARATOR = {
+    "type": "line",
+    "start_xy": (0, 64),
+    "end_xy": (320, 64),
+    "color": COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "width": 2,
+    "align": "topleft",
 }

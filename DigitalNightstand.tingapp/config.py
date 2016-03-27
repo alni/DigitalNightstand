@@ -68,3 +68,8 @@ CLOCK_DATE_FORMAT = "DD MMMM YYYY"
 CLOCK_TIME_FORMAT = "HH mm"
 
 CLOCK_TIME_FORMAT_12H = "hh mm"
+
+try:
+    FORECASTIO_API_KEY = load_settings("weather/private.json")["forecastio_api_key"]
+except Exception:
+    FORECASTIO_API_KEY = None

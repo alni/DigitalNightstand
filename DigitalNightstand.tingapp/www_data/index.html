@@ -118,6 +118,73 @@
                     {{/each}}
                 </div>
             </div>
+            <div data-role="collapsible">
+                <!--<h2>Weather</h2>-->
+                <h2>{{globalize @root.lang "setup/weather/header"}}</h2>
+
+                <div class="ui-field-contain">
+                    <!--<label for="weather_latitude">Latitude:</label>-->
+                    <label for="weather_latitude">{{globalize @root.lang "setup/weather/label_latitude"}}</label>
+                    <input type="number"
+                           name="weather_latitude"
+                           id="weather_latitude"
+                           step="0.0001"
+                           value="{{weather/latitude}}" />
+                </div>
+                <div class="ui-field-contain">
+                    <!--<label for="weather_longitude">Longitude:</label>-->
+                    <label for="weather_longitude">{{globalize @root.lang "setup/weather/label_longitude"}}</label>
+                    <input type="number"
+                           name="weather_longitude"
+                           id="weather_longitude"
+                           step="0.0001"
+                           value="{{weather/longitude}}" />
+                </div>
+
+                <div class="ui-field-contain">
+                    <!--<label for="weather_units">Weather language</label>-->
+                    <label for="weather_units">{{globalize @root.lang "setup/weather/label_units"}}</label>
+                    <select name="weather_units"
+                            id="weather_units"
+                            type="text"
+                            value="{{weather/units}}"
+                            data-native-menu="false">
+                        {{#select weather/units}}
+                        {{#each weather/units_list}}
+                        <option value="{{units_code}}">
+                            {{globalize @root.lang "setup/weather/units" units_code}}
+                             ({{units_code}})
+                        </option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+
+                <div class="ui-field-contain">
+                    <!--<label for="weather_language">Weather language</label>-->
+                    <label for="weather_language">{{globalize @root.lang "setup/weather/label_language"}}</label>
+                    <select name="weather_language"
+                            id="weather_language"
+                            type="text"
+                            value="{{weather/language}}"
+                            data-native-menu="false">
+                        {{#select weather/language}}
+                        {{#each weather/languages}}
+                        <option value="{{language_code}}">
+                            {{globalize @root.lang "setup/weather/languages" language_code}}
+                            ({{language_code}})
+                        </option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+                <div class="ui-field-contain">
+                    <label for="forecastio_api_key">{{globalize @root.lang "setup/weather/label_api_key"}}</label>
+                    <input name="forecastio_api_key"
+                           id="forecastio_api_key"
+                           type="text" />
+                </div>
+            </div>
             <div data-role="collapsible" style="display: none;">
                 <!--<h2>Internet Radio</h2>-->
                 <h2>{{globalize @root.lang "setup/radio/header"}}</h2>

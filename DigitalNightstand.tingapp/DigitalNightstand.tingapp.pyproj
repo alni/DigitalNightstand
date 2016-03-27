@@ -22,6 +22,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Weather.py" />
     <Compile Include="Alarm.py">
       <SubType>Code</SubType>
     </Compile>
@@ -34,18 +35,15 @@
     <Compile Include="defs\colors.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="defs\weather_icons.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="defs\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="locales.py" />
     <Compile Include="main.py" />
     <Compile Include="gui.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Player.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Radio.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ScrollText.py">
@@ -58,9 +56,14 @@
   <ItemGroup>
     <Folder Include="data\" />
     <Folder Include="data\gui\" />
-    <Folder Include="data\radio\" />
     <Folder Include="docs\" />
     <Folder Include="docs\mplayer\" />
+    <Folder Include="res\fonts\" />
+    <Folder Include="res\fonts\weather-icons-2.0.10\" />
+    <Folder Include="res\fonts\Open_Sans\" />
+    <Folder Include="res\fonts\weather-icons-2.0.10\font\" />
+    <Folder Include="res\icons\weather-icons\" />
+    <Folder Include="res\icons\weather-icons\forecastio\" />
     <Folder Include="www_data\" />
     <Folder Include="res\" />
     <Folder Include="defs\" />
@@ -89,13 +92,29 @@
   <ItemGroup>
     <Content Include="data\alarms.json" />
     <Content Include="data\gui\pages.xml" />
-    <Content Include="data\radio.json" />
-    <Content Include="data\radio\NO.json" />
-    <Content Include="data\radio\GB.json" />
+    <Content Include="data\weather.json" />
     <Content Include="docs\mplayer\slave.txt" />
     <Content Include="docs\Pictaculous.PNG" />
     <Content Include="README.md" />
     <Content Include="requirements.txt" />
+    <Content Include="res\fonts\Open_Sans\LICENSE.txt" />
+    <Content Include="res\fonts\Open_Sans\OpenSans-Bold.ttf" />
+    <Content Include="res\fonts\Open_Sans\OpenSans-BoldItalic.ttf" />
+    <Content Include="res\fonts\Open_Sans\OpenSans-ExtraBold.ttf" />
+    <Content Include="res\fonts\Open_Sans\OpenSans-ExtraBoldItalic.ttf" />
+    <Content Include="res\fonts\Open_Sans\OpenSans-Italic.ttf" />
+    <Content Include="res\fonts\Open_Sans\OpenSans-Light.ttf" />
+    <Content Include="res\fonts\Open_Sans\OpenSans-LightItalic.ttf" />
+    <Content Include="res\fonts\Open_Sans\OpenSans-Regular.ttf" />
+    <Content Include="res\fonts\Open_Sans\OpenSans-Semibold.ttf" />
+    <Content Include="res\fonts\Open_Sans\OpenSans-SemiboldItalic.ttf" />
+    <Content Include="res\fonts\weather-icons-2.0.10\bower.json" />
+    <Content Include="res\fonts\weather-icons-2.0.10\font\weathericons-regular-webfont.eot" />
+    <Content Include="res\fonts\weather-icons-2.0.10\font\weathericons-regular-webfont.svg" />
+    <Content Include="res\fonts\weather-icons-2.0.10\font\weathericons-regular-webfont.ttf" />
+    <Content Include="res\fonts\weather-icons-2.0.10\font\weathericons-regular-webfont.woff" />
+    <Content Include="res\fonts\weather-icons-2.0.10\font\weathericons-regular-webfont.woff2" />
+    <Content Include="res\fonts\weather-icons-2.0.10\README.md" />
     <Content Include="res\icons\material-design-icons-2.0\av\2x_web\ic_pause_circle_outline_white_24dp.png" />
     <Content Include="res\icons\material-design-icons-2.0\av\2x_web\ic_play_circle_outline_white_24dp.png" />
     <Content Include="res\icons\material-design-icons-2.0\av\2x_web\ic_skip_next_white_24dp.png" />
@@ -109,6 +128,19 @@
     <Content Include="res\icons\material-design-icons-2.0\navigation\2x_web\ic_chevron_right_black_18dp.png" />
     <Content Include="res\icons\material-design-icons-2.0\navigation\2x_web\ic_chevron_right_white_18dp.png" />
     <Content Include="res\icons\material-design-icons-2.0\README.md" />
+    <Content Include="res\icons\weather-icons\forecastio\clear-day.png" />
+    <Content Include="res\icons\weather-icons\forecastio\clear-night.png" />
+    <Content Include="res\icons\weather-icons\forecastio\cloudy.png" />
+    <Content Include="res\icons\weather-icons\forecastio\fog.png" />
+    <Content Include="res\icons\weather-icons\forecastio\hail.png" />
+    <Content Include="res\icons\weather-icons\forecastio\partly-cloudy-day.png" />
+    <Content Include="res\icons\weather-icons\forecastio\partly-cloudy-night.png" />
+    <Content Include="res\icons\weather-icons\forecastio\rain.png" />
+    <Content Include="res\icons\weather-icons\forecastio\sleet.png" />
+    <Content Include="res\icons\weather-icons\forecastio\snow.png" />
+    <Content Include="res\icons\weather-icons\forecastio\thunderstorm.png" />
+    <Content Include="res\icons\weather-icons\forecastio\tornado.png" />
+    <Content Include="res\icons\weather-icons\forecastio\wind.png" />
     <Content Include="res\images\banner-911778_1280.jpg" />
     <Content Include="res\images\delicate-arch-960279_240p.jpg" />
     <Content Include="res\images\delicate-arch-960279_640.jpg" />

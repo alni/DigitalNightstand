@@ -111,6 +111,14 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             logging.warning("\n")
             self.send_response(200)
             return
+        elif self.path == "/forecastio_api_key":
+            data_string = self.rfile.read(int(self.headers['Content-Length']))
+            data = json.loads(data_string)
+            config.save_settings(data, "weather/private.json")
+            config.FORECASTIO_API_KEY = data["forecastio_api_key"]
+            logging.warning("\n")
+            self.send_response(200)
+            return
         else:
             self.send_error(501, "POST request is not supported with path")
             return
