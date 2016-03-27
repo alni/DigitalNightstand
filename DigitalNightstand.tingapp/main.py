@@ -87,11 +87,19 @@ def draw_clock_page():
         align=FORECAST_ICON_CONDITION["align"]
     )
     screen.text(
-        FORECAST_LABEL_SUMMARY["text"] % (weather.currently.summary, weather.currently.temperature),
+        FORECAST_LABEL_SUMMARY["text"] % (weather.currently.summary),
         xy=FORECAST_LABEL_SUMMARY["xy"],
         color=FORECAST_LABEL_SUMMARY["color"],
         font_size=FORECAST_LABEL_SUMMARY["font_size"],
         align=FORECAST_LABEL_SUMMARY["align"],
+        font=DEFAULT_FONT
+    )
+    screen.text(
+        FORECAST_LABEL_TEMPERATURE["text"] % (weather.currently.temperature),
+        xy=FORECAST_LABEL_TEMPERATURE["xy"],
+        color=FORECAST_LABEL_TEMPERATURE["color"],
+        font_size=FORECAST_LABEL_TEMPERATURE["font_size"],
+        align=FORECAST_LABEL_TEMPERATURE["align"],
         font=DEFAULT_FONT
     )
     screen.line(
@@ -221,5 +229,6 @@ weather = Weather(settings=settings_data)
 weather.create_forecast()
 
 web_frontend.alarm = alarm
+web_frontend.weather = weather
 
 tingbot.run(loop)

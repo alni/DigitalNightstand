@@ -26,6 +26,7 @@ api_data = {
 }
 
 alarm = None
+weather = None
 
 # modify this to add additional routes
 ROUTES = (
@@ -107,6 +108,8 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             config.SETTINGS = data
             if alarm is not None:
                 alarm.set_settings(config.SETTINGS)
+            if weather is not None:
+                weather.set_settings(config.SETTINGS)
 
             logging.warning("\n")
             self.send_response(200)

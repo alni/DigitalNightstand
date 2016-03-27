@@ -66,11 +66,20 @@ FORECAST_ICON_CONDITION = {
 
 FORECAST_LABEL_SUMMARY = {
     "type": "text",
-    "xy": (256, 32),
+    "xy": (256, 16),
     "color": COLOR_WHITE, # COLOR_BLUE_LIGHT,
     "font_size": 24,
     "align": "right",
-    "text": u"%s : %d°"
+    "text": u"%s"
+}
+
+FORECAST_LABEL_TEMPERATURE = {
+    "type": "text",
+    "xy": (256, 44),
+    "color": COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "font_size": 24,
+    "align": "right",
+    "text": u"%d°"
 }
 
 FORECAST_LINE_SEPARATOR = {

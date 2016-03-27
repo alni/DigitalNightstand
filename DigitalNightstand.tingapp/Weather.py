@@ -38,7 +38,6 @@ class Weather(object):
             # Only set settings if settings is actually set and "weather" exists
             # within settings
             self.settings = settings["weather"]
-            schedule.clear() # Delete all scheduled alarms
             self.create_forecast()
 
     def _format_time(self, hour, minute):

@@ -4,7 +4,7 @@ Digital Nightstand for the Tingbot/Raspberry Pi.
 
 Features includes:
 
-* Internet Radio,
+* Weather Forecast,
 * Digital Clock
 * Alarm Clock
 * Web Frontend
@@ -26,29 +26,23 @@ Key               | Action
 <kbd>&darr;</kbd> | Previous station
 
 
-## Internet Radio ##
+## Weather Forecast ##
 
-Listen to Internet Radio stations.
+Get weather forecast for a place on Earth (Powered by Forecast).
 
 Currently supports:
 
-* `NRK Radio` - <http://lyd.nrk.no> (Norwegian Broadcasting Corporation/Norsk rikskringkasting AS)
-* Downloading list of radio stations by country with the [Dirble][dirble] service
-* Custom radio stations
-
-User Interface controls:
-
-* Play/Pause toggle
-* Previous/Next station change
-* Decrease/Increase/Mute volume
-* Radio station name
-* Radio station information
+* Display current weather conditions on the Clock page - summary, temperature 
+  and icon
+* Displaying the summary in different languages
+* Display the temperature by different units - location dependent or user set
 
 
 
 ## Digital Clock ##
 
-Shows the current time and date. The time is shown big, and the date medium size but still readable.
+Shows the current time and date. The time is shown big, and the date medium 
+size but still readable.
 
 The time and date is formatted based on the locale of the computer.
 
@@ -64,44 +58,40 @@ Easily set-up from the Web Frontend.
 
 ## Web Frontend ##
 
-The Web Frontend provides configuration and control of the Nightstand from a web browser.
+The Web Frontend provides configuration and control of the Nightstand from a 
+web browser.
 
 Accepts connections default on port `8000`.
 
 Supports:
 
-* Radio Player control
 * Setting up the alarms (total 5)
-* Setting the current country for Internet radio list
-* Adding custom Internet radio stations
-
-### Radio Player ###
-
-Supports all controls that are available on the Nightstand.
-
-Also supports:
-
-* Changing the current country for the station list temporarily
-* Searching and selecting a radio station from a list
+* Setting up the weather forecast (including latitude/longitude coordinates, 
+  desired language and units)
 
 
 ## Configuration and Data Files ##
 
-The configuration and data files are stored within a specific folder path unique for each platform.
+The configuration and data files are stored within a specific folder path 
+unique for each platform.
 
-* `config.json` - contains all user configured settings. This includes all settings configured with the Web Frontend (excluding the _Dirble API Key_)
-* `radio/<country>.json`  - contains transformed Internet stations data downloaded from Dirble a specific `country`
-* `radio/private.json` - contains private user data that should not be shared. This includes the Dirble API Key set from the Web Frontend
+* `config.json` - contains all user configured settings. This includes all 
+  settings configured with the Web Frontend (excluding the _Forecast IO API Key_)
+* `weather/private.json` - contains private user data that should not be 
+  shared. This includes the Forecast IO API Key set from the Web Frontend
 
-### Dirble API Key ###
+### Forecast IO API Key ###
 
-When downloaded radio channels using the Dirble Service, a Dirble API Key must be provided.
+When downloaded weather data using the Forecast Service, a Forecast IO API Key
+must be provided.
 
 This can be set from the Web Frontend.
 
-When the value of Dirble API Key field is changed the API Key is automatically saved to `radio/private.json`. If successful the field is cleared to prevent reading of the API key.
+When the value of Forecast IO API Key field is changed the API Key is
+automatically saved to `weather/private.json`. If successful the field is 
+cleared to prevent reading of the API key.
 
-The Dirble API Key is never loaded to the configuration page.
+The Forecast IO API Key is never loaded to the configuration page.
 
 --------
 
@@ -109,39 +99,56 @@ The Dirble API Key is never loaded to the configuration page.
 
 This application has been inspired, and contains/uses other projects.
 
-* Background [image][background-image] by [geralt][pixabay-geralt] from [Pixabay][pixabay]
-* Color palette was generated from the background image with the [Pictaculous][pictaculous] service
+* Background [image][background-image] by [skeeze][pixabay-skeeze] from 
+  [Pixabay][pixabay]
+* Color palette was generated from the background image with the 
+  [Pictaculous][pictaculous] service
 
 ### Python libraries ###
 
 This project uses the following Python libraries:
 
-* `appdirs` - [`appdirs`][appdirs] is created by [ActiveState Software Inc][activestate-software-inc] and distributed under the [MIT license][appdirs-license]
-* `arrow` - [`arrow`][arrow] is created by [Chris Smith][chris-smith] and licensed under the [Apache License, Version 2.0][apache-license-2-0]
-* `pygame` - [`pygame`][pygame] is developed by the [Pygame Community][pygame-community] and distributed under [GNU LGPL version 2.1][pygame-license]
-* `schedule` - [`schedule`][schedule] is created by [Daniel Bader][daniel-bader] and distributed under the [MIT license][schedule-license]
-* `tingbot-python` - [`tingbot-python`][tingbot-python] is created by [Tingbot][tingbot] and licensed under the ['BSD 2-clause license'][tingbot-python-license]
-
-### The Radio ###
-
-The radio layout has been inspired heavily by the **[Raspberry Pi radio player with touchscreen][raspberry-pi-radio-player-with-touchscreen]** by [Spencer Organ][adafruit-learn-Uktechreviews] from the [Adafruit Learning System][adafruit-learn]
-
-Uses icons from the [Material design icons][material-icons] by Google, Inc
+* `appdirs` - [`appdirs`][appdirs] is created by 
+  [ActiveState Software Inc][activestate-software-inc] and distributed under 
+  the [MIT license][appdirs-license]
+* `arrow` - [`arrow`][arrow] is created by [Chris Smith][chris-smith] and 
+  licensed under the [Apache License, Version 2.0][apache-license-2-0]
+* `pygame` - [`pygame`][pygame] is developed by the 
+  [Pygame Community][pygame-community] and distributed under 
+  [GNU LGPL version 2.1][pygame-license]
+* `python-forecastio` - [`python-forecastio`][python-forecastio] is created by 
+  [Ze'ev Gilovitz][ZeevG] and licensed under the 
+  ['BSD 2-clause license'][python-forecastio-license]
+* `schedule` - [`schedule`][schedule] is created by 
+  [Daniel Bader][daniel-bader] and distributed under the 
+  [MIT license][schedule-license]
+* `tingbot-python` - [`tingbot-python`][tingbot-python] is created by 
+  [Tingbot][tingbot] and licensed under the 
+  ['BSD 2-clause license'][tingbot-python-license]
 
 ### Alarm ###
 
-Uses [Material][material-alarm-sounds] alarm sounds from the [`platforms_frameworks_base`][platforms-frameworks-base] repository by [The Android Open Source Project][aosp]
+Uses [Material][material-alarm-sounds] alarm sounds from the 
+[`platforms_frameworks_base`][platforms-frameworks-base] repository by
+[The Android Open Source Project][aosp].
 
 ### The Web Frontend ###
 
-Built with [jQuery Mobile][jqm] by [jQuery Foundation, Inc.][jquery-foundation] released under the [MIT license][jqm-license].
+Built with [jQuery Mobile][jqm] by [jQuery Foundation, Inc.][jquery-foundation]
+released under the [MIT license][jqm-license].
 
-Also uses the [DateBox][jtsage-datebox] JavaScript library by [J.T. Sage][jtsage] released under the [MIT license][jtsage-datebox-license].
+Uses the [nativeDroid2][nativeDroid2] template by 
+[Raphael Wildhaber, Godesign Webpublishing GmbH][wildhaber] released under the 
+[MIT license][nativeDroid2-license].
+
+Also uses the [DateBox][jtsage-datebox] JavaScript library by 
+[J.T. Sage][jtsage] released under the [MIT license][jtsage-datebox-license].
 
 
-[dirble]: https://dirble.com/ "Dirble"
-[background-image]: https://pixabay.com/en/banner-header-lines-light-rays-911778/ "background image"
+[background-image-old]: https://pixabay.com/en/banner-header-lines-light-rays-911778/ "background image"
 [pixabay-geralt]: https://pixabay.com/en/users/geralt-9301/ "geralt"
+[background-image]: https://pixabay.com/en/delicate-arch-night-stars-landscape-960279/ "background image"
+[pixabay-skeeze]: https://pixabay.com/en/users/skeeze-272447/ "skeeze"
 [pixabay]: https://pixabay.com/ "Pixabay"
 [pictaculous]: http://pictaculous.com/ "Pictaculous"
 
@@ -155,14 +162,14 @@ Also uses the [DateBox][jtsage-datebox] JavaScript library by [J.T. Sage][jtsage
 [pygame-community]: http://www.pygame.org/ "Pygame Community"
 [pygame-license]: http://www.gnu.org/copyleft/lesser.html "GNU LGPL version 2.1"
 [schedule]: https://github.com/dbader/schedule
+[python-forecastio]: https://github.com/ZeevG/python-forecast.io "Forecast.io Wrapper"
+[ZeevG]: http://zeevgilovitz.com/ "Ze'ev Gilovitz"
+[python-forecastio-license]: https://github.com/ZeevG/python-forecast.io/blob/master/LICENSE.txt "BSD 2-clause license"
 [daniel-bader]: https://twitter.com/dbader_org "Daniel Bader"
 [schedule-license]: https://github.com/dbader/schedule/blob/master/LICENSE.txt "MIT license"
 [tingbot-python]: https://github.com/tingbot/tingbot-python
 [tingbot]: http://tingbot.com/ "Tingbot"
 [tingbot-python-license]: https://github.com/tingbot/tingbot-python/blob/master/LICENSE "BSD 2-clause license"
-[raspberry-pi-radio-player-with-touchscreen]: https://learn.adafruit.com/raspberry-pi-radio-player-with-touchscreen/overview "Raspberry Pi radio player with touchscreen"
-[adafruit-learn-Uktechreviews]: https://learn.adafruit.com/users/Uktechreviews "Spencer Organ"
-[adafruit-learn]: https://learn.adafruit.com/ "Adafruit Learning System"
 [material-alarm-sounds]: https://github.com/android/platform_frameworks_base/tree/master/data/sounds/alarms/material/ogg "Material alarm sounds"
 [platforms-frameworks-base]: https://github.com/android/platform_frameworks_base "platforms frameworks base"
 [aosp]: http://source.android.com/ "The Android Open Source Project"
@@ -170,6 +177,9 @@ Also uses the [DateBox][jtsage-datebox] JavaScript library by [J.T. Sage][jtsage
 [jqm]: http://jquerymobile.com/ "jQuery Mobile"
 [jquery-foundation]: https://jquery.org/ "jQuery Foundation, Inc."
 [jqm-license]: https://github.com/jquery/jquery-mobile/blob/master/LICENSE.txt "MIT license"
+[nativeDroid2]: http://nativedroid.godesign.ch/ "nativeDroid2"
+[wildhaber]: http://godesign.ch/ "Raphael Wildhaber, Godesign Webpublishing GmbH"
+[nativeDroid2-license]: https://github.com/wildhaber/nativeDroid2/blob/master/LICENSE "MIT license"
 [jtsage-datebox]: https://github.com/jtsage/jquery-mobile-datebox "Datebox"
 [jtsage]: https://github.com/jtsage "J.T. Sage"
 [jtsage-datebox-license]: https://github.com/jtsage/jquery-mobile-datebox/blob/master/LICENSE.txt "MIT license"
