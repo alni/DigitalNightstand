@@ -50,6 +50,7 @@ if os.name == 'nt':
     # have used "windows-" as prefix)
     current_coding = "cp" + subprocess.check_output("chcp", shell=True).split(": ")[1].strip()
 print current_coding
+# current_locale = "en" # use while testing (comment out otherwise)
 
 localized_strings = locales.get_locale(current_locale)
 print localized_strings
@@ -82,35 +83,51 @@ def update():
         gui.current_am_pm = local.format("a")
 
 @every(minutes=30)
-def update_weather():
-    weather.create_forecast()
+@touch(
+    xy=FORECAST_ICON_CONDITION["xy"],
+    size=FORECAST_ICON_CONDITION["touch_size"],
+    align=FORECAST_ICON_CONDITION["align"])
+def update_weather(xy=None, action=None):
+    # weather.create_forecast()
+    thread_pool.apply_async(weather.create_forecast, ())
+
+
+@button.press('right')
+def take_screenshot():
+    thread_pool.apply_async(_take_screenshot2, ())
+
+def _take_screenshot2():
+    time.sleep(1)
+    pygame.image.save(pygame.display.get_surface(), "screenshot.jpg")
+
 
 # Clock Page Draw method
 def draw_clock_page():
-    screen.image(
-        weather.get_icon_path(weather.currently),
-        xy=FORECAST_ICON_CONDITION["xy"],
-        scale=FORECAST_ICON_CONDITION["scale"],
-        align=FORECAST_ICON_CONDITION["align"]
-    )
+    if weather.currently is not None:
+        screen.image(
+            weather.get_icon_path(weather.currently),
+            xy=FORECAST_ICON_CONDITION["xy"],
+            scale=FORECAST_ICON_CONDITION["scale"],
+            align=FORECAST_ICON_CONDITION["align"]
+        )
+        screen.text(
+            FORECAST_LABEL_SUMMARY["text"] % (weather.currently.summary),
+            xy=FORECAST_LABEL_SUMMARY["xy"],
+            color=FORECAST_LABEL_SUMMARY["color"],
+            font_size=FORECAST_LABEL_SUMMARY["font_size"],
+            align=FORECAST_LABEL_SUMMARY["align"],
+            font=DEFAULT_FONT
+        )
+        screen.text(
+            FORECAST_LABEL_TEMPERATURE["text"] % (weather.currently.temperature),
+            xy=FORECAST_LABEL_TEMPERATURE["xy"],
+            color=FORECAST_LABEL_TEMPERATURE["color"],
+            font_size=FORECAST_LABEL_TEMPERATURE["font_size"],
+            align=FORECAST_LABEL_TEMPERATURE["align"],
+            font=DEFAULT_FONT
+        )
     screen.text(
-        FORECAST_LABEL_SUMMARY["text"] % (weather.currently.summary),
-        xy=FORECAST_LABEL_SUMMARY["xy"],
-        color=FORECAST_LABEL_SUMMARY["color"],
-        font_size=FORECAST_LABEL_SUMMARY["font_size"],
-        align=FORECAST_LABEL_SUMMARY["align"],
-        font=DEFAULT_FONT
-    )
-    screen.text(
-        FORECAST_LABEL_TEMPERATURE["text"] % (weather.currently.temperature),
-        xy=FORECAST_LABEL_TEMPERATURE["xy"],
-        color=FORECAST_LABEL_TEMPERATURE["color"],
-        font_size=FORECAST_LABEL_TEMPERATURE["font_size"],
-        align=FORECAST_LABEL_TEMPERATURE["align"],
-        font=DEFAULT_FONT
-    )
-    screen.text(
-        FORECAST_LABEL_POWERED_BY["text"],
+        localized_strings.fetching_new_data if weather.is_fetching else FORECAST_LABEL_POWERED_BY["text"],
         xy=FORECAST_LABEL_POWERED_BY["xy"],
         color=FORECAST_LABEL_POWERED_BY["color"],
         font_size=FORECAST_LABEL_POWERED_BY["font_size"],
@@ -250,7 +267,8 @@ alarm = Alarm("res/sounds/Argon_48k.wav", settings=settings_data)
 alarm.create_alarms()
 
 weather = Weather(settings=settings_data)
-weather.create_forecast()
+# weather = Weather() # use while testing (comment out otherwise)
+update_weather()
 
 web_frontend.alarm = alarm
 web_frontend.weather = weather

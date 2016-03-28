@@ -55,6 +55,8 @@ class EnglishLocale(Locale):
 
     title = 'Digital Nightstand'
 
+    fetching_new_data = "Fetching new data..."
+
     alarm = {
         'next': 'Next alarm {0}',
         'none': '(no alarms set)'
@@ -157,6 +159,8 @@ class NorwegianLocale(Locale):
 
     title = 'Digitalt Nattbord'
 
+    fetching_new_data = "Henter ny data..."
+
     alarm = {
         'next': 'Neste alarm {0}',
         'none': '(ingen alarmer angitt)'
@@ -166,6 +170,8 @@ class NorwegianLocale(Locale):
 class NewNorwegianLocale(NorwegianLocale):
 
     names = ['nn', 'nn_no']
+
+    fetching_new_data = "Henter ny data..."
 
     alarm = {
         'next': 'Neste alarm {0}',

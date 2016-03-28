@@ -70,21 +70,23 @@ ALARM_LABEL_TITLE = {
 FORECAST_ICON_CONDITION = {
     "xy": (256,0),
     "scale": 0.4210526315789474,
-    "align": "topleft"
+    "align": "topleft",
+    "touch_xy": (256, 0),
+    "touch_size": (64, 64)
 }
 
 FORECAST_LABEL_SUMMARY = {
     "type": "text",
-    "xy": (256, 16),
+    "xy": (250, 16),
     "color": COLOR_WHITE, # COLOR_BLUE_LIGHT,
-    "font_size": 24,
+    "font_size": 19,
     "align": "right",
     "text": u"%s"
 }
 
 FORECAST_LABEL_TEMPERATURE = {
     "type": "text",
-    "xy": (256, 44),
+    "xy": (250, 44),
     "color": COLOR_WHITE, # COLOR_BLUE_LIGHT,
     "font_size": 24,
     "align": "right",

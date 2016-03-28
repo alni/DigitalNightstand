@@ -16,6 +16,7 @@ class Weather(object):
     def __init__(self, config="data/weather.json", settings=None):
         self.forecast = None
         self.currently = None
+        self.is_fetching = False
         if settings is None:
             self.settings = self.load_settings(config)
         elif "weather" in settings:
@@ -52,8 +53,10 @@ class Weather(object):
             lon = self.settings["longitude"]
             units = self.settings["units"]
             lang = self.settings["language"]
+            self.is_fetching = True
             self.forecast = forecastio.manual(self.create_url())
             self.currently = self.forecast.currently()
+            self.is_fetching = False
 
     def create_url(self):
         """Create Forecast IO API URL"""
