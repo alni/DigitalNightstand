@@ -49,10 +49,10 @@ CLOCK_LABEL_DATE = {
 
 CLOCK_LABEL_ALARM_NEXT = {
     "type": "text",
-    "xy": (20, 220),
+    "xy": (4, 238),
     "color": COLOR_WHITE, # COLOR_BLUE_LIGHT,
     "font_size": 14,
-    "align": "topleft",
+    "align": "bottomleft",
     "text": "Next alarm %s"
 }
 
@@ -89,6 +89,15 @@ FORECAST_LABEL_TEMPERATURE = {
     "font_size": 24,
     "align": "right",
     "text": u"%d°"
+}
+
+FORECAST_LABEL_POWERED_BY = {
+    "type": "text",
+    "xy": (4, 60),
+    "color": COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "font_size": 14,
+    "align": "bottomleft",
+    "text": "Powered by Forecast"
 }
 
 FORECAST_LINE_SEPARATOR = {

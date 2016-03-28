@@ -122,6 +122,18 @@
                 <!--<h2>Weather</h2>-->
                 <h2>{{globalize @root.lang "setup/weather/header"}}</h2>
 
+                <div class="nd2-card">
+                    <div class="card-supporting-text">
+                        <strong>
+                            <a href="http://forecast.io/"
+                               target="_blank"
+                               title="Powered by Forecast">
+                                Powered by Forecast
+                            </a>
+                        </strong>
+                    </div>
+                </div>
+
                 <div class="ui-field-contain">
                     <!--<label for="weather_latitude">Latitude:</label>-->
                     <label for="weather_latitude">{{globalize @root.lang "setup/weather/label_latitude"}}</label>
@@ -153,7 +165,7 @@
                         {{#each weather/units_list}}
                         <option value="{{units_code}}">
                             {{globalize @root.lang "setup/weather/units" units_code}}
-                             ({{units_code}})
+                            ({{units_code}})
                         </option>
                         {{/each}}
                         {{/select}}
@@ -183,6 +195,13 @@
                     <input name="forecastio_api_key"
                            id="forecastio_api_key"
                            type="text" />
+                    <span>
+                        <a class="ui-btn ui-btn-inline"
+                           href="https://developer.forecast.io/"
+                           target="_blank">
+                            {{globalize @root.lang "setup/weather/link_api_key"}}
+                        </a>
+                    </span>
                 </div>
             </div>
             <div data-role="collapsible" style="display: none;">
@@ -238,8 +257,8 @@
                 </div>
                 <div class="ui-field-contain">
                     <label for="general_clock_12h">{{globalize @root.lang "setup/general/label_clock_12h"}}</label>
-                    <select name="general_clock_12h" 
-                            id="general_clock_12h" 
+                    <select name="general_clock_12h"
+                            id="general_clock_12h"
                             data-role="flipswitch"
                             value="{{clock_12h}}">
                         {{#select clock_12h}}

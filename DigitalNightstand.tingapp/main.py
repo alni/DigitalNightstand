@@ -109,6 +109,14 @@ def draw_clock_page():
         align=FORECAST_LABEL_TEMPERATURE["align"],
         font=DEFAULT_FONT
     )
+    screen.text(
+        FORECAST_LABEL_POWERED_BY["text"],
+        xy=FORECAST_LABEL_POWERED_BY["xy"],
+        color=FORECAST_LABEL_POWERED_BY["color"],
+        font_size=FORECAST_LABEL_POWERED_BY["font_size"],
+        align=FORECAST_LABEL_POWERED_BY["align"],
+        font=DEFAULT_FONT
+    )
     screen.line(
         start_xy=FORECAST_LINE_SEPARATOR["start_xy"],
         end_xy=FORECAST_LINE_SEPARATOR["end_xy"],

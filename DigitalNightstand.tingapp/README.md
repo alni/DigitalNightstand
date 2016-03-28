@@ -28,7 +28,7 @@ Key               | Action
 
 ## Weather Forecast ##
 
-Get weather forecast for a place on Earth (Powered by Forecast).
+Get weather forecast for a place on Earth.
 
 Currently supports:
 
@@ -37,7 +37,7 @@ Currently supports:
 * Displaying the summary in different languages
 * Display the temperature by different units - location dependent or user set
 
-
+> **[Powered by Forecast](http://forecast.io/ "Powered by Forecast")**
 
 ## Digital Clock ##
 

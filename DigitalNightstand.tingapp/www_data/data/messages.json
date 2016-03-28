@@ -32,6 +32,7 @@
         "label_units": "Weather Units",
         "label_language": "Weather Language",
         "label_api_key": "Forecast IO API Key",
+        "link_api_key": "Get an API key here",
         "units": [
           "{0, select,",
           "  auto {Auto}",
@@ -135,6 +136,7 @@
         "label_units": "Måleenheter",
         "label_language": "Språk",
         "label_api_key": "Forecast IO API Nøkkel",
+        "link_api_key": "Få en API nøkkel her",
         "units": [
           "{0, select,",
           "  auto {Auto}",
@@ -156,7 +158,7 @@
       "general": {
         "header": "Generelt",
         "label_config_file": "Oppsettsfil",
-        "label_clock_12h": "Bruke 12 timers klokke?",
+        "label_clock_12h": "Bruk 12 timers klokke?",
         "label_mplayer_path": "Bane til MPlayer"
       }
     },
