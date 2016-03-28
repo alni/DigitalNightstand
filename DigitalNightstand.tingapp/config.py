@@ -65,9 +65,16 @@ except IOError:
 WEB_FRONTENT_PORT = 8000
 MOUSE_VISIBLE = True
 CLOCK_DATE_FORMAT = "DD MMMM YYYY"
-CLOCK_TIME_FORMAT = "HH mm"
+CLOCK_TIME_FORMAT_24H = "HH mm"
 
 CLOCK_TIME_FORMAT_12H = "hh mm"
+
+if "clock_12h" in SETTINGS and SETTINGS["clock_12h"]:
+    CLOCK_TIME_FORMAT = CLOCK_TIME_FORMAT_12H
+    CLOCK_12H = True
+else:
+    CLOCK_TIME_FORMAT = CLOCK_TIME_FORMAT_24H
+    CLOCK_12H = False
 
 try:
     FORECASTIO_API_KEY = load_settings("weather/private.json")["forecastio_api_key"]

@@ -8,6 +8,7 @@ initialized = False
 
 current_date = ""
 current_time = ""
+current_am_pm = ""
 
 PAGE_INDEX_CLOCK = 1
 PAGE_INDEX_FORECAST = 2
@@ -27,6 +28,14 @@ CLOCK_LABEL_TIME = {
     "text": "%H %M",
     "touch_xy": (8, 0),
     "touch_size": (304, 68)
+}
+
+CLOCK_LABEL_TIME_AMPM = {
+    "type": "text",
+    "xy": (308, 152),
+    "color": COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "font_size": 24,
+    "align": "bottomright"
 }
 
 CLOCK_LABEL_DATE = {

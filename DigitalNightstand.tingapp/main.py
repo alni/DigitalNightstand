@@ -77,6 +77,13 @@ def update():
     # time.strftime("%d %B %Y")
     gui.current_time = local.format("HH mm", current_locale)
     # time.strftime("%H %M")
+    gui.current_am_pm = local.format("a", current_locale)
+    if gui.current_am_pm == "":
+        gui.current_am_pm = local.format("a")
+
+@every(minutes=30)
+def update_weather():
+    weather.create_forecast()
 
 # Clock Page Draw method
 def draw_clock_page():
@@ -124,6 +131,15 @@ def draw_clock_page():
             color=CLOCK_LABEL_TIME["color"],
             font_size=CLOCK_LABEL_TIME["font_size"],
             align=CLOCK_LABEL_TIME["align"],
+            font=DEFAULT_FONT
+        )
+    if config.CLOCK_12H:
+        screen.text(
+            gui.current_am_pm,
+            xy=CLOCK_LABEL_TIME_AMPM["xy"],
+            color=CLOCK_LABEL_TIME_AMPM["color"],
+            font_size=CLOCK_LABEL_TIME_AMPM["font_size"],
+            align=CLOCK_LABEL_TIME_AMPM["align"],
             font=DEFAULT_FONT
         )
 

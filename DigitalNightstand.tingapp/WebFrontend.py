@@ -106,6 +106,12 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             data = json.loads(self.data_string)
             config.save_settings(data, config.CONFIG_FILE)
             config.SETTINGS = data
+            if "clock_12h" in config.SETTINGS and config.SETTINGS["clock_12h"]:
+                config.CLOCK_TIME_FORMAT = config.CLOCK_TIME_FORMAT_12H
+                config.CLOCK_12H = True
+            else:
+                config.CLOCK_TIME_FORMAT = config.CLOCK_TIME_FORMAT_24H
+                config.CLOCK_12H = False
             if alarm is not None:
                 alarm.set_settings(config.SETTINGS)
             if weather is not None:

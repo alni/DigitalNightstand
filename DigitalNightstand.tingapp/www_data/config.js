@@ -131,6 +131,8 @@
                     language_code: "zh-tw",
                     name: "traditional Chinese"
                 }];
+
+                context.clock_12h = !!context.clock_12h ? "yes" : "no";
                 /*
                 context.radio.countries = data.countries || [{
                     country_code: "GB",
@@ -266,7 +268,8 @@
 
                     $.post("/", JSON.stringify({
                         alarms: alarms,
-                        weather: weather
+                        weather: weather,
+                        clock_12h: $("#general_clock_12h").val() == "yes"
                         //radio: radio
                         //radio_stations: radio_custom_stations
                     }));

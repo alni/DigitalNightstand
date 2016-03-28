@@ -232,9 +232,21 @@
                     <!--<label for="general_config_file">Config file</label>-->
                     <label for="general_config_file">{{globalize @root.lang "setup/general/label_config_file"}}</label>
                     <input name="general_config_file"
-                           id="general_mplayer_path"
+                           id="general_config_file"
                            type="text"
                            value="{{general/config_file}}" />
+                </div>
+                <div class="ui-field-contain">
+                    <label for="general_clock_12h">{{globalize @root.lang "setup/general/label_clock_12h"}}</label>
+                    <select name="general_clock_12h" 
+                            id="general_clock_12h" 
+                            data-role="flipswitch"
+                            value="{{clock_12h}}">
+                        {{#select clock_12h}}
+                        <option value="no">{{globalize @root.lang "common/No"}}</option>
+                        <option value="yes">{{globalize @root.lang "common/Yes"}}</option>
+                        {{/select}}
+                    </select>
                 </div>
                 <div class="ui-field-contain" style="display: none;">
                     <!--<label for="general_mplayer_path">MPlayer path</label>-->
