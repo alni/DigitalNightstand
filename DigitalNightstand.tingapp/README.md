@@ -13,6 +13,14 @@ Features includes:
     * Norwegian Bokmal (nb)
     * Norwegian Nynorsk (nn)
 
+## Button shortcuts ##
+
+Button            | Action
+----------------- | ---------------------
+`midright`        | Snooze current alarm
+`right`           | Take screenshot
+
+
 ## Keyboard shortcuts ##
 
 Key               | Action

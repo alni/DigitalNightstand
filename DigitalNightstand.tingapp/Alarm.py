@@ -71,32 +71,34 @@ class Alarm(object):
         """
         _time = self._format_time(hour, minute)
         _args = None
+        only_once = True
         if repeat:
             _args = (title)
+            only_once = False
         else:
             # If repeat is false, then the alarm should only be run once
             _args = (title, True)
         if days == None or len(days) == 7:
             # If days is not defined, or it contains 7 entries, we assume that
             # the alarm should be run every day
-            schedule.every().day.at(_time).do(self.play_alarm, _args)
+            schedule.every().day.at(_time).do(self.play_alarm, title, only_once)
         else:
             # Check if each weekday exists in days.
             # And schedule the alarm for each weekday found.
             if "mon" in days: # Monday found... Schedule it!
-                schedule.every().monday.at(_time).do(self.play_alarm, _args)
+                schedule.every().monday.at(_time).do(self.play_alarm, title, only_once)
             if "tue" in days: # Tuesday found... Schedule it!
-                schedule.every().tuesday.at(_time).do(self.play_alarm, _args)
+                schedule.every().tuesday.at(_time).do(self.play_alarm, title, only_once)
             if "wed" in days: # Wednesday found... Schedule it!
-                schedule.every().wednesday.at(_time).do(self.play_alarm, _args)
+                schedule.every().wednesday.at(_time).do(self.play_alarm, title, only_once)
             if "thu" in days: # Thursday found... Schedule it!
-                schedule.every().thursday.at(_time).do(self.play_alarm, _args)
+                schedule.every().thursday.at(_time).do(self.play_alarm, title, only_once)
             if "fri" in days: # Friday found... Schedule it!
-                schedule.every().friday.at(_time).do(self.play_alarm, _args)
+                schedule.every().friday.at(_time).do(self.play_alarm, title, only_once)
             if "sat" in days: # Saturday found... Schedule it!
-                schedule.every().saturday.at(_time).do(self.play_alarm, _args)
+                schedule.every().saturday.at(_time).do(self.play_alarm, title, only_once)
             if "sun" in days: # Sunday found... Schedule it!
-                schedule.every().sunday.at(_time).do(self.play_alarm, _args)
+                schedule.every().sunday.at(_time).do(self.play_alarm, title, only_once)
         # self.s.enterabs(secs, 1, self.play_alarm, ())
 
     def run_alarm(self):
@@ -124,6 +126,18 @@ class Alarm(object):
         """Stop the playback of the alarm"""
         self.current_alarm = None
         pygame.mixer.music.stop()
+
+    def snooze_alarm(self, title, minutes=5):
+        """Snooze the alarm"""
+
+        if title != None:
+            _time = time.localtime(time.time() + (minutes*60))
+            hour = _time.tm_hour
+            minute = _time.tm_min
+
+            self.create_alarm(hour, minute, False, None, title)
+            for job in schedule.jobs:
+                print job
 
     def next_alarm(self):
         """Returns the datetime object of next scheduled alarm"""

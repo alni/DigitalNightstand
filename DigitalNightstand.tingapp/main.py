@@ -100,6 +100,12 @@ def _take_screenshot2():
     time.sleep(1)
     pygame.image.save(pygame.display.get_surface(), "screenshot.jpg")
 
+@button.press('midright')
+def snooze_alarm():
+    if alarm.current_alarm is not None:
+        alarm.snooze_alarm(alarm.current_alarm, 1)
+        alarm.stop_alarm()
+    
 
 # Clock Page Draw method
 def draw_clock_page():
