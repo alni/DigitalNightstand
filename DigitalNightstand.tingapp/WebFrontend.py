@@ -34,6 +34,7 @@ ROUTES = (
     ['/media', '/var/www/media'],
     ['/icons', './res/icons/material-design-icons-2.0'],
     ['/tingbot', os.path.dirname(inspect.getfile(tingbot))],
+    ['/api/media', config.USER_MEDIA_CACHE_DIR],
     ['',       './www_data']  # empty string for the 'default' match
 )
 
@@ -95,6 +96,12 @@ class _ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 return
             if self.path == "/api/get_fonts":
                 self.api_call(data=pygame.font.get_fonts())
+                return
+            if self.path == "/api/get_screenshot":
+                screenshot = config.USER_MEDIA_CACHE_DIR + "/screenshot.jpg"
+                # pygame.image.save(pygame.display.get_surface(), screenshot)
+                pygame.image.save(tingbot.screen.surface, screenshot)
+                self.api_call(data="/api/media/screenshot.jpg")
                 return
         SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
 

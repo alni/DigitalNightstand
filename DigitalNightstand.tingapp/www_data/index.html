@@ -327,6 +327,20 @@
 
         <div role="main"
              class="ui-content">
+        <div class="nd2-card">
+            <div class="card-media">
+                <img id="screenshot" />
+            </div>
+            <div class="card-action">
+                <div class="row between-xs">
+                    <div class="col-xs-12 align-right">
+                        <div class="box">
+                            <a href="#" id="refresh_screenshot" class="ui-btn ui-btn-inline waves-effect waves-button"><i class="zmdi zmdi-refresh"></i> <span data-globalize="main/btn_refresh_screenshot">Refresh screenshot</span></a>                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
             <form method="post"
                   id="form"></form>
         </div><!-- /content -->
@@ -335,6 +349,14 @@
     <script src="config.js"></script>
     <script>
         $(document).ready(function () {
+            var refresh_screenshot = function() {
+                $.get("/api/get_screenshot").done(function (data) {
+                    $("#screenshot").attr("src", data + "?_t=" + (+new Date()));
+                });
+            }
+            $("#refresh_screenshot").on("click", refresh_screenshot);
+            //setInterval(refresh_screenshot.bind(this), 10000);
+            //refresh_screenshot();
             DigitalNightstandSetup.init();
         });
     </script>

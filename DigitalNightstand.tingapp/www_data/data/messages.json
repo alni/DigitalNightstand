@@ -4,6 +4,9 @@
       "Yes": "Yes",
       "No": "No"
     },
+    "main": {
+      "btn_refresh_screenshot": "Refresh Screenshot"
+    },
     "setup": {
       "header": "Setup",
       "title": "Digital Nightstand Frontend",
@@ -107,6 +110,9 @@
     "common": {
       "Yes": "Ja",
       "No": "Nei"
+    },
+    "main": {
+      "btn_refresh_screenshot": "Forny skjermdump"
     },
     "setup": {
       "header": "Oppsett",

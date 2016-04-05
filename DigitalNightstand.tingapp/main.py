@@ -55,6 +55,8 @@ print current_coding
 localized_strings = locales.get_locale(current_locale)
 print localized_strings
 
+current_tz = arrow.now().tzinfo
+
 # Create a thread pool to keep the number of running threads to a minimum
 thread_pool = ThreadPool(4)
 
@@ -186,7 +188,8 @@ def draw_clock_page():
     next_alarm = localized_strings.get_alarm(None)
     if alarm.next_alarm() is not None:
         # Humanize the next alarm datetime to a string
-        next_alarm = localized_strings.get_alarm(arrow.get(alarm.next_alarm()).humanize(locale=current_locale))
+        next_alarm_dt = arrow.get(alarm.next_alarm(), current_tz)
+        next_alarm = localized_strings.get_alarm(next_alarm_dt.humanize(locale=current_locale))
         # next_alarm = arrow.get(alarm.next_alarm()).humanize()
     # Draw the next alarm info on the bottom left of the the screen
     screen.text(

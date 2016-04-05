@@ -272,7 +272,9 @@
                         clock_12h: $("#general_clock_12h").val() == "yes"
                         //radio: radio
                         //radio_stations: radio_custom_stations
-                    }));
+                    })).done(function () {
+                        $("#refresh_screenshot").trigger("click");
+                    });
 
                 });
             });

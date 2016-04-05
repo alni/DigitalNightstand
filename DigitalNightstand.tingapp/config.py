@@ -11,6 +11,12 @@ USER_CONFIG_DIR = _dirs.user_config_dir
 USER_CACHE_DIR = _dirs.user_cache_dir
 USER_LOG_DIR = _dirs.user_log_dir
 
+USER_MEDIA_CACHE_DIR = USER_CACHE_DIR + "/media"
+if not os.path.exists(USER_MEDIA_CACHE_DIR):
+    # If the folder path to the User Media Cache Directory does not exists, then
+    # create it + any non-existing parent folders
+    os.makedirs(USER_MEDIA_CACHE_DIR)
+
 def load_settings(config_file="config.json"):
     with open(_dirs.user_config_dir + "/" + config_file) as data_file:
         settings_data = json.load(data_file)
