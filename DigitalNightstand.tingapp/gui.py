@@ -9,6 +9,7 @@ initialized = False
 current_date = ""
 current_time = ""
 current_am_pm = ""
+next_alarm = ""
 
 PAGE_INDEX_CLOCK = 1
 PAGE_INDEX_FORECAST = 2

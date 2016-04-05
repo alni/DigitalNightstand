@@ -4,6 +4,7 @@ import urllib
 import os
 import json
 import base64
+import time
 
 
 import config
@@ -14,6 +15,7 @@ _BASE_URL = "https://api.forecast.io/forecast/{api_key}/{lat},{lon}?"
 class Weather(object):
     """description of class"""
     def __init__(self, config="data/weather.json", settings=None):
+        self.last_update = -1
         self.forecast = None
         self.currently = None
         self.is_fetching = False
@@ -45,18 +47,28 @@ class Weather(object):
         """Format hour and time as 'HH:MM'"""
         return "%02d:%02d" % (hour,minute)
 
-    def create_forecast(self):
+    def create_forecast(self, cache_for=25):
         """Create forecast from settings"""
         if self.settings is not None and config.FORECASTIO_API_KEY is not None:
             # Only create forecast if settings actually set
-            lat = self.settings["latitude"]
-            lon = self.settings["longitude"]
-            units = self.settings["units"]
-            lang = self.settings["language"]
-            self.is_fetching = True
-            self.forecast = forecastio.manual(self.create_url())
-            self.currently = self.forecast.currently()
-            self.is_fetching = False
+            if cache_for <= 0 or (
+                self.last_update == -1 or time.time() - self.last_update > cache_for * 60
+            ):
+                # only update forecast if 
+                # - "cache_for" is less than or equal to "0" minutes (cache
+                #   disabled) 
+                # - OR there is more than "cache_for" minutes since last 
+                #   forecast update
+                self.last_update = time.time() # set last update to current time
+                
+                lat = self.settings["latitude"]
+                lon = self.settings["longitude"]
+                units = self.settings["units"]
+                lang = self.settings["language"]
+                self.is_fetching = True
+                self.forecast = forecastio.manual(self.create_url())
+                self.currently = self.forecast.currently()
+                self.is_fetching = False
 
     def create_url(self):
         """Create Forecast IO API URL"""

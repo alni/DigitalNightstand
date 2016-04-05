@@ -72,10 +72,25 @@ def clean_up():
 
 @every(seconds=0.5)
 def update():
-    local = arrow.now()
+    #local = arrow.now()
     # Every 500ms check for new alarms and update the current_time and 
     # current_date variables
     alarm.run_alarm()
+    #gui.current_date = local.format('D MMMM YYYY', current_locale)
+    ## time.strftime("%d %B %Y")
+    #gui.current_time = local.format("HH mm", current_locale)
+    ## time.strftime("%H %M")
+    #gui.current_am_pm = local.format("a", current_locale)
+    #if gui.current_am_pm == "":
+    #    gui.current_am_pm = local.format("a")
+
+
+@every(seconds=30)
+def update_minor():
+    # Every 30 seconds update the next_alarm, current_time and current_date 
+    # variables
+    local = arrow.now()
+   
     gui.current_date = local.format('D MMMM YYYY', current_locale)
     # time.strftime("%d %B %Y")
     gui.current_time = local.format("HH mm", current_locale)
@@ -83,6 +98,14 @@ def update():
     gui.current_am_pm = local.format("a", current_locale)
     if gui.current_am_pm == "":
         gui.current_am_pm = local.format("a")
+
+    gui.next_alarm = localized_strings.get_alarm(None)
+    if alarm.next_alarm() is not None:
+        # Humanize the next alarm datetime to a string
+        next_alarm_dt = arrow.get(alarm.next_alarm(), local.tzinfo)
+        next_alarm_hm = next_alarm_dt.humanize(locale=current_locale)
+        gui.next_alarm = localized_strings.get_alarm(next_alarm_hm)
+
 
 @every(minutes=30)
 @touch(
@@ -185,15 +208,15 @@ def draw_clock_page():
         font=DEFAULT_FONT
     )
     # next_alarm = "(no current alarms)"
-    next_alarm = localized_strings.get_alarm(None)
-    if alarm.next_alarm() is not None:
+    # next_alarm = localized_strings.get_alarm(None)
+    # if alarm.next_alarm() is not None:
         # Humanize the next alarm datetime to a string
-        next_alarm_dt = arrow.get(alarm.next_alarm(), current_tz)
-        next_alarm = localized_strings.get_alarm(next_alarm_dt.humanize(locale=current_locale))
+        # next_alarm_dt = arrow.get(alarm.next_alarm(), current_tz)
+        # next_alarm = localized_strings.get_alarm(next_alarm_dt.humanize(locale=current_locale))
         # next_alarm = arrow.get(alarm.next_alarm()).humanize()
     # Draw the next alarm info on the bottom left of the the screen
     screen.text(
-        next_alarm,
+        gui.next_alarm,
         xy=CLOCK_LABEL_ALARM_NEXT["xy"],
         color=CLOCK_LABEL_ALARM_NEXT["color"],
         font_size=CLOCK_LABEL_ALARM_NEXT["font_size"],
@@ -231,6 +254,7 @@ def on_touch_clock_datetime(xy, action):
 
 
 # BEGIN: loop()
+@every(seconds=0.5)
 def loop():
     if not gui.initialized:
         if config.MOUSE_VISIBLE:
@@ -282,4 +306,7 @@ update_weather()
 web_frontend.alarm = alarm
 web_frontend.weather = weather
 
-tingbot.run(loop)
+def run_loop(): return
+
+tingbot.run(run_loop)
+# tingbot.run(loop)
