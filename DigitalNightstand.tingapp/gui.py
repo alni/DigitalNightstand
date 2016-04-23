@@ -6,6 +6,8 @@ last_key_down = -1.0
 last_key_pressed = None
 initialized = False
 
+forecast_scroll_text_summary = None
+
 current_date = ""
 current_time = ""
 current_am_pm = ""
@@ -81,6 +83,8 @@ FORECAST_LABEL_SUMMARY = {
     "xy": (250, 16),
     "color": COLOR_WHITE, # COLOR_BLUE_LIGHT,
     "font_size": 19,
+    "hpos": 6,
+    "margin": (6, 70),
     "align": "right",
     "text": u"%s"
 }

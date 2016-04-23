@@ -134,23 +134,80 @@ def snooze_alarm():
 
 # Clock Page Draw method
 def draw_clock_page():
-    if weather.currently is not None:
+    if weather.type == "currently" and weather.currently is not None:
         screen.image(
             weather.get_icon_path(weather.currently),
             xy=FORECAST_ICON_CONDITION["xy"],
             scale=FORECAST_ICON_CONDITION["scale"],
             align=FORECAST_ICON_CONDITION["align"]
         )
-        screen.text(
-            FORECAST_LABEL_SUMMARY["text"] % (weather.currently.summary),
-            xy=FORECAST_LABEL_SUMMARY["xy"],
-            color=FORECAST_LABEL_SUMMARY["color"],
-            font_size=FORECAST_LABEL_SUMMARY["font_size"],
-            align=FORECAST_LABEL_SUMMARY["align"],
-            font=DEFAULT_FONT
-        )
+        if gui.forecast_scroll_text_summary == None:
+            gui.forecast_scroll_text_summary = ScrollText(
+                surface=tingbot.screen.surface, 
+                text=FORECAST_LABEL_SUMMARY["text"] % (weather.currently.summary),
+                hpos=FORECAST_LABEL_SUMMARY["hpos"],
+                color=FORECAST_LABEL_SUMMARY["color"],
+                margin=FORECAST_LABEL_SUMMARY["margin"],
+                size=FORECAST_LABEL_SUMMARY["font_size"],
+                speed=2,
+                font=DEFAULT_FONT
+            )
+        else:
+            gui.forecast_scroll_text_summary.update_text(
+                FORECAST_LABEL_SUMMARY["text"] % (weather.currently.summary)
+            )
+        gui.forecast_scroll_text_summary.update()
+        #screen.text(
+        #    FORECAST_LABEL_SUMMARY["text"] % (weather.currently.summary),
+        #    xy=FORECAST_LABEL_SUMMARY["xy"],
+        #    color=FORECAST_LABEL_SUMMARY["color"],
+        #    font_size=FORECAST_LABEL_SUMMARY["font_size"],
+        #    align=FORECAST_LABEL_SUMMARY["align"],
+        #    font=DEFAULT_FONT
+        #)
         screen.text(
             FORECAST_LABEL_TEMPERATURE["text"] % (weather.currently.temperature),
+            xy=FORECAST_LABEL_TEMPERATURE["xy"],
+            color=FORECAST_LABEL_TEMPERATURE["color"],
+            font_size=FORECAST_LABEL_TEMPERATURE["font_size"],
+            align=FORECAST_LABEL_TEMPERATURE["align"],
+            font=DEFAULT_FONT
+        )
+    elif weather.type == "daily" and weather.daily is not None:
+        screen.image(
+            weather.get_icon_path(weather.daily.data[0]),
+            xy=FORECAST_ICON_CONDITION["xy"],
+            scale=FORECAST_ICON_CONDITION["scale"],
+            align=FORECAST_ICON_CONDITION["align"]
+        )
+        if gui.forecast_scroll_text_summary == None:
+            gui.forecast_scroll_text_summary = ScrollText(
+                surface=tingbot.screen.surface, 
+                text=FORECAST_LABEL_SUMMARY["text"] % (weather.daily.data[0].summary),
+                hpos=FORECAST_LABEL_SUMMARY["hpos"],
+                color=FORECAST_LABEL_SUMMARY["color"],
+                margin=FORECAST_LABEL_SUMMARY["margin"],
+                size=FORECAST_LABEL_SUMMARY["font_size"],
+                speed=2,
+                font=DEFAULT_FONT
+            )
+        else:
+            gui.forecast_scroll_text_summary.update_text(
+                FORECAST_LABEL_SUMMARY["text"] % (weather.daily.data[0].summary)
+            )
+        gui.forecast_scroll_text_summary.update()
+
+
+        #screen.text(
+        #    FORECAST_LABEL_SUMMARY["text"] % (weather.daily.data[0].summary),
+        #    xy=FORECAST_LABEL_SUMMARY["xy"],
+        #    color=FORECAST_LABEL_SUMMARY["color"],
+        #    font_size=FORECAST_LABEL_SUMMARY["font_size"],
+        #    align=FORECAST_LABEL_SUMMARY["align"],
+        #    font=DEFAULT_FONT
+        #)
+        screen.text(
+            FORECAST_LABEL_TEMPERATURE["text"] % (weather.daily.data[0].temperatureMax),
             xy=FORECAST_LABEL_TEMPERATURE["xy"],
             color=FORECAST_LABEL_TEMPERATURE["color"],
             font_size=FORECAST_LABEL_TEMPERATURE["font_size"],
@@ -252,9 +309,8 @@ def on_touch_clock_datetime(xy, action):
     if action == 'down' and gui.current_page == PAGE_INDEX_CLOCK:
         set_current_page(PAGE_INDEX_FORECAST)
 
-
 # BEGIN: loop()
-@every(seconds=0.5)
+@every(seconds=0.100)
 def loop():
     if not gui.initialized:
         if config.MOUSE_VISIBLE:

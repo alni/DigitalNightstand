@@ -9,7 +9,7 @@ import sys
 class ScrollText(object):
     """Simple 2d Scrolling Text"""
     
-    def __init__(self, surface, text, hpos, color, margin=(0,0), size=30, font=None):
+    def __init__(self, surface, text, hpos, color, margin=(0,0), size=30, speed=1, font=None):
         """
         (pygame.Surface) surface - surface to draw on
         (string) text - text to draw
@@ -25,6 +25,7 @@ class ScrollText(object):
         self.color = color
         self.margin = margin
         self.size = size
+        self.speed = speed
         # initialize
         self.position = 0
         if font is None:
@@ -37,15 +38,19 @@ class ScrollText(object):
         """update every frame"""
         if hpos is not None:
             self.hpos = hpos
+        width = self.surface.get_width()-self.margin[0]-self.margin[1]
         self.surface.blit(self.text_surface, 
             (self.margin[0], self.hpos), 
-            (self.position, 0, self.surface.get_width()-self.margin[0]-self.margin[1], self.size)
+            (self.position, 0, width, self.text_surface.get_height())
         )
-        if self.position < self.text_surface.get_width():
-            self.position += 1
+        if self.text_surface.get_width() > width:
+            if self.position < self.text_surface.get_width():
+                self.position += self.speed #1
+            else:
+                # set position on the far right, just outside the viewable area
+                self.position = -width
         else:
-            # set position on the far right, just outside the viewable area
-            self.position = -self.surface.get_width() 
+            self.position = 0
 
     def update_text(self, text):
         if text != self.text:
