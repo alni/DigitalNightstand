@@ -17,12 +17,18 @@ class Weather(object):
     def __init__(self, config="data/weather.json", settings=None):
         self.last_update = -1
         self.forecast = None
+        self.type = "currently" # supports "currently", "daily"
         self.currently = None
+        self.hourly = None
+        self.daily = None
         self.is_fetching = False
         if settings is None:
             self.settings = self.load_settings(config)
         elif "weather" in settings:
             self.settings = settings["weather"]
+        
+        if self.settings is not None:
+            self.type = self.settings["type"]
 
     def load_settings(self, config):
         """Load settings from config"""
@@ -49,6 +55,8 @@ class Weather(object):
                 # the settings has changed
                 settings_changed = True
             self.settings = settings["weather"]
+            if self.settings["type"] != self.type:
+                self.type = self.settings["type"]
             if settings_changed:
                 # Force re-creating of the forecast object and discard/disable
                 # the cache temporarily
@@ -60,7 +68,7 @@ class Weather(object):
         """Checks if current setting from key is different than from input
         settings.
         """
-        return settings[key] != self.set_settings[key]
+        return settings["weather"][key] != self.settings[key]
 
     def _format_time(self, hour, minute):
         """Format hour and time as 'HH:MM'"""
@@ -102,6 +110,7 @@ class Weather(object):
                     # Otherwise, just update the forecast
                     self.forecast.update()
                 self.currently = self.forecast.currently()
+                self.daily = self.forecast.daily()
                 self.is_fetching = False
 
     def create_url(self):

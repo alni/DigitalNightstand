@@ -33,6 +33,13 @@
                     }
                 };
                 context.weather = context.weather || {};
+                context.weather.type_list = [{
+                    type_code: "currently",
+                    name: "Current conditions"
+                }, {
+                    type_code: "daily",
+                    name: "Daily forecast"
+                }];
                 context.weather.units_list = [{
                     units_code: "auto",
                     name: "Auto"
@@ -243,7 +250,8 @@
                         latitude: $("#weather_latitude").val(),
                         longitude: $("#weather_longitude").val(),
                         units: $("#weather_units").val() || "auto",
-                        language: $("#weather_language").val() || "en"
+                        language: $("#weather_language").val() || "en",
+                        type: $("#weather_forecast_type").val() || "currently"
                     };
 
                     /*

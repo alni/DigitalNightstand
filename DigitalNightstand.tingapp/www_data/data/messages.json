@@ -32,10 +32,18 @@
         "header": "Weather Forecast",
         "label_latitude": "Latitude",
         "label_longitude": "Longitude",
+        "label_forecast_type": "Forecast type",
         "label_units": "Weather Units",
         "label_language": "Weather Language",
         "label_api_key": "Forecast IO API Key",
         "link_api_key": "Get an API key here",
+        "forecast_type": [
+          "{0, select,",
+          "  currently {Current conditions}",
+          "  daily {Daily forecast}",
+          "  other {Unknown Forecast Type}",
+          "}"
+        ],
         "units": [
           "{0, select,",
           "  auto {Auto}",
@@ -139,10 +147,18 @@
         "header": "Værvarsel",
         "label_latitude": "Breddegrad",
         "label_longitude": "Lengdegrad",
+        "label_forecast_type": "Varseltype",
         "label_units": "Måleenheter",
         "label_language": "Språk",
         "label_api_key": "Forecast IO API Nøkkel",
         "link_api_key": "Få en API nøkkel her",
+        "forecast_type": [
+          "{0, select,",
+          "  currently {Nåværende forhold}",
+          "  daily {Daglig varsel}",
+          "  other {Ukjent varseltype}",
+          "}"
+        ],
         "units": [
           "{0, select,",
           "  auto {Auto}",

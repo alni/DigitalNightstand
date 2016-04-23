@@ -152,6 +152,24 @@
                            step="0.0001"
                            value="{{weather/longitude}}" />
                 </div>
+                <div class="ui-field-contain">
+                    <!--<label for="weather_units">Forecast type</label>-->
+                    <label for="weather_units">{{globalize @root.lang "setup/weather/label_forecast_type"}}</label>
+                    <select name="weather_forecast_type"
+                            id="weather_forecast_type"
+                            type="text"
+                            value="{{weather/type}}"
+                            data-native-menu="false">
+                        {{#select weather/type}}
+                        {{#each weather/type_list}}
+                        <option value="{{type_code}}">
+                            {{globalize @root.lang "setup/weather/forecast_type" type_code}}
+                            ({{type_code}})
+                        </option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
 
                 <div class="ui-field-contain">
                     <!--<label for="weather_units">Weather language</label>-->
