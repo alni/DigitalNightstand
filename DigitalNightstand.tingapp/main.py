@@ -67,7 +67,7 @@ def clean_up():
         last_page=gui.current_page
     )
     thread_pool.close()
-    pygame.quit()
+    #pygame.quit()
     sys.exit()
 
 @every(seconds=0.5)
@@ -117,7 +117,7 @@ def update_weather(xy=None, action=None):
     thread_pool.apply_async(weather.create_forecast, ())
 
 
-@button.press('right')
+@button.right_button.hold
 def take_screenshot():
     thread_pool.apply_async(_take_screenshot2, ())
 
@@ -125,12 +125,17 @@ def _take_screenshot2():
     time.sleep(1)
     pygame.image.save(pygame.display.get_surface(), "screenshot.jpg")
 
-@button.press('midright')
+@button.midright_button.up
 def snooze_alarm():
     if alarm.current_alarm is not None:
         alarm.snooze_alarm(alarm.current_alarm, 1)
         alarm.stop_alarm()
-    
+
+@button.midright_button.hold
+def stop_alarm():
+    if alarm.current_alarm is not None:
+        alarm.stop_alarm()
+
 
 # Clock Page Draw method
 def draw_clock_page():
@@ -347,7 +352,7 @@ def loop():
 
 # END: loop()
 
-frontend = WebFrontend(port=config.WEB_FRONTENT_PORT)
+frontend = WebFrontend(port=config.WEB_FRONTEND_PORT)
 frontend.serve()
 
 settings_data = config.SETTINGS

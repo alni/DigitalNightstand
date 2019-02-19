@@ -22,6 +22,7 @@ class Weather(object):
         self.hourly = None
         self.daily = None
         self.is_fetching = False
+        self.settings = None
         if settings is None:
             self.settings = self.load_settings(config)
         elif "weather" in settings:
