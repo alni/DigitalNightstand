@@ -4,6 +4,7 @@ FONT_PATH = _FONT_BASE_PATH + "weather-icons-2.0.10/font/weathericons-regular-we
 
 ICON_PATH = "res/icons/weather-icons/forecastio/"
 
+# FIXME: Use the correct Unicode format with these icon strings
 _DAY_SUNNY = "\uf00d"
 _NIGHT_CLEAR = "\uf02e"
 _RAIN = "\uf019"

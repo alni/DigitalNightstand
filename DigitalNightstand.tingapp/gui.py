@@ -104,6 +104,7 @@ FORECAST_LABEL_POWERED_BY = {
     "color": colors.COLOR_WHITE, # COLOR_BLUE_LIGHT,
     "font_size": 14,
     "align": "bottomleft",
+    # FIXME: Change to Dark Sky
     "text": "Powered by Forecast"
 }
 
