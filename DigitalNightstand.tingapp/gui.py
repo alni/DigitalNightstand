@@ -1,4 +1,4 @@
-﻿from defs.colors import *
+﻿import defs.colors as colors
 
 current_page = 1
 last_touch = -1
@@ -25,7 +25,7 @@ DEFAULT_FONT = _FONT_BASE_PATH + "Open_Sans/OpenSans-Regular.ttf"
 CLOCK_LABEL_TIME = {
     "type": "text",
     "xy": (160, 110),
-    "color": COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "color": colors.COLOR_WHITE, # COLOR_BLUE_LIGHT,
     "font_size": 85,
     "align": "center",
     "text": "%H %M",
@@ -36,7 +36,7 @@ CLOCK_LABEL_TIME = {
 CLOCK_LABEL_TIME_AMPM = {
     "type": "text",
     "xy": (308, 152),
-    "color": COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "color": colors.COLOR_WHITE, # COLOR_BLUE_LIGHT,
     "font_size": 24,
     "align": "bottomright"
 }
@@ -44,7 +44,7 @@ CLOCK_LABEL_TIME_AMPM = {
 CLOCK_LABEL_DATE = {
     "type": "text",
     "xy": (160, 180),
-    "color": COLOR_WHITE, # COLOR_TAN,
+    "color": colors.COLOR_WHITE, # COLOR_TAN,
     "font_size": 24,
     "align": "center",
     "text": "%d %B %Y"
@@ -53,7 +53,7 @@ CLOCK_LABEL_DATE = {
 CLOCK_LABEL_ALARM_NEXT = {
     "type": "text",
     "xy": (4, 238),
-    "color": COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "color": colors.COLOR_WHITE, # COLOR_BLUE_LIGHT,
     "font_size": 14,
     "align": "bottomleft",
     "text": "Next alarm %s"
@@ -62,7 +62,7 @@ CLOCK_LABEL_ALARM_NEXT = {
 ALARM_LABEL_TITLE = {
     "type": "text",
     "xy": (160, 110),
-    "color": COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "color": colors.COLOR_WHITE, # COLOR_BLUE_LIGHT,
     "font_size": 50,
     "align": "center",
     "touch_size": (160, 120),
@@ -81,7 +81,7 @@ FORECAST_ICON_CONDITION = {
 FORECAST_LABEL_SUMMARY = {
     "type": "text",
     "xy": (250, 16),
-    "color": COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "color": colors.COLOR_WHITE, # COLOR_BLUE_LIGHT,
     "font_size": 19,
     "hpos": 6,
     "margin": (6, 70),
@@ -92,7 +92,7 @@ FORECAST_LABEL_SUMMARY = {
 FORECAST_LABEL_TEMPERATURE = {
     "type": "text",
     "xy": (250, 44),
-    "color": COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "color": colors.COLOR_WHITE, # COLOR_BLUE_LIGHT,
     "font_size": 24,
     "align": "right",
     "text": u"%d°"
@@ -101,7 +101,7 @@ FORECAST_LABEL_TEMPERATURE = {
 FORECAST_LABEL_POWERED_BY = {
     "type": "text",
     "xy": (4, 60),
-    "color": COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "color": colors.COLOR_WHITE, # COLOR_BLUE_LIGHT,
     "font_size": 14,
     "align": "bottomleft",
     "text": "Powered by Forecast"
@@ -111,7 +111,7 @@ FORECAST_LINE_SEPARATOR = {
     "type": "line",
     "start_xy": (0, 64),
     "end_xy": (320, 64),
-    "color": COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "color": colors.COLOR_WHITE, # COLOR_BLUE_LIGHT,
     "width": 2,
     "align": "topleft",
 }

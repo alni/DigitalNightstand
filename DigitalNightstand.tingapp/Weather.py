@@ -48,12 +48,12 @@ class Weather(object):
             # Only set settings if settings is actually set and "weather" exists
             # within settings
             settings_changed = False
-            if (self.setting_is_different("latitude", settings)
+            if self.settings is None or (self.setting_is_different("latitude", settings)
                 or self.setting_is_different("longitude", settings)
                 or self.setting_is_different("units", settings)
                 or self.setting_is_different("language", settings)):
                 # Force re-creating of the forecast object if at-least one of 
-                # the settings has changed
+                # the settings has changed (or if self.settings is not set)
                 settings_changed = True
             self.settings = settings["weather"]
             if self.settings["type"] != self.type:

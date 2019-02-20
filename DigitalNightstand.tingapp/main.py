@@ -16,7 +16,7 @@ import locale
 import inspect
 from multiprocessing.pool import ThreadPool
 
-from defs.colors import *
+import defs.colors as colors
 import defs.weather_icons as wx_icons
 
 from Alarm import Alarm
@@ -24,7 +24,21 @@ import WebFrontend as web_frontend
 from WebFrontend import WebFrontend
 from Weather import Weather
 import gui
-from gui import *
+from gui import (
+    FORECAST_ICON_CONDITION,
+    FORECAST_LABEL_SUMMARY,
+    FORECAST_LABEL_TEMPERATURE,
+    FORECAST_LABEL_POWERED_BY,
+    FORECAST_LINE_SEPARATOR,
+    CLOCK_LABEL_TIME,
+    CLOCK_LABEL_TIME_AMPM,
+    CLOCK_LABEL_DATE,
+    CLOCK_LABEL_ALARM_NEXT,
+    ALARM_LABEL_TITLE,
+    PAGE_INDEX_CLOCK,
+    PAGE_INDEX_FORECAST,
+    DEFAULT_FONT
+)
 import config
 import locales
 
@@ -324,7 +338,7 @@ def loop():
         gui.initialized = True
 
     screen.fill(
-        color=COLOR_BLUE_DARK
+        color=colors.COLOR_BLUE_DARK
     )
     
 
