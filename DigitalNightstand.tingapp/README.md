@@ -45,7 +45,7 @@ Currently supports:
 * Displaying the summary in different languages
 * Display the temperature by different units - location dependent or user set
 
-> **[Powered by Forecast](http://forecast.io/ "Powered by Forecast")**
+> **[Powered by Dark Sky](https://darksky.net/poweredby/ "Powered by Dark Sky")**
 
 ## Digital Clock ##
 
