@@ -19,7 +19,7 @@ _HAIL = "\uf015"
 _THUNDERSTORM = u"\xf01e"
 _TORNADO = "\f056"
 
-FORECAST_IO_ICONS = {
+DARK_SKY_ICONS = {
     'clear-day' : "clear-day.png",
     'clear-night': "clear-night.png",
     'rain': "rain.png",

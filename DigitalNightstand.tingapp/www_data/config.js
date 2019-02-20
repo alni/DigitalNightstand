@@ -183,14 +183,14 @@
                     }
                 }
                 $("#form").trigger("create");
-                $("#forecastio_api_key").on("change", function (e) {
+                $("#darksky_api_key").on("change", function (e) {
                     var $this = $(this);
                     var val = $this.val();
                     if (val && val.length > 0) {
                         // Send and save the key to the main application
-                        $.post("/forecastio_api_key", JSON.stringify({
+                        $.post("/darksky_api_key", JSON.stringify({
                             // Base64 encode the key before sending it
-                            forecastio_api_key: btoa(val)
+                            darksky_api_key: btoa(val)
                         })).done(function () {
                             // Clear the field to prevent reading of the API key
                             $this.val("");

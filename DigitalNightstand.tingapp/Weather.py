@@ -10,7 +10,7 @@ import time
 import config
 import defs.weather_icons as wx_icons
 
-_BASE_URL = "https://api.forecast.io/forecast/{api_key}/{lat},{lon}?"
+_BASE_URL = "https://api.darksky.net/forecast/{api_key}/{lat},{lon}?"
 
 class Weather(object):
     """description of class"""
@@ -85,8 +85,8 @@ class Weather(object):
                              request and the request should be re-created.
                              (Defaults to False).
         """
-        if self.settings is not None and config.FORECASTIO_API_KEY is not None:
-            # Only create forecast if settings AND the Forecast IO API Key are
+        if self.settings is not None and config.DARK_SKY_API_KEY is not None:
+            # Only create forecast if settings AND the Dark Sky API Key are
             # actually set
             if cache_for <= 0 or (
                 self.last_update == -1 
@@ -120,7 +120,7 @@ class Weather(object):
         lon = self.settings["longitude"]
 
         # Base64 decode the API Key before sending it with the request
-        api_key = base64.b64decode(config.FORECASTIO_API_KEY)
+        api_key = base64.b64decode(config.DARK_SKY_API_KEY)
 
         url = _BASE_URL.format(api_key=api_key, lat=lat, lon=lon)
         params = {
@@ -136,7 +136,7 @@ class Weather(object):
         Parameters:
         - datapoint : the datapoint (for example self.currently)
         """
-        return wx_icons.ICON_PATH + wx_icons.FORECAST_IO_ICONS[datapoint.icon]
+        return wx_icons.ICON_PATH + wx_icons.DARK_SKY_ICONS[datapoint.icon]
 
 
 def test():

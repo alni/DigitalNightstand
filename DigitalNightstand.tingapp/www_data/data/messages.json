@@ -35,7 +35,7 @@
         "label_forecast_type": "Forecast type",
         "label_units": "Weather Units",
         "label_language": "Weather Language",
-        "label_api_key": "Forecast IO API Key",
+        "label_api_key": "Dark Sky API Key",
         "link_api_key": "Get an API key here",
         "forecast_type": [
           "{0, select,",
@@ -150,7 +150,7 @@
         "label_forecast_type": "Varseltype",
         "label_units": "Måleenheter",
         "label_language": "Språk",
-        "label_api_key": "Forecast IO API Nøkkel",
+        "label_api_key": "Dark Sky API Nøkkel",
         "link_api_key": "Få en API nøkkel her",
         "forecast_type": [
           "{0, select,",

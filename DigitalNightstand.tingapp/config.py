@@ -83,6 +83,6 @@ else:
     CLOCK_12H = False
 
 try:
-    FORECASTIO_API_KEY = load_settings("weather/private.json")["forecastio_api_key"]
+    DARK_SKY_API_KEY = load_settings("weather/private.json")["darksky_api_key"]
 except Exception:
-    FORECASTIO_API_KEY = None
+    DARK_SKY_API_KEY = None
