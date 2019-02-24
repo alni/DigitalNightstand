@@ -107,7 +107,7 @@ def update_minor():
    
     gui.current_date = local.format('D MMMM YYYY', current_locale)
     # time.strftime("%d %B %Y")
-    gui.current_time = local.format("HH mm", current_locale)
+    gui.current_time = local.format(config.CLOCK_TIME_FORMAT, current_locale)
     # time.strftime("%H %M")
     gui.current_am_pm = local.format("a", current_locale)
     if gui.current_am_pm == "":

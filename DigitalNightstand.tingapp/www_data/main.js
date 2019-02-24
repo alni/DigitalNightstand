@@ -161,15 +161,16 @@
                 //$.getJSON("/api/list_countries"),
                 $.getJSON("/data/messages.json")
             ).done(function (settings, messages) { //countries, messages) {
+                var _settings = settings[0];
                 Globalize.loadMessages(messages[0]);
-                settings[0].lang = lang + "";
+                _settings.lang = lang + "";
                 $("[data-globalize]").each(function () {
                     var $this = $(this);
                     var formatter = Globalize(lang).messageFormatter($this.data("globalize"));
                     $this.text(formatter());
                 });
                 promise.resolve({
-                    settings: settings[0]//,
+                    settings: _settings//,
                     //countries: countries[0]
                 });
             });
@@ -182,4 +183,3 @@
 
     return obj;
 })();
-
