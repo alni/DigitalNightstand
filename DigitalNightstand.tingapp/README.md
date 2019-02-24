@@ -4,7 +4,7 @@ Digital Nightstand for the Tingbot/Raspberry Pi.
 
 Features includes:
 
-* Weather Forecast,
+* Weather Forecast
 * Digital Clock
 * Alarm Clock
 * Web Frontend
@@ -15,12 +15,14 @@ Features includes:
 
 ## Button shortcuts ##
 
-Button            | Action
------------------ | ---------------------
-`midright`        | Snooze current alarm
-`right`           | Take screenshot
+Button                | Action
+--------------------- | ---------------------
+`midright`            | Snooze current alarm
+`midright` (**hold**) | Stop current alarm
+`right` (**hold**)    | Take screenshot
 
 
+<!--
 ## Keyboard shortcuts ##
 
 Key               | Action
@@ -32,6 +34,7 @@ Key               | Action
 <kbd>&rarr;</kbd> | Volume Up
 <kbd>&uarr;</kbd> | Next station
 <kbd>&darr;</kbd> | Previous station
+-->
 
 
 ## Weather Forecast ##
