@@ -66,20 +66,20 @@
                     language_code: "be",
                     name: "Belarusian"
                 }, {
-                   language_code: "bg",
-                   name: "Bulgarian" 
+                    language_code: "bg",
+                    name: "Bulgarian" 
                 }, {
                     language_code: "bs",
                     name: "Bosnian"
                 }, {
-                   language_code: "ca",
-                   name: "Catalan" 
+                    language_code: "ca",
+                    name: "Catalan" 
                 }, {
                     language_code: "cs",
                     name: "Czech"
                 }, {
-                   language_code: "da",
-                   name: "Danish" 
+                    language_code: "da",
+                    name: "Danish" 
                 }, {
                     language_code: "de",
                     name: "German"
@@ -93,17 +93,17 @@
                     language_code: "es",
                     name: "Spanish"
                 }, {
-                   language_code: "et",
-                   name: "Estonian" 
+                    language_code: "et",
+                    name: "Estonian" 
                 }, {
-                   language_code: "fi",
-                   name: "Finnish"
+                    language_code: "fi",
+                    name: "Finnish"
                 }, {
                     language_code: "fr",
                     name: "French"
                 }, {
-                   language_code: "he",
-                   name: "Hebrew", 
+                    language_code: "he",
+                    name: "Hebrew", 
                 }, {
                     language_code: "hr",
                     name: "Croatian"
@@ -111,8 +111,8 @@
                     language_code: "hu",
                     name: "Hungarian"
                 }, {
-                   language_code: "id",
-                   name: "Indonesian" 
+                    language_code: "id",
+                    name: "Indonesian" 
                 }, {
                     language_code: "is",
                     name: "Icelandic"
@@ -120,20 +120,20 @@
                     language_code: "it",
                     name: "Italian"
                 }, {
-                   language_code: "ja",
-                   name: "Japanese" 
+                    language_code: "ja",
+                    name: "Japanese" 
                 }, {
-                   language_code: "ka",
-                   name: "Georgian" 
+                    language_code: "ka",
+                    name: "Georgian" 
                 }, {
-                   language_code: "ko",
-                   name: "Korean" 
+                    language_code: "ko",
+                    name: "Korean" 
                 }, {
                     language_code: "kw",
                     name: "Cornish"
                 }, {
-                   language_code: "lv",
-                   name: "Latvian" 
+                    language_code: "lv",
+                    name: "Latvian" 
                 }, {
                     language_code: "nb",
                     name: "Norwegian Bokmål"
@@ -141,8 +141,8 @@
                     language_code: "nl",
                     name: "Dutch"
                 }, {
-                   language_code: "no",
-                   name: "Norwegian" 
+                    language_code: "no",
+                    name: "Norwegian" 
                 }, {
                     language_code: "pl",
                     name: "Polish"
@@ -150,8 +150,8 @@
                     language_code: "pt",
                     name: "Portuguese"
                 }, {
-                   language_code: "ro",
-                   name: "Romanian" 
+                    language_code: "ro",
+                    name: "Romanian" 
                 }, {
                     language_code: "ru",
                     name: "Russian"
@@ -159,8 +159,8 @@
                     language_code: "sk",
                     name: "Slovak"
                 }, {
-                   language_code: "sl",
-                   name: "Slovenian", 
+                    language_code: "sl",
+                    name: "Slovenian", 
                 }, {
                     language_code: "sr",
                     name: "Serbian"
