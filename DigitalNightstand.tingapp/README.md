@@ -9,9 +9,9 @@ Features includes:
 * Alarm Clock
 * Web Frontend
 * Translated into:
-    * English (en)
-    * Norwegian Bokmal (nb)
-    * Norwegian Nynorsk (nn)
+  * English (en)
+  * Norwegian Bokmal (nb)
+  * Norwegian Nynorsk (nn)
 
 ## Button shortcuts ##
 
@@ -40,8 +40,7 @@ Get weather forecast for a place on Earth.
 
 Currently supports:
 
-* Display current weather conditions on the Clock page - summary, temperature 
-  and icon
+* Display current weather conditions on the Clock page - summary, temperature and icon
 * Displaying the summary in different languages
 * Display the temperature by different units - location dependent or user set
 
@@ -49,8 +48,7 @@ Currently supports:
 
 ## Digital Clock ##
 
-Shows the current time and date. The time is shown big, and the date medium 
-size but still readable.
+Shows the current time and date. The time is shown big, and the date medium size but still readable.
 
 The time and date is formatted based on the locale of the computer.
 
@@ -66,38 +64,30 @@ Easily set-up from the Web Frontend.
 
 ## Web Frontend ##
 
-The Web Frontend provides configuration and control of the Nightstand from a 
-web browser.
+The Web Frontend provides configuration and control of the Nightstand from a web browser.
 
 Accepts connections default on port `8000`.
 
 Supports:
 
 * Setting up the alarms (total 5)
-* Setting up the weather forecast (including latitude/longitude coordinates, 
-  desired language and units)
-
+* Setting up the weather forecast (including latitude/longitude coordinates, desired language and units)
 
 ## Configuration and Data Files ##
 
-The configuration and data files are stored within a specific folder path 
-unique for each platform.
+The configuration and data files are stored within a specific folder path unique for each platform.
 
-* `config.json` - contains all user configured settings. This includes all 
-  settings configured with the Web Frontend (excluding the _Dark Sky API Key_)
-* `weather/private.json` - contains private user data that should not be 
-  shared. This includes the Dark Sky API Key set from the Web Frontend
+* `config.json` - contains all user configured settings. This includes all settings configured with the Web Frontend (excluding the _Dark Sky API Key_)
+* `weather/private.json` - contains private user data that should not be shared. This includes the Dark Sky API Key set from the Web Frontend
 
 ### Dark Sky API Key ###
 
-When downloaded weather data using the weather forecast service, a Dark Sky API Key
-must be provided.
+When downloaded weather data using the weather forecast service, a Dark Sky API Key must be provided.
 
 This can be set from the Web Frontend.
 
 When the value of Dark Sky API Key field is changed the API Key is
-automatically saved to `weather/private.json`. If successful the field is 
-cleared to prevent reading of the API key.
+automatically saved to `weather/private.json`. If successful the field is cleared to prevent reading of the API key.
 
 The Dark Sky API Key is never loaded to the configuration page.
 
@@ -107,50 +97,32 @@ The Dark Sky API Key is never loaded to the configuration page.
 
 This application has been inspired, and contains/uses other projects.
 
-* Background [image][background-image] by [skeeze][pixabay-skeeze] from 
-  [Pixabay][pixabay]
-* Color palette was generated from the background image with the 
-  [Pictaculous][pictaculous] service
+* Background [image][background-image] by [skeeze][pixabay-skeeze] from [Pixabay][pixabay]
+* Color palette was generated from the background image with the [Pictaculous][pictaculous] service
 
 ### Python libraries ###
 
 This project uses the following Python libraries:
 
-* `appdirs` - [`appdirs`][appdirs] is created by 
-  [ActiveState Software Inc][activestate-software-inc] and distributed under 
-  the [MIT license][appdirs-license]
-* `arrow` - [`arrow`][arrow] is created by [Chris Smith][chris-smith] and 
-  licensed under the [Apache License, Version 2.0][apache-license-2-0]
-* `pygame` - [`pygame`][pygame] is developed by the 
-  [Pygame Community][pygame-community] and distributed under 
-  [GNU LGPL version 2.1][pygame-license]
-* `python-forecastio` - [`python-forecastio`][python-forecastio] is created by 
-  [Ze'ev Gilovitz][ZeevG] and licensed under the 
-  ['BSD 2-clause license'][python-forecastio-license]
-* `schedule` - [`schedule`][schedule] is created by 
-  [Daniel Bader][daniel-bader] and distributed under the 
-  [MIT license][schedule-license]
-* `tingbot-python` - [`tingbot-python`][tingbot-python] is created by 
-  [Tingbot][tingbot] and licensed under the 
-  ['BSD 2-clause license'][tingbot-python-license]
+* `appdirs` - [`appdirs`][appdirs] is created by [ActiveState Software Inc][activestate-software-inc] and distributed under the [MIT license][appdirs-license]
+* `arrow` - [`arrow`][arrow] is created by [Chris Smith][chris-smith] and licensed under the [Apache License, Version 2.0][apache-license-2-0]
+* `pygame` - [`pygame`][pygame] is developed by the [Pygame Community][pygame-community] and distributed under [GNU LGPL version 2.1][pygame-license]
+* `python-forecastio` - [`python-forecastio`][python-forecastio] is created by [Ze'ev Gilovitz][ZeevG] and licensed under the ['BSD 2-clause license'][python-forecastio-license]
+* `schedule` - [`schedule`][schedule] is created by [Daniel Bader][daniel-bader] and distributed under the [MIT license][schedule-license]
+* `tingbot-python` - [`tingbot-python`][tingbot-python] is created by [Tingbot][tingbot] and licensed under the ['BSD 2-clause license'][tingbot-python-license]
 
 ### Alarm ###
 
-Uses [Material][material-alarm-sounds] alarm sounds from the 
-[`platforms_frameworks_base`][platforms-frameworks-base] repository by
+Uses [Material][material-alarm-sounds] alarm sounds from the [`platforms_frameworks_base`][platforms-frameworks-base] repository by
 [The Android Open Source Project][aosp].
 
 ### The Web Frontend ###
 
-Built with [jQuery Mobile][jqm] by [jQuery Foundation, Inc.][jquery-foundation]
-released under the [MIT license][jqm-license].
+Built with [jQuery Mobile][jqm] by [jQuery Foundation, Inc.][jquery-foundation] released under the [MIT license][jqm-license].
 
-Uses the [nativeDroid2][nativeDroid2] template by 
-[Raphael Wildhaber, Godesign Webpublishing GmbH][wildhaber] released under the 
-[MIT license][nativeDroid2-license].
+Uses the [nativeDroid2][nativeDroid2] template by [Raphael Wildhaber, Godesign Webpublishing GmbH][wildhaber] released under the [MIT license][nativeDroid2-license].
 
-Also uses the [DateBox][jtsage-datebox] JavaScript library by 
-[J.T. Sage][jtsage] released under the [MIT license][jtsage-datebox-license].
+Also uses the [DateBox][jtsage-datebox] JavaScript library by [J.T. Sage][jtsage] released under the [MIT license][jtsage-datebox-license].
 
 
 [background-image-old]: https://pixabay.com/en/banner-header-lines-light-rays-911778/ "background image"
