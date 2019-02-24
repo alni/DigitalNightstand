@@ -115,7 +115,7 @@ class Weather(object):
                 self.is_fetching = False
 
     def create_url(self):
-        """Create Forecast IO API URL"""
+        """Create Dark Sky API URL"""
         lat = self.settings["latitude"]
         lon = self.settings["longitude"]
 
