@@ -84,22 +84,22 @@ The configuration and data files are stored within a specific folder path
 unique for each platform.
 
 * `config.json` - contains all user configured settings. This includes all 
-  settings configured with the Web Frontend (excluding the _Forecast IO API Key_)
+  settings configured with the Web Frontend (excluding the _Dark Sky API Key_)
 * `weather/private.json` - contains private user data that should not be 
-  shared. This includes the Forecast IO API Key set from the Web Frontend
+  shared. This includes the Dark Sky API Key set from the Web Frontend
 
-### Forecast IO API Key ###
+### Dark Sky API Key ###
 
-When downloaded weather data using the Forecast Service, a Forecast IO API Key
+When downloaded weather data using the weather forecast service, a Dark Sky API Key
 must be provided.
 
 This can be set from the Web Frontend.
 
-When the value of Forecast IO API Key field is changed the API Key is
+When the value of Dark Sky API Key field is changed the API Key is
 automatically saved to `weather/private.json`. If successful the field is 
 cleared to prevent reading of the API key.
 
-The Forecast IO API Key is never loaded to the configuration page.
+The Dark Sky API Key is never loaded to the configuration page.
 
 --------
 
@@ -170,7 +170,7 @@ Also uses the [DateBox][jtsage-datebox] JavaScript library by
 [pygame-community]: http://www.pygame.org/ "Pygame Community"
 [pygame-license]: http://www.gnu.org/copyleft/lesser.html "GNU LGPL version 2.1"
 [schedule]: https://github.com/dbader/schedule
-[python-forecastio]: https://github.com/ZeevG/python-forecast.io "Forecast.io Wrapper"
+[python-forecastio]: https://github.com/ZeevG/python-forecast.io "Dark Sky Wrapper"
 [ZeevG]: http://zeevgilovitz.com/ "Ze'ev Gilovitz"
 [python-forecastio-license]: https://github.com/ZeevG/python-forecast.io/blob/master/LICENSE.txt "BSD 2-clause license"
 [daniel-bader]: https://twitter.com/dbader_org "Daniel Bader"
