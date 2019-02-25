@@ -320,6 +320,98 @@ def draw_clock_page():
         font=DEFAULT_FONT
     )
 
+def init_forecast_page():
+    day_format = u"ddd"
+    temperature_format = u"%d°\n%d°"
+    if weather.daily is not None:
+        daily = weather.daily.data
+        label_day1_text = ""
+        label_day2_text = ""
+        label_day3_text = ""
+        label_day4_text = ""
+        label_day5_text = ""
+
+        label_temp_day1_text = ""
+        label_temp_day2_text = ""
+        label_temp_day3_text = ""
+        label_temp_day4_text = ""
+        label_temp_day5_text = ""
+
+        icon_day1 = ""
+        icon_day2 = ""
+        icon_day3 = ""
+        icon_day4 = ""
+        icon_day5 = ""
+
+        day1_time = weather.get_local_time(daily[0])
+        day1_temp_min = daily[0].temperatureMin
+        day1_temp_max = daily[0].temperatureMax
+
+        label_day1_text = day1_time.format(day_format, current_locale)
+        FORECAST_PAGE_LABEL_DAY1["text"] = label_day1_text
+
+        label_temp_day1_text = temperature_format % (day1_temp_min, day1_temp_max)
+        FORECAST_PAGE_LABEL_TEMPERATURE_DAY1["text"] = label_temp_day1_text
+        
+        icon_day1 = daily[0].icon
+        FORECAST_PAGE_ICON_CONDITION_DAY1["icon"] = icon_day1
+
+
+        day2_time = weather.get_local_time(daily[1])
+        day2_temp_min = daily[1].temperatureMin
+        day2_temp_max = daily[1].temperatureMax
+
+        label_day2_text = day2_time.format(day_format, current_locale)
+        FORECAST_PAGE_LABEL_DAY2["text"] = label_day2_text
+
+        label_temp_day2_text = temperature_format % (day2_temp_min, day2_temp_max)
+        FORECAST_PAGE_LABEL_TEMPERATURE_DAY2["text"] = label_temp_day2_text
+        
+        icon_day2 = daily[1].icon
+        FORECAST_PAGE_ICON_CONDITION_DAY2["icon"] = icon_day2
+
+
+        day3_time = weather.get_local_time(daily[2])
+        day3_temp_min = daily[2].temperatureMin
+        day3_temp_max = daily[2].temperatureMax
+
+        label_day3_text = day3_time.format(day_format, current_locale)
+        FORECAST_PAGE_LABEL_DAY3["text"] = label_day3_text
+
+        label_temp_day3_text = temperature_format % (day3_temp_min, day3_temp_max)
+        FORECAST_PAGE_LABEL_TEMPERATURE_DAY3["text"] = label_temp_day3_text
+        
+        icon_day3 = daily[2].icon
+        FORECAST_PAGE_ICON_CONDITION_DAY3["icon"] = icon_day3
+
+
+        day4_time = weather.get_local_time(daily[3])
+        day4_temp_min = daily[3].temperatureMin
+        day4_temp_max = daily[3].temperatureMax
+
+        label_day4_text = day4_time.format(day_format, current_locale)
+        FORECAST_PAGE_LABEL_DAY4["text"] = label_day4_text
+
+        label_temp_day4_text = temperature_format % (day4_temp_min, day4_temp_max)
+        FORECAST_PAGE_LABEL_TEMPERATURE_DAY4["text"] = label_temp_day4_text
+        
+        icon_day4 = daily[3].icon
+        FORECAST_PAGE_ICON_CONDITION_DAY4["icon"] = icon_day4
+
+
+        day5_time = weather.get_local_time(daily[4])
+        day5_temp_min = daily[4].temperatureMin
+        day5_temp_max = daily[4].temperatureMax
+
+        label_day5_text = day5_time.format(day_format, current_locale)
+        FORECAST_PAGE_LABEL_DAY5["text"] = label_day5_text
+
+        label_temp_day5_text = temperature_format % (day5_temp_min, day5_temp_max)
+        FORECAST_PAGE_LABEL_TEMPERATURE_DAY5["text"] = label_temp_day5_text
+        
+        icon_day5 = daily[4].icon
+        FORECAST_PAGE_ICON_CONDITION_DAY5["icon"] = icon_day5
+
 def draw_forecast_page():
     draw_forecast_summary()
 
@@ -370,7 +462,7 @@ def draw_forecast_page():
 
     screen.image(
         # weather.get_icon_path(weather.currently),
-        weather.get_icon_path(icon="clear-day"),
+        weather.get_icon_path(icon=FORECAST_PAGE_ICON_CONDITION_DAY1["icon"]),
         xy=FORECAST_PAGE_ICON_CONDITION_DAY1["xy"],
         scale=FORECAST_PAGE_ICON_CONDITION_DAY1["scale"],
         align=FORECAST_PAGE_ICON_CONDITION_DAY1["align"]
@@ -378,7 +470,7 @@ def draw_forecast_page():
 
     screen.image(
         # weather.get_icon_path(weather.currently),
-        weather.get_icon_path(icon="clear-day"),
+        weather.get_icon_path(icon=FORECAST_PAGE_ICON_CONDITION_DAY2["icon"]),
         xy=FORECAST_PAGE_ICON_CONDITION_DAY2["xy"],
         scale=FORECAST_PAGE_ICON_CONDITION_DAY2["scale"],
         align=FORECAST_PAGE_ICON_CONDITION_DAY2["align"]
@@ -386,7 +478,7 @@ def draw_forecast_page():
 
     screen.image(
         # weather.get_icon_path(weather.currently),
-        weather.get_icon_path(icon="clear-day"),
+        weather.get_icon_path(icon=FORECAST_PAGE_ICON_CONDITION_DAY3["icon"]),
         xy=FORECAST_PAGE_ICON_CONDITION_DAY3["xy"],
         scale=FORECAST_PAGE_ICON_CONDITION_DAY3["scale"],
         align=FORECAST_PAGE_ICON_CONDITION_DAY3["align"]
@@ -394,7 +486,7 @@ def draw_forecast_page():
 
     screen.image(
         # weather.get_icon_path(weather.currently),
-        weather.get_icon_path(icon="clear-day"),
+        weather.get_icon_path(icon=FORECAST_PAGE_ICON_CONDITION_DAY4["icon"]),
         xy=FORECAST_PAGE_ICON_CONDITION_DAY4["xy"],
         scale=FORECAST_PAGE_ICON_CONDITION_DAY4["scale"],
         align=FORECAST_PAGE_ICON_CONDITION_DAY4["align"]
@@ -402,7 +494,7 @@ def draw_forecast_page():
 
     screen.image(
         # weather.get_icon_path(weather.currently),
-        weather.get_icon_path(icon="clear-day"),
+        weather.get_icon_path(icon=FORECAST_PAGE_ICON_CONDITION_DAY5["icon"]),
         xy=FORECAST_PAGE_ICON_CONDITION_DAY5["xy"],
         scale=FORECAST_PAGE_ICON_CONDITION_DAY5["scale"],
         align=FORECAST_PAGE_ICON_CONDITION_DAY5["align"]
@@ -458,6 +550,8 @@ def set_current_page(val):
         # only switch page if there is more than 1 second since last page change
         gui.last_touch = time.time() # set last page change to current time
         gui.current_page = val
+        return True
+    return False
 
 # Alarm Page touch event
 # Stop the alarm if the alarm title is touched
@@ -480,7 +574,8 @@ def on_touch_clock_datetime(xy, action):
     print(action + " | " + str(gui.current_page) + " (" + str(PAGE_INDEX_CLOCK) + ")")
     if action == 'down':
         if gui.current_page == PAGE_INDEX_CLOCK:
-            set_current_page(PAGE_INDEX_FORECAST)
+            if set_current_page(PAGE_INDEX_FORECAST):
+                init_forecast_page()
         else:
             set_current_page(PAGE_INDEX_CLOCK)
 

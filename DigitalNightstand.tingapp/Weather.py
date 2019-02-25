@@ -5,6 +5,7 @@ import os
 import json
 import base64
 import time
+import arrow
 
 
 import config
@@ -24,6 +25,7 @@ class Weather(object):
         self.daily = None
         self.is_fetching = False
         self.settings = None
+        self.timezone = None
         if settings is None:
             self.settings = self.load_settings(config)
         elif "weather" in settings:
@@ -113,6 +115,8 @@ class Weather(object):
                     self.forecast.update()
                 self.currently = self.forecast.currently()
                 self.daily = self.forecast.daily()
+                print(self.forecast.json["timezone"])
+                self.timezone = self.forecast.json["timezone"]
                 self.is_fetching = False
 
     def create_url(self):
@@ -147,6 +151,14 @@ class Weather(object):
             return wx_icons.ICON_PATH + wx_icons.DARK_SKY_ICONS[_icon]
         else:
             return icon_empty
+    
+    def get_local_time(self, datapoint):
+        """Get the local time of the datapoint
+
+        Parameters:
+        - datapoint : the datapoint (for example self.currently)
+        """
+        return arrow.get(datapoint.time).to(self.timezone)
 
 
 def test():

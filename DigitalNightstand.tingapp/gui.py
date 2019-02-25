@@ -168,7 +168,8 @@ FORECAST_PAGE_ICON_CONDITION_DAY1 = {
     "scale": 0.31578947368421052631578947368421,
     "align": "top",
     "touch_xy": (256, 0),
-    "touch_size": (64, 64)
+    "touch_size": (64, 64),
+    "icon": "clear-day"
 }
 
 FORECAST_PAGE_ICON_CONDITION_DAY2 = {
@@ -176,7 +177,8 @@ FORECAST_PAGE_ICON_CONDITION_DAY2 = {
     "scale": 0.31578947368421052631578947368421,
     "align": "top",
     "touch_xy": (256, 0),
-    "touch_size": (64, 64)
+    "touch_size": (64, 64),
+    "icon": "clear-day"
 }
 
 FORECAST_PAGE_ICON_CONDITION_DAY3 = {
@@ -184,7 +186,8 @@ FORECAST_PAGE_ICON_CONDITION_DAY3 = {
     "scale": 0.31578947368421052631578947368421,
     "align": "top",
     "touch_xy": (256, 0),
-    "touch_size": (64, 64)
+    "touch_size": (64, 64),
+    "icon": "clear-day"
 }
 
 FORECAST_PAGE_ICON_CONDITION_DAY4 = {
@@ -192,7 +195,8 @@ FORECAST_PAGE_ICON_CONDITION_DAY4 = {
     "scale": 0.31578947368421052631578947368421,
     "align": "top",
     "touch_xy": (256, 0),
-    "touch_size": (64, 64)
+    "touch_size": (64, 64),
+    "icon": "clear-day"
 }
 
 FORECAST_PAGE_ICON_CONDITION_DAY5 = {
@@ -200,7 +204,8 @@ FORECAST_PAGE_ICON_CONDITION_DAY5 = {
     "scale": 0.31578947368421052631578947368421,
     "align": "top",
     "touch_xy": (256, 0),
-    "touch_size": (64, 64)
+    "touch_size": (64, 64),
+    "icon": "clear-day"
 }
 
 
