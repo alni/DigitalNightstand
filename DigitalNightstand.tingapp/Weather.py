@@ -9,6 +9,7 @@ import time
 
 import config
 import defs.weather_icons as wx_icons
+from defs import IMAGE_EMPTY as icon_empty
 
 _BASE_URL = "https://api.darksky.net/forecast/{api_key}/{lat},{lon}?"
 
@@ -130,13 +131,22 @@ class Weather(object):
         
         return url + urllib.urlencode(params)
 
-    def get_icon_path(self, datapoint):
+    def get_icon_path(self, datapoint=None, icon=None):
         """Get Icon Path from datapoint
         
         Parameters:
         - datapoint : the datapoint (for example self.currently)
         """
-        return wx_icons.ICON_PATH + wx_icons.DARK_SKY_ICONS[datapoint.icon]
+        _icon = ""
+        if datapoint is not None:
+            _icon = datapoint.icon
+        elif icon is not None:
+            _icon = icon + ""
+        
+        if _icon in wx_icons.DARK_SKY_ICONS:
+            return wx_icons.ICON_PATH + wx_icons.DARK_SKY_ICONS[_icon]
+        else:
+            return icon_empty
 
 
 def test():

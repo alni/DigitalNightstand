@@ -115,3 +115,136 @@ FORECAST_LINE_SEPARATOR = {
     "width": 2,
     "align": "topleft",
 }
+
+
+FORECAST_PAGE_LABEL_DAY1 = {
+    "type": "text",
+    "xy": (32, 68),
+    "color": colors.COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "font_size": 19,
+    "align": "top",
+    "text": "Day 1"
+}
+
+FORECAST_PAGE_LABEL_DAY2 = {
+    "type": "text",
+    "xy": (96, 68),
+    "color": colors.COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "font_size": 19,
+    "align": "top",
+    "text": "Day 2"
+}
+
+FORECAST_PAGE_LABEL_DAY3 = {
+    "type": "text",
+    "xy": (160, 68),
+    "color": colors.COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "font_size": 19,
+    "align": "top",
+    "text": "Day 3"
+}
+
+FORECAST_PAGE_LABEL_DAY4 = {
+    "type": "text",
+    "xy": (224, 68),
+    "color": colors.COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "font_size": 19,
+    "align": "top",
+    "text": "Day 4"
+}
+
+FORECAST_PAGE_LABEL_DAY5 = {
+    "type": "text",
+    "xy": (288, 68),
+    "color": colors.COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "font_size": 19,
+    "align": "top",
+    "text": "Day 5"
+}
+
+
+FORECAST_PAGE_ICON_CONDITION_DAY1 = {
+    "xy": (32,95),
+    "scale": 0.31578947368421052631578947368421,
+    "align": "top",
+    "touch_xy": (256, 0),
+    "touch_size": (64, 64)
+}
+
+FORECAST_PAGE_ICON_CONDITION_DAY2 = {
+    "xy": (96,95),
+    "scale": 0.31578947368421052631578947368421,
+    "align": "top",
+    "touch_xy": (256, 0),
+    "touch_size": (64, 64)
+}
+
+FORECAST_PAGE_ICON_CONDITION_DAY3 = {
+    "xy": (160,95),
+    "scale": 0.31578947368421052631578947368421,
+    "align": "top",
+    "touch_xy": (256, 0),
+    "touch_size": (64, 64)
+}
+
+FORECAST_PAGE_ICON_CONDITION_DAY4 = {
+    "xy": (224,95),
+    "scale": 0.31578947368421052631578947368421,
+    "align": "top",
+    "touch_xy": (256, 0),
+    "touch_size": (64, 64)
+}
+
+FORECAST_PAGE_ICON_CONDITION_DAY5 = {
+    "xy": (288,95),
+    "scale": 0.31578947368421052631578947368421,
+    "align": "top",
+    "touch_xy": (256, 0),
+    "touch_size": (64, 64)
+}
+
+
+FORECAST_PAGE_LABEL_TEMPERATURE_DAY1 = {
+    "type": "text",
+    "xy": (32, 151),
+    "color": colors.COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "font_size": 16,
+    "align": "top",
+    "text": u"20°\n100°"
+}
+
+FORECAST_PAGE_LABEL_TEMPERATURE_DAY2 = {
+    "type": "text",
+    "xy": (96, 151),
+    "color": colors.COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "font_size": 16,
+    "align": "top",
+    "text": u"20°\n100°"
+}
+
+FORECAST_PAGE_LABEL_TEMPERATURE_DAY3 = {
+    "type": "text",
+    "xy": (160, 151),
+    "color": colors.COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "font_size": 16,
+    "align": "top",
+    "text": u"20°\n100°"
+}
+
+FORECAST_PAGE_LABEL_TEMPERATURE_DAY4 = {
+    "type": "text",
+    "xy": (224, 151),
+    "color": colors.COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "font_size": 16,
+    "align": "top",
+    "text": u"20°\n100°"
+}
+
+FORECAST_PAGE_LABEL_TEMPERATURE_DAY5 = {
+    "type": "text",
+    "xy": (288, 151),
+    "color": colors.COLOR_WHITE, # COLOR_BLUE_LIGHT,
+    "font_size": 16,
+    "align": "top",
+    "text": u"20°\n100°"
+}

@@ -37,6 +37,21 @@ from gui import (
     ALARM_LABEL_TITLE,
     PAGE_INDEX_CLOCK,
     PAGE_INDEX_FORECAST,
+    FORECAST_PAGE_LABEL_DAY1,
+    FORECAST_PAGE_LABEL_DAY2,
+    FORECAST_PAGE_LABEL_DAY3,
+    FORECAST_PAGE_LABEL_DAY4,
+    FORECAST_PAGE_LABEL_DAY5,
+    FORECAST_PAGE_ICON_CONDITION_DAY1,
+    FORECAST_PAGE_ICON_CONDITION_DAY2,
+    FORECAST_PAGE_ICON_CONDITION_DAY3,
+    FORECAST_PAGE_ICON_CONDITION_DAY4,
+    FORECAST_PAGE_ICON_CONDITION_DAY5,
+    FORECAST_PAGE_LABEL_TEMPERATURE_DAY1,
+    FORECAST_PAGE_LABEL_TEMPERATURE_DAY2,
+    FORECAST_PAGE_LABEL_TEMPERATURE_DAY3,
+    FORECAST_PAGE_LABEL_TEMPERATURE_DAY4,
+    FORECAST_PAGE_LABEL_TEMPERATURE_DAY5,
     DEFAULT_FONT
 )
 import config
@@ -152,7 +167,7 @@ def stop_alarm():
 
 
 # Clock Page Draw method
-def draw_clock_page():
+def draw_forecast_summary():
     if weather.type == "currently" and weather.currently is not None:
         screen.image(
             weather.get_icon_path(weather.currently),
@@ -233,6 +248,7 @@ def draw_clock_page():
             align=FORECAST_LABEL_TEMPERATURE["align"],
             font=DEFAULT_FONT
         )
+    
     screen.text(
         localized_strings.fetching_new_data if weather.is_fetching else FORECAST_LABEL_POWERED_BY["text"],
         xy=FORECAST_LABEL_POWERED_BY["xy"],
@@ -247,6 +263,10 @@ def draw_clock_page():
         color=FORECAST_LINE_SEPARATOR["color"],
         width=FORECAST_LINE_SEPARATOR["width"]
     )
+
+# Clock Page Draw method
+def draw_clock_page():
+    draw_forecast_summary()
     screen.text(
         gui.current_time,
         xy=CLOCK_LABEL_TIME["xy"],
@@ -300,6 +320,138 @@ def draw_clock_page():
         font=DEFAULT_FONT
     )
 
+def draw_forecast_page():
+    draw_forecast_summary()
+
+    screen.text(
+        FORECAST_PAGE_LABEL_DAY1["text"],
+        xy=FORECAST_PAGE_LABEL_DAY1["xy"],
+        color=FORECAST_PAGE_LABEL_DAY1["color"],
+        font_size=FORECAST_PAGE_LABEL_DAY1["font_size"],
+        align=FORECAST_PAGE_LABEL_DAY1["align"],
+        font=DEFAULT_FONT
+    )
+
+    screen.text(
+        FORECAST_PAGE_LABEL_DAY2["text"],
+        xy=FORECAST_PAGE_LABEL_DAY2["xy"],
+        color=FORECAST_PAGE_LABEL_DAY2["color"],
+        font_size=FORECAST_PAGE_LABEL_DAY2["font_size"],
+        align=FORECAST_PAGE_LABEL_DAY2["align"],
+        font=DEFAULT_FONT
+    )
+
+    screen.text(
+        FORECAST_PAGE_LABEL_DAY3["text"],
+        xy=FORECAST_PAGE_LABEL_DAY3["xy"],
+        color=FORECAST_PAGE_LABEL_DAY3["color"],
+        font_size=FORECAST_PAGE_LABEL_DAY3["font_size"],
+        align=FORECAST_PAGE_LABEL_DAY3["align"],
+        font=DEFAULT_FONT
+    )
+
+    screen.text(
+        FORECAST_PAGE_LABEL_DAY4["text"],
+        xy=FORECAST_PAGE_LABEL_DAY4["xy"],
+        color=FORECAST_PAGE_LABEL_DAY4["color"],
+        font_size=FORECAST_PAGE_LABEL_DAY4["font_size"],
+        align=FORECAST_PAGE_LABEL_DAY4["align"],
+        font=DEFAULT_FONT
+    )
+
+    screen.text(
+        FORECAST_PAGE_LABEL_DAY5["text"],
+        xy=FORECAST_PAGE_LABEL_DAY5["xy"],
+        color=FORECAST_PAGE_LABEL_DAY5["color"],
+        font_size=FORECAST_PAGE_LABEL_DAY5["font_size"],
+        align=FORECAST_PAGE_LABEL_DAY5["align"],
+        font=DEFAULT_FONT
+    )
+
+    screen.image(
+        # weather.get_icon_path(weather.currently),
+        weather.get_icon_path(icon="clear-day"),
+        xy=FORECAST_PAGE_ICON_CONDITION_DAY1["xy"],
+        scale=FORECAST_PAGE_ICON_CONDITION_DAY1["scale"],
+        align=FORECAST_PAGE_ICON_CONDITION_DAY1["align"]
+    )
+
+    screen.image(
+        # weather.get_icon_path(weather.currently),
+        weather.get_icon_path(icon="clear-day"),
+        xy=FORECAST_PAGE_ICON_CONDITION_DAY2["xy"],
+        scale=FORECAST_PAGE_ICON_CONDITION_DAY2["scale"],
+        align=FORECAST_PAGE_ICON_CONDITION_DAY2["align"]
+    )
+
+    screen.image(
+        # weather.get_icon_path(weather.currently),
+        weather.get_icon_path(icon="clear-day"),
+        xy=FORECAST_PAGE_ICON_CONDITION_DAY3["xy"],
+        scale=FORECAST_PAGE_ICON_CONDITION_DAY3["scale"],
+        align=FORECAST_PAGE_ICON_CONDITION_DAY3["align"]
+    )
+
+    screen.image(
+        # weather.get_icon_path(weather.currently),
+        weather.get_icon_path(icon="clear-day"),
+        xy=FORECAST_PAGE_ICON_CONDITION_DAY4["xy"],
+        scale=FORECAST_PAGE_ICON_CONDITION_DAY4["scale"],
+        align=FORECAST_PAGE_ICON_CONDITION_DAY4["align"]
+    )
+
+    screen.image(
+        # weather.get_icon_path(weather.currently),
+        weather.get_icon_path(icon="clear-day"),
+        xy=FORECAST_PAGE_ICON_CONDITION_DAY5["xy"],
+        scale=FORECAST_PAGE_ICON_CONDITION_DAY5["scale"],
+        align=FORECAST_PAGE_ICON_CONDITION_DAY5["align"]
+    )
+
+    screen.text(
+        FORECAST_PAGE_LABEL_TEMPERATURE_DAY1["text"],
+        xy=FORECAST_PAGE_LABEL_TEMPERATURE_DAY1["xy"],
+        color=FORECAST_PAGE_LABEL_TEMPERATURE_DAY1["color"],
+        font_size=FORECAST_PAGE_LABEL_TEMPERATURE_DAY1["font_size"],
+        align=FORECAST_PAGE_LABEL_TEMPERATURE_DAY1["align"],
+        font=DEFAULT_FONT
+    )
+
+    screen.text(
+        FORECAST_PAGE_LABEL_TEMPERATURE_DAY2["text"],
+        xy=FORECAST_PAGE_LABEL_TEMPERATURE_DAY2["xy"],
+        color=FORECAST_PAGE_LABEL_TEMPERATURE_DAY2["color"],
+        font_size=FORECAST_PAGE_LABEL_TEMPERATURE_DAY2["font_size"],
+        align=FORECAST_PAGE_LABEL_TEMPERATURE_DAY2["align"],
+        font=DEFAULT_FONT
+    )
+
+    screen.text(
+        FORECAST_PAGE_LABEL_TEMPERATURE_DAY3["text"],
+        xy=FORECAST_PAGE_LABEL_TEMPERATURE_DAY3["xy"],
+        color=FORECAST_PAGE_LABEL_TEMPERATURE_DAY3["color"],
+        font_size=FORECAST_PAGE_LABEL_TEMPERATURE_DAY3["font_size"],
+        align=FORECAST_PAGE_LABEL_TEMPERATURE_DAY3["align"],
+        font=DEFAULT_FONT
+    )
+
+    screen.text(
+        FORECAST_PAGE_LABEL_TEMPERATURE_DAY4["text"],
+        xy=FORECAST_PAGE_LABEL_TEMPERATURE_DAY4["xy"],
+        color=FORECAST_PAGE_LABEL_TEMPERATURE_DAY4["color"],
+        font_size=FORECAST_PAGE_LABEL_TEMPERATURE_DAY4["font_size"],
+        align=FORECAST_PAGE_LABEL_TEMPERATURE_DAY4["align"],
+        font=DEFAULT_FONT
+    )
+
+    screen.text(
+        FORECAST_PAGE_LABEL_TEMPERATURE_DAY5["text"],
+        xy=FORECAST_PAGE_LABEL_TEMPERATURE_DAY5["xy"],
+        color=FORECAST_PAGE_LABEL_TEMPERATURE_DAY5["color"],
+        font_size=FORECAST_PAGE_LABEL_TEMPERATURE_DAY5["font_size"],
+        align=FORECAST_PAGE_LABEL_TEMPERATURE_DAY5["align"],
+        font=DEFAULT_FONT
+    )
 
 def set_current_page(val):
     if gui.last_touch == -1 or time.time() - gui.last_touch > 1:
@@ -325,8 +477,12 @@ def stop_alarm_clock(xy, action):
     size=CLOCK_LABEL_TIME["touch_size"],
     align=CLOCK_LABEL_TIME["align"])
 def on_touch_clock_datetime(xy, action):
-    if action == 'down' and gui.current_page == PAGE_INDEX_CLOCK:
-        set_current_page(PAGE_INDEX_FORECAST)
+    print(action + " | " + str(gui.current_page) + " (" + str(PAGE_INDEX_CLOCK) + ")")
+    if action == 'down':
+        if gui.current_page == PAGE_INDEX_CLOCK:
+            set_current_page(PAGE_INDEX_FORECAST)
+        else:
+            set_current_page(PAGE_INDEX_CLOCK)
 
 # BEGIN: loop()
 @every(seconds=0.100)
@@ -358,11 +514,12 @@ def loop():
             align=ALARM_LABEL_TITLE["align"],
             font=DEFAULT_FONT
         )
-    elif gui.current_page == gui.PAGE_INDEX_CLOCK or True:
+    elif gui.current_page == gui.PAGE_INDEX_CLOCK:
         draw_clock_page()
     elif gui.current_page == gui.PAGE_INDEX_FORECAST:
         # TODO: Implement Forecast Page
-        draw_clock_page() # Forecast currently not implemented
+        draw_forecast_page()
+        # draw_clock_page() # Forecast currently not implemented
 
 # END: loop()
 
