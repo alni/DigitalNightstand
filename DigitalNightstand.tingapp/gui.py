@@ -167,8 +167,6 @@ FORECAST_PAGE_ICON_CONDITION_DAY1 = {
     "xy": (32,95),
     "scale": 0.31578947368421052631578947368421,
     "align": "top",
-    "touch_xy": (256, 0),
-    "touch_size": (64, 64),
     "icon": "clear-day"
 }
 
@@ -176,8 +174,6 @@ FORECAST_PAGE_ICON_CONDITION_DAY2 = {
     "xy": (96,95),
     "scale": 0.31578947368421052631578947368421,
     "align": "top",
-    "touch_xy": (256, 0),
-    "touch_size": (64, 64),
     "icon": "clear-day"
 }
 
@@ -185,8 +181,6 @@ FORECAST_PAGE_ICON_CONDITION_DAY3 = {
     "xy": (160,95),
     "scale": 0.31578947368421052631578947368421,
     "align": "top",
-    "touch_xy": (256, 0),
-    "touch_size": (64, 64),
     "icon": "clear-day"
 }
 
@@ -194,8 +188,6 @@ FORECAST_PAGE_ICON_CONDITION_DAY4 = {
     "xy": (224,95),
     "scale": 0.31578947368421052631578947368421,
     "align": "top",
-    "touch_xy": (256, 0),
-    "touch_size": (64, 64),
     "icon": "clear-day"
 }
 
@@ -203,8 +195,6 @@ FORECAST_PAGE_ICON_CONDITION_DAY5 = {
     "xy": (288,95),
     "scale": 0.31578947368421052631578947368421,
     "align": "top",
-    "touch_xy": (256, 0),
-    "touch_size": (64, 64),
     "icon": "clear-day"
 }
 

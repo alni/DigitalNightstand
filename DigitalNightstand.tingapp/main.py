@@ -166,7 +166,7 @@ def stop_alarm():
         alarm.stop_alarm()
 
 
-# Clock Page Draw method
+# Weather Forecast Summary Draw method
 def draw_forecast_summary():
     if weather.type == "currently" and weather.currently is not None:
         screen.image(
