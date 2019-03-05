@@ -79,6 +79,7 @@ class Weather(object):
         return "%02d:%02d" % (hour,minute)
 
     def create_forecast(self, cache_for=25, settings_changed=False):
+        print("cache_for=" + str(cache_for))
         """Create forecast from settings
         
         Parameters:

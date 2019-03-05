@@ -143,7 +143,8 @@ def update_minor():
     align=FORECAST_ICON_CONDITION["align"])
 def update_weather(xy=None, action=None):
     # weather.create_forecast()
-    thread_pool.apply_async(weather.create_forecast, ())
+    print(weather)
+    thread_pool.apply_async(weather.create_forecast, (5,))
 
 
 @button.right_button.hold
@@ -323,6 +324,15 @@ def draw_clock_page():
 def init_forecast_page():
     day_format = u"ddd"
     temperature_format = u"%d°\n%d°"
+    language = current_locale + ""
+    if weather.settings is not None and "language" in weather.settings:
+        language = weather.settings["language"]
+        try:
+            arrow.locales.get_locale(language)
+        except Exception as err:
+            print(err.message)
+            language = current_locale + ""
+    
     if weather.daily is not None:
         daily = weather.daily.data
         label_day1_text = ""
@@ -347,7 +357,7 @@ def init_forecast_page():
         day1_temp_min = daily[0].temperatureMin
         day1_temp_max = daily[0].temperatureMax
 
-        label_day1_text = day1_time.format(day_format, current_locale)
+        label_day1_text = day1_time.format(day_format, language)
         FORECAST_PAGE_LABEL_DAY1["text"] = label_day1_text
 
         label_temp_day1_text = temperature_format % (day1_temp_min, day1_temp_max)
@@ -361,7 +371,7 @@ def init_forecast_page():
         day2_temp_min = daily[1].temperatureMin
         day2_temp_max = daily[1].temperatureMax
 
-        label_day2_text = day2_time.format(day_format, current_locale)
+        label_day2_text = day2_time.format(day_format, language)
         FORECAST_PAGE_LABEL_DAY2["text"] = label_day2_text
 
         label_temp_day2_text = temperature_format % (day2_temp_min, day2_temp_max)
@@ -375,7 +385,7 @@ def init_forecast_page():
         day3_temp_min = daily[2].temperatureMin
         day3_temp_max = daily[2].temperatureMax
 
-        label_day3_text = day3_time.format(day_format, current_locale)
+        label_day3_text = day3_time.format(day_format, language)
         FORECAST_PAGE_LABEL_DAY3["text"] = label_day3_text
 
         label_temp_day3_text = temperature_format % (day3_temp_min, day3_temp_max)
@@ -389,7 +399,7 @@ def init_forecast_page():
         day4_temp_min = daily[3].temperatureMin
         day4_temp_max = daily[3].temperatureMax
 
-        label_day4_text = day4_time.format(day_format, current_locale)
+        label_day4_text = day4_time.format(day_format, language)
         FORECAST_PAGE_LABEL_DAY4["text"] = label_day4_text
 
         label_temp_day4_text = temperature_format % (day4_temp_min, day4_temp_max)
@@ -403,7 +413,7 @@ def init_forecast_page():
         day5_temp_min = daily[4].temperatureMin
         day5_temp_max = daily[4].temperatureMax
 
-        label_day5_text = day5_time.format(day_format, current_locale)
+        label_day5_text = day5_time.format(day_format, language)
         FORECAST_PAGE_LABEL_DAY5["text"] = label_day5_text
 
         label_temp_day5_text = temperature_format % (day5_temp_min, day5_temp_max)
@@ -567,9 +577,9 @@ def stop_alarm_clock(xy, action):
 
 # Clock Page DateTime touch event - switch to the Forecast Page
 @touch(
-    xy=CLOCK_LABEL_TIME["touch_xy"],
-    size=CLOCK_LABEL_TIME["touch_size"],
-    align=CLOCK_LABEL_TIME["align"])
+    xy=FORECAST_LABEL_SUMMARY["touch_xy"],
+    size=FORECAST_LABEL_SUMMARY["touch_size"],
+    align=FORECAST_LABEL_SUMMARY["align"])
 def on_touch_clock_datetime(xy, action):
     print(action + " | " + str(gui.current_page) + " (" + str(PAGE_INDEX_CLOCK) + ")")
     if action == 'down':
@@ -628,7 +638,7 @@ alarm.create_alarms()
 
 weather = Weather(settings=settings_data)
 # weather = Weather() # use while testing (comment out otherwise)
-update_weather()
+# update_weather()
 
 web_frontend.alarm = alarm
 web_frontend.weather = weather

@@ -1,4 +1,4 @@
-arrow==0.7.0
+arrow==0.13.1
 #pygame==1.9.3
 schedule==0.3.2
 #tingbot==0.3

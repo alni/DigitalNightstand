@@ -1,4 +1,4 @@
-﻿import defs.colors as colors
+import defs.colors as colors
 
 current_page = 1
 last_touch = -1
@@ -85,7 +85,9 @@ FORECAST_LABEL_SUMMARY = {
     "font_size": 19,
     "hpos": 6,
     "margin": (6, 70),
-    "align": "right",
+    "align": "topleft",
+    "touch_xy": (8, 8),
+    "touch_size": (70, 24),
     "text": u"%s"
 }
 
