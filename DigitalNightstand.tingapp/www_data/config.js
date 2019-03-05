@@ -69,6 +69,9 @@
                     language_code: "bg",
                     name: "Bulgarian" 
                 }, {
+                    language_code: "bn",
+                    name: "Bengali"
+                }, {
                     language_code: "bs",
                     name: "Bosnian"
                 }, {
@@ -90,11 +93,17 @@
                     language_code: "en",
                     name: "English"
                 }, {
+                    language_code: "eo",
+                    name: "Esperanto" 
+                }, {
                     language_code: "es",
                     name: "Spanish"
                 }, {
                     language_code: "et",
                     name: "Estonian" 
+                }, {
+                    language_code: "fa",
+                    name: "Persian" // Farsi
                 }, {
                     language_code: "fi",
                     name: "Finnish"
@@ -104,6 +113,9 @@
                 }, {
                     language_code: "he",
                     name: "Hebrew", 
+                }, {
+                    language_code: "hi",
+                    name: "Hindi",
                 }, {
                     language_code: "hr",
                     name: "Croatian"
@@ -126,6 +138,9 @@
                     language_code: "ka",
                     name: "Georgian" 
                 }, {
+                    language_code: "kn",
+                    name: "Kannada" 
+                }, {
                     language_code: "ko",
                     name: "Korean" 
                 }, {
@@ -135,6 +150,9 @@
                     language_code: "lv",
                     name: "Latvian" 
                 }, {
+                    language_code: "mr",
+                    name: "Marathi"
+                }, {
                     language_code: "nb",
                     name: "Norwegian Bokmål"
                 }, {
@@ -143,6 +161,9 @@
                 }, {
                     language_code: "no",
                     name: "Norwegian" 
+                }, {
+                    language_code: "pa",
+                    name: "Punjabi", // Panjabi
                 }, {
                     language_code: "pl",
                     name: "Polish"
@@ -167,6 +188,12 @@
                 }, {
                     language_code: "sv",
                     name: "Swedish"
+                }, {
+                    language_code: "ta",
+                    name: "Tamil" 
+                }, {
+                    language_code: "te",
+                    name: "Telugu"
                 }, {
                     language_code: "tet",
                     name: "Tetum"
